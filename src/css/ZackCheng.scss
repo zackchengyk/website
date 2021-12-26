@@ -19,27 +19,28 @@ $hero-text-color: hsl(28, 31%, 87%);
 
   &.stars {
     .pixel {
-      fill: var(--fill);
-      transform: var(--transform);
+      fill: var(--pix-fill);
+      transform: var(--pix-transform);
     }
   }
 
   &.coalesce,
   &.text {
     .pixel {
-      transition: var(--transition);
+      transition: var(--pix-transition);
       @media (prefers-reduced-motion) {
-        transition: var(--transition-reduced-motion);
+        transition: var(--pix-transition-reduced-motion);
       }
-      transition-property: fill, transform; // must come after transition property to override "all", which is costly
 
+      transition-property: fill, transform; // must come after transition property to override "all", which is costly
       fill: $hero-text-color;
       transform: translate(0) scale(1);
     }
   }
 
   &.text {
-    transition: var(--transition);
-    transform: translateY(1rem);
+    transition: var(--svg-transition);
+    transition-property: transform;
+    transform: translateY(3rem);
   }
 }

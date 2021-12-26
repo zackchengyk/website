@@ -8,17 +8,20 @@ const starPixSizeModifier = 0.6
 const starPixMargin = 5
 
 const timing = {
-  overallDuration: 2.5,
-  getDelay: () => {
+  starShiftDuration: 2.5,
+  textShiftDuration: 1.25,
+  getStarShiftDelay: () => {
     if (Math.random() < 0.1) {
       return 0
     }
     const roll1 = Math.random()
     const roll2 = Math.random()
     const roll3 = Math.random()
-    return (2 / 3) * (roll1 + roll2 + roll3 - Math.min(roll1, roll2, roll3))
+    return (roll1 + roll2 + roll3 - Math.min(roll1, roll2, roll3)) / 2
   },
 }
+
+// Stars
 
 const colors = [
   '#f0e5bb', // yellow
@@ -36,7 +39,6 @@ function selectRandomColor() {
   }
   return colors[(Math.random() * colors.length) >> 0]
 }
-
 function getRandomStarPos(h: number, w: number) {
   return [
     ((Math.random() - 0.5) / starPixSizeModifier + 0.5) * w + starPixMargin,
@@ -58,14 +60,14 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
   const starOffsetX = (starPosX - x) * starPixSizeModifier,
     starOffsetY = (starPosY - y) * starPixSizeModifier
 
-  const delay = timing.getDelay()
-  const transitionTime = timing.overallDuration - delay
+  const delay = timing.getStarShiftDelay()
+  const transitionTime = timing.starShiftDuration - Math.random() / 2 - delay
 
   const style = {
-    '--transition-reduced-motion': `0s ${delay}s`,
-    '--transition': `${transitionTime}s cubic-bezier(0.7, 0, 0.3, 1) ${delay}s`,
-    '--fill': selectRandomColor(),
-    '--transform': `translate(${starOffsetX}px, ${starOffsetY}px) scale(${starPixSizeModifier})`,
+    '--pix-transition-reduced-motion': `0s ${delay}s`,
+    '--pix-transition': `${transitionTime}s cubic-bezier(0.7, 0, 0.3, 1) ${delay}s`,
+    '--pix-fill': selectRandomColor(),
+    '--pix-transform': `translate(${starOffsetX}px, ${starOffsetY}px) scale(${starPixSizeModifier})`,
   } as React.CSSProperties
 
   return <rect id={`${x},${y}`} className="pixel" width="1" height="1" x={x} y={y} style={style} />
@@ -102,7 +104,9 @@ function ZackCheng() {
     className === 'text' ? { x: textX, y: textY } : { x: width / pixSize, y: height / pixSize }
   const style: React.CSSProperties =
     className === 'text' ? { height: textY * pixSize, width: textX * pixSize } : { height, width }
-  const otherStyle = { '--transition': 'transform 1.75s cubic-bezier(0.7, 0, 0.3, 1)' } as React.CSSProperties
+  const otherStyle = {
+    '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(0.7, 0, 0.3, 1)`,
+  } as React.CSSProperties
 
   const baseXOffset = pixDimensions.x / 2 - textX / 2
   const baseYOffset = pixDimensions.y / 2 - textY / 2
@@ -126,7 +130,7 @@ function ZackCheng() {
     setClassName('coalesce')
     setTimeout(() => {
       setClassName('text')
-    }, timing.overallDuration * 1000)
+    }, timing.starShiftDuration * 1000)
   }
 
   return (
