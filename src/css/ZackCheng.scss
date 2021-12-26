@@ -1,24 +1,45 @@
-$delay: 1s;
+@use 'sass:color';
+
+$hero-text-color: hsl(28, 31%, 87%);
 
 #ZackCheng {
-  position: fixed;
+  position: absolute;
   inset: 0;
   display: grid;
-  place-items: center;
 }
 
 #ZackCheng-svg {
-  position: fixed;
-  inset: 0;
-  fill: white;
+  // background-color: rgba(0, 0, 0, 0.5);
+  place-self: start center;
+  transform: translateY(-50%) translateY(50vh);
 
   .pixel {
-    transform: var(--star-transform);
+    transform-origin: center;
   }
 
-  &.start-animation {
+  &.stars {
     .pixel {
-      transform: translate(0);
+      fill: var(--fill);
+      transform: var(--transform);
     }
+  }
+
+  &.coalesce,
+  &.text {
+    .pixel {
+      transition: var(--transition);
+      @media (prefers-reduced-motion) {
+        transition: var(--transition-reduced-motion);
+      }
+      transition-property: fill, transform; // must come after transition property to override "all", which is costly
+
+      fill: $hero-text-color;
+      transform: translate(0) scale(1);
+    }
+  }
+
+  &.text {
+    transition: var(--transition);
+    transform: translateY(1rem);
   }
 }
