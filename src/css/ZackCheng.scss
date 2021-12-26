@@ -1,0 +1,24 @@
+$delay: 1s;
+
+#ZackCheng {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+#ZackCheng-svg {
+  position: fixed;
+  inset: 0;
+  fill: white;
+
+  .pixel {
+    transform: var(--star-transform);
+  }
+
+  &.start-animation {
+    .pixel {
+      transform: translate(0);
+    }
+  }
+}
