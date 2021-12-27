@@ -1,0 +1,35 @@
+g.star-group {
+  .first {
+    opacity: 1;
+    animation: coreKeyframes var(--duration) infinite var(--first-delay);
+  }
+  .second {
+    opacity: 0;
+    animation: splashKeyframes var(--duration) infinite var(--second-delay);
+  }
+  .third {
+    opacity: 0;
+    animation: splashKeyframes var(--duration) infinite var(--third-delay);
+  }
+}
+
+@keyframes coreKeyframes {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes splashKeyframes {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  22%,
+  100% {
+    opacity: 0;
+  }
+}

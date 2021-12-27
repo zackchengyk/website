@@ -1,4 +1,5 @@
 import '../css/App.scss'
+import PixelSVG from './svgPixels/PixelSVG'
 import { useWindowDimensions } from './useWindowDimensions'
 import ZackCheng from './ZackCheng'
 
@@ -12,7 +13,8 @@ function App() {
 
   return (
     <div className="App" style={style}>
-      <ZackCheng hwDimensions={hwDimensions} />
+      <PixelSVG containerDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
+      {/* <ZackCheng hwDimensions={hwDimensions} /> */}
     </div>
   )
 }

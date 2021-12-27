@@ -71,7 +71,7 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
     '--pix-transform': `translate(${starOffsetX}px, ${starOffsetY}px) scale(${starPixSizeModifier})`,
   } as React.CSSProperties
 
-  return <rect id={`${x},${y}`} className="pixel" width="1" height="1" x={x} y={y} style={style} />
+  return <rect id={`${x},${y}`} className="letterPixel" width="1" height="1" x={x} y={y} style={style} />
 }
 
 type PixelLetterSVGFragmentProps = {
