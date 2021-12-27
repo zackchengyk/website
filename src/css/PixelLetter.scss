@@ -1,23 +1,19 @@
-g.letter-group {
+g.word-group {
   .pixel {
-    fill: var(--fill-from);
-    transform: var(--transform-from) var(--transform);
-
-    animation: coalesce var(--duration) cubic-bezier(0.55, 0, 0.45, 1) var(--delay) forwards;
-
+    transition: var(--duration) cubic-bezier(0.55, 0, 0.45, 1);
     @media (prefers-reduced-motion) {
-      animation-duration: 0s;
+      transition-duration: 0s;
     }
-  }
-}
+    transition-property: fill transform;
 
-@keyframes coalesce {
-  from {
-    fill: var(--fill-from);
-    transform: var(--transform-from) var(--transform);
+    fill: var(--pixel-fill-from);
+    transform: var(--pixel-transform-from);
   }
-  to {
-    fill: var(--fill-to);
-    transform: var(--transform-to) var(--transform);
+
+  &.text {
+    .pixel {
+      fill: var(--pixel-fill-to);
+      transform: var(--pixel-transform-to);
+    }
   }
 }

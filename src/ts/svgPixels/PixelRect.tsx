@@ -5,21 +5,21 @@ import '../../css/PixelRect.scss'
 type PixelRectProps = {
   extraClass?: string
   position: XY
-  scale: XY
+  scale?: XY
   color: string
   extraStyle?: React.CSSProperties
 }
 
-function _PixelRect({ extraClass, position, scale, color, extraStyle }: PixelRectProps) {
+function _PixelRect({ extraClass, position, color, extraStyle }: PixelRectProps) {
   const { x: xPos, y: yPos } = position
-  const { x: xScl, y: yScl } = scale
+  const { x: xScl, y: yScl } = { x: 1, y: 1 }
 
   const transformX = xPos / xScl
   const transformY = yPos / yScl
 
   const style = {
-    '--transform': `translate(${transformX}px, ${transformY}px) scale(${xScl}, ${yScl})`,
-    '--fill': color,
+    '--pixel-transform': `translate(${transformX}px, ${transformY}px)`,
+    '--pixel-fill': color,
     ...extraStyle,
   }
 
@@ -40,7 +40,6 @@ function pixelRectPropsAreEqual(prevProps: PixelRectProps, nextProps: PixelRectP
   return (
     prevProps.extraClass === nextProps.extraClass &&
     xyEqual(prevProps.position, nextProps.position) &&
-    xyEqual(prevProps.scale, nextProps.scale) &&
     prevProps.color === nextProps.color &&
     CSSPropertiesEqual(prevProps.extraStyle, nextProps.extraStyle)
   )

@@ -2,18 +2,20 @@ import { getRandomColor, XY } from '../common'
 import { PixelLetterData } from './PixelLetterData'
 import PixelRect from '../PixelRect'
 import '../../../css/PixelLetter.scss'
+import { useEffect, useState } from 'react'
 
 export type PixelLetterProps = {
   offset: XY
   data: PixelLetterData
-  scale: XY
   pixelDimensions: XY
+  endScale: number
 }
 
-export function PixelLetter({ offset, data, scale, pixelDimensions }: PixelLetterProps) {
+export function PixelLetter({ offset, data, endScale, pixelDimensions }: PixelLetterProps) {
   const { x: xOff, y: yOff } = offset
-  const { x: xScl, y: yScl } = scale
   let { x: xDim, y: yDim } = pixelDimensions
+
+  const [rects, setRects] = useState<any[]>([])
 
   function getDisplacement(): XY {
     return {
@@ -22,29 +24,33 @@ export function PixelLetter({ offset, data, scale, pixelDimensions }: PixelLette
     }
   }
 
+  useEffect(() => {
+    console.log(xOff)
+    const rectsTemp: any[] = []
+    for (let i = 0; i < data.positions.length; i++) {
+      const xPos = data.positions[i].x * endScale + xOff
+      const yPos = data.positions[i].y * endScale + yOff
+      const displacement = getDisplacement()
+
+      const style = {
+        '--pixel-fill-from': getRandomColor(),
+        '--pixel-fill-to': 'gold',
+        '--pixel-transform-from': `translate(${displacement.x}px, ${displacement.y}px)`,
+        '--pixel-transform-to': `translate(${xPos}px, ${yPos}px) scale(${endScale})`,
+      } as React.CSSProperties
+
+      rectsTemp.push({
+        style: style,
+      })
+    }
+    setRects(rectsTemp)
+  }, [data, pixelDimensions])
+
   return (
     <g className="letter-group">
-      {data.positions.map(({ x, y }, i) => {
-        const xPos = x * xScl * xScl + xOff
-        const yPos = y * yScl * yScl + yOff
-
-        const displacement = getDisplacement()
-
-        const extraStyle = {
-          '--fill-from': getRandomColor(),
-          '--transform-from': `translate(${displacement.x - xPos}px, ${displacement.y - yPos}px)`,
-        } as React.CSSProperties
-
-        return (
-          <PixelRect
-            key={i}
-            position={{ x: xPos, y: yPos }}
-            scale={scale}
-            color={''}
-            extraStyle={extraStyle}
-          />
-        )
-      })}
+      {rects.map((rectProps, i) => (
+        <rect key={i} {...rectProps} className={'pixel'} width="1" height="1" x="0" y="0" />
+      ))}
     </g>
   )
 }

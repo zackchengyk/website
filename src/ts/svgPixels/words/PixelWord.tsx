@@ -3,48 +3,55 @@ import { XY } from '../common'
 import { PixelLetter, PixelLetterProps } from './PixelLetter'
 import { PixelLetterData } from './PixelLetterData'
 
+const timing = {
+  duration: 1,
+  delay: 1,
+}
+
 type PixelWordProps = {
   pixelDimensions: XY
   word: PixelLetterData[]
-  scale: XY
 }
 
-export function PixelWord({ pixelDimensions, word, scale }: PixelWordProps) {
-  const [letters, setLetters] = useState<Omit<PixelLetterProps, 'scale' | 'pixelDimensions'>[]>([])
+export function PixelWord({ pixelDimensions, word }: PixelWordProps) {
+  const { x: xDim, y: yDim } = pixelDimensions
 
-  const pixelWordStyle = {
-    '--duration': '1s',
-    '--delay': '1s',
-    '--transform-to': 'translate(0)',
-    '--fill-to': 'gold',
+  const [letters, setLetters] = useState<Omit<PixelLetterProps, 'endScale' | 'pixelDimensions'>[]>([])
+  const [extraClassName, setExtraClassName] = useState<string>('stars')
+
+  const textX = word.reduce((acc, curr) => (acc += curr.width), 0) + word.length - 1
+  const textY = 5
+  const endScale = 2
+  const baseXOffset = xDim / 2 - (textX / 2) * endScale
+  const baseYOffset = yDim / 2 - (textY / 2) * endScale
+
+  const wordStyle = {
+    '--duration': timing.duration + 's',
   } as React.CSSProperties
 
   useEffect(() => {
-    const { x: xDim, y: yDim } = pixelDimensions
-    const { x: xScl, y: yScl } = scale
-
-    const textX = (word.reduce((acc, curr) => (acc += curr.width), 0) + word.length - 1) * xScl
-    const textY = 5 * yScl
-
-    const baseXOffset = (xDim / 2 - textX / 2) * xScl
-    const baseYOffset = (yDim / 2 - textY / 2) * yScl
-
-    const lettersTemp: Omit<PixelLetterProps, 'scale' | 'pixelDimensions'>[] = []
+    const lettersTemp: Omit<PixelLetterProps, 'endScale' | 'pixelDimensions'>[] = []
     let xOffsetAccumulator = 0
     for (let i = 0; i < word.length; i++) {
       lettersTemp.push({
         data: word[i],
-        offset: { x: xOffsetAccumulator + baseXOffset, y: baseYOffset },
+        offset: { x: xOffsetAccumulator + baseXOffset, y: 0 + baseYOffset },
       })
-      xOffsetAccumulator += (word[i].width + 1) * xScl * xScl
+      xOffsetAccumulator += (word[i].width + 1) * endScale
     }
     setLetters(lettersTemp)
   }, [pixelDimensions, word])
 
+  useEffect(() => {
+    const startStarToText = () => setExtraClassName('text')
+    const timeoutHandle = setTimeout(startStarToText, timing.delay * 1000)
+    return () => clearTimeout(timeoutHandle)
+  }, [])
+
   return (
-    <g className="word-group" style={pixelWordStyle}>
+    <g className={'word-group ' + extraClassName} style={wordStyle}>
       {letters.map((letterProps, i) => (
-        <PixelLetter key={i} {...letterProps} scale={scale} pixelDimensions={pixelDimensions} />
+        <PixelLetter key={i} {...letterProps} endScale={endScale} pixelDimensions={pixelDimensions} />
       ))}
     </g>
   )

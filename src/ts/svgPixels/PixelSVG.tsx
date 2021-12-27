@@ -3,7 +3,7 @@ import { XY } from './common'
 import { PixelLetterData, Z, A, C, K, space, H, E, N, G } from './words/PixelLetterData'
 import { PixelWord } from './words/PixelWord'
 
-const pixelSize = 3
+const pixelSize = 2
 
 type PixelSVGProps = {
   containerDimensions: XY
@@ -29,7 +29,7 @@ export function PixelSVG({ containerDimensions }: PixelSVGProps) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}
       style={style}>
-      <PixelWord pixelDimensions={pixelDimensions} word={word} scale={{ x: 1, y: 1 }} />
+      <PixelWord pixelDimensions={pixelDimensions} word={word} />
       <PixelStarField pixelDimensions={pixelDimensions} />
     </svg>
   )
