@@ -1,5 +1,6 @@
 import React from 'react'
 import { CSSPropertiesEqual, XY, xyEqual } from './common'
+import '../../css/PixelRect.scss'
 
 type PixelRectProps = {
   extraClass?: string
@@ -17,8 +18,8 @@ function _PixelRect({ extraClass, position, scale, color, extraStyle }: PixelRec
   const transformY = yPos / yScl
 
   const style = {
-    transform: `translate(${transformX}px, ${transformY}px) scale(${xScl}, ${yScl})`,
-    fill: color,
+    '--transform': `translate(${transformX}px, ${transformY}px) scale(${xScl}, ${yScl})`,
+    '--fill': color,
     ...extraStyle,
   }
 

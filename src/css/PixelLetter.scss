@@ -1,0 +1,23 @@
+g.letter-group {
+  .pixel {
+    fill: var(--fill-from);
+    transform: var(--transform-from) var(--transform);
+
+    animation: coalesce var(--duration) cubic-bezier(0.55, 0, 0.45, 1) var(--delay) forwards;
+
+    @media (prefers-reduced-motion) {
+      animation-duration: 0s;
+    }
+  }
+}
+
+@keyframes coalesce {
+  from {
+    fill: var(--fill-from);
+    transform: var(--transform-from) var(--transform);
+  }
+  to {
+    fill: var(--fill-to);
+    transform: var(--transform-to) var(--transform);
+  }
+}
