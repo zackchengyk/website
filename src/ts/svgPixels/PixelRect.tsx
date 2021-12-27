@@ -2,7 +2,7 @@ import React from 'react'
 import { XY, xyEqual } from './types'
 
 type PixelRectProps = {
-  extraClass: string
+  extraClass?: string
   position: XY
   scale: XY
   color: string

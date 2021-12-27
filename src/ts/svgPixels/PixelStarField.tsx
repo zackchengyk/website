@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { XY } from './types'
 import { PixelAnimStarProps, PixelAnimStar } from './PixelAnimStar'
+import { PixelStar, PixelStarProps } from './PixelStar'
 
 const colors = [
   '#f0e5bb', // yellow
@@ -25,15 +26,16 @@ type PixelStarFieldProps = {
 }
 
 export function PixelStarField({ pixelDimensions }: PixelStarFieldProps) {
-  const [stars, setStars] = useState<PixelAnimStarProps[]>([])
+  const [animStars, setAnimStars] = useState<PixelAnimStarProps[]>([])
+  const [stars, setStars] = useState<PixelStarProps[]>([])
 
-  const numStars = 30
+  const numAnimStars = 20
+  const numStars = 40
 
   useEffect(() => {
     const { x: xDim, y: yDim } = pixelDimensions
-    const numTemp: number[] = [...Array(numStars).keys()]
 
-    const starsTemp: PixelStarProps[] = numTemp.map(() => ({
+    const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
       position: {
         x: Math.round(Math.random() * xDim),
         y: Math.round(Math.random() * yDim),
@@ -42,13 +44,26 @@ export function PixelStarField({ pixelDimensions }: PixelStarFieldProps) {
       scale: { x: 1, y: 1 },
       offsetFrac: Math.random(),
     }))
+    setAnimStars(animStarsTemp)
+
+    const starsTemp: PixelStarProps[] = [...Array(numStars).keys()].map(() => ({
+      position: {
+        x: Math.round(Math.random() * xDim),
+        y: Math.round(Math.random() * yDim),
+      },
+      color: selectRandomColor(),
+      scale: { x: 1, y: 1 },
+    }))
     setStars(starsTemp)
   }, [pixelDimensions])
 
   return (
     <>
-      {stars.map((starProps, i) => (
+      {animStars.map((starProps, i) => (
         <PixelAnimStar key={i} {...starProps} />
+      ))}
+      {stars.map((starProps, i) => (
+        <PixelStar key={i} {...starProps} />
       ))}
     </>
   )
