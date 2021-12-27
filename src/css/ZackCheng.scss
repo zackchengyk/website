@@ -11,7 +11,7 @@ $hero-text-color: hsl(28, 31%, 87%);
 #ZackCheng-svg {
   // background-color: rgba(0, 0, 0, 0.5);
   place-self: start center;
-  transform: translateY(-50%) translateY(50vh);
+  transform: translateY(-50%) translateY(calc(var(--viewport-height) / 2));
 
   .pixel {
     transform-origin: center;
