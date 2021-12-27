@@ -1,7 +1,7 @@
 import PixelStarField from './PixelStarField'
 import { XY } from './types'
 
-const pixelSize = 4
+const pixelSize = 3
 
 type PixelSVGProps = {
   containerDimensions: XY
