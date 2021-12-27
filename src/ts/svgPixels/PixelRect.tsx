@@ -1,14 +1,15 @@
 import React from 'react'
-import { XY, xyEqual } from './types'
+import { CSSPropertiesEqual, XY, xyEqual } from './types'
 
 type PixelRectProps = {
   extraClass?: string
   position: XY
   scale: XY
   color: string
+  extraStyle?: React.CSSProperties
 }
 
-function _PixelRect({ extraClass, position, scale, color }: PixelRectProps) {
+function _PixelRect({ extraClass, position, scale, color, extraStyle }: PixelRectProps) {
   const { x: xPos, y: yPos } = position
   const { x: xScl, y: yScl } = scale
 
@@ -18,6 +19,7 @@ function _PixelRect({ extraClass, position, scale, color }: PixelRectProps) {
   const style = {
     transform: `translate(${transformX}px, ${transformY}px) scale(${xScl}, ${yScl})`,
     fill: color,
+    ...extraStyle,
   }
 
   return (
@@ -35,9 +37,11 @@ function _PixelRect({ extraClass, position, scale, color }: PixelRectProps) {
 
 function pixelRectPropsAreEqual(prevProps: PixelRectProps, nextProps: PixelRectProps): boolean {
   return (
+    prevProps.extraClass === nextProps.extraClass &&
     xyEqual(prevProps.position, nextProps.position) &&
     xyEqual(prevProps.scale, nextProps.scale) &&
-    prevProps.color === nextProps.color
+    prevProps.color === nextProps.color &&
+    CSSPropertiesEqual(prevProps.extraStyle, nextProps.extraStyle)
   )
 }
 const PixelRect = React.memo(_PixelRect, pixelRectPropsAreEqual)
