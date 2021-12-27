@@ -1,6 +1,6 @@
 import React from 'react'
 import PixelRect from './PixelRect'
-import { XY } from './types'
+import { XY } from './common'
 import '../../css/PixelAnimStar.scss'
 
 export type PixelAnimStarProps = {

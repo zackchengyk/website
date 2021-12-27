@@ -1,5 +1,5 @@
 import React from 'react'
-import { CSSPropertiesEqual, XY, xyEqual } from './types'
+import { CSSPropertiesEqual, XY, xyEqual } from './common'
 
 type PixelRectProps = {
   extraClass?: string

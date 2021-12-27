@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { XY } from './types'
+import { XY } from './common'
 import { PixelAnimStarProps, PixelAnimStar } from './PixelAnimStar'
 import { PixelStar, PixelStarProps } from './PixelStar'
 

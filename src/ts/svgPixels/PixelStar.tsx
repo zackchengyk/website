@@ -1,5 +1,5 @@
 import PixelRect from './PixelRect'
-import { XY } from './types'
+import { XY } from './common'
 
 export type PixelStarProps = {
   position: XY

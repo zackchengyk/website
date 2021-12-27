@@ -1,5 +1,5 @@
 import { PixelStarField } from './PixelStarField'
-import { XY } from './types'
+import { XY } from './common'
 
 const pixelSize = 3
 
