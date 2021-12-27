@@ -1,5 +1,5 @@
 import '../css/App.scss'
-import PixelSVG from './svgPixels/PixelSVG'
+import { PixelSVG } from './svgPixels/PixelSVG'
 import { useWindowDimensions } from './useWindowDimensions'
 import ZackCheng from './ZackCheng'
 
