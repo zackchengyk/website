@@ -1,13 +1,13 @@
-import { useState } from 'react'
 import '../css/App.scss'
+import { useWindowDimensions } from './useWindowDimensions'
 import ZackCheng from './ZackCheng'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const hwDimensions = useWindowDimensions()
 
   return (
     <div className="App">
-      <ZackCheng />
+      <ZackCheng hwDimensions={hwDimensions} />
     </div>
   )
 }

@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react'
 
 const debounceDelay = 100
 
-function getWindowDimensions() {
+export type HWDimensions = {
+  height: number
+  width: number
+}
+
+function getWindowDimensions(): HWDimensions {
   return { height: window.innerHeight, width: window.innerWidth }
 }
 
-export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions)
+export function useWindowDimensions(): HWDimensions {
+  const [windowDimensions, setWindowDimensions] = useState<HWDimensions>(getWindowDimensions)
 
   useEffect(() => {
     let isWaiting: number = 0

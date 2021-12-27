@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../css/ZackCheng.scss'
 import { PixelLetter, Z, A, C, K, space, H, E, N, G } from './PixelLetter.type'
-import useWindowDimensions from './useWindowDimensions'
+import { HWDimensions } from './useWindowDimensions'
 
 const pixSize = 5
 const starPixSizeModifier = 0.6
-const starPixMargin = 5
+const starPixMargin = 1
 
 const timing = {
   starShiftDuration: 2.5,
-  textShiftDuration: 1.25,
+  textShiftDuration: 1.5,
   getStarShiftDelay: () => {
     if (Math.random() < 0.1) {
       return 0
@@ -34,10 +34,11 @@ const colors = [
   '#f0bbde', // pink
 ]
 function selectRandomColor() {
-  if (Math.random() < 0.6) {
+  const roll = Math.random()
+  if (roll > 0.5) {
     return 'white'
   }
-  return colors[(Math.random() * colors.length) >> 0]
+  return colors[(roll * 2 * colors.length) >> 0]
 }
 function getRandomStarPos(h: number, w: number) {
   return [
@@ -61,7 +62,7 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
     starOffsetY = (starPosY - y) * starPixSizeModifier
 
   const delay = timing.getStarShiftDelay()
-  const transitionTime = timing.starShiftDuration - Math.random() / 2 - delay
+  const transitionTime = timing.starShiftDuration - delay
 
   const style = {
     '--pix-transition-reduced-motion': `0s ${delay}s`,
@@ -73,16 +74,14 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
   return <rect id={`${x},${y}`} className="pixel" width="1" height="1" x={x} y={y} style={style} />
 }
 
-function PixelLetterSVGFragment({
-  xyOffset,
-  data,
-  pixDimensions,
-}: {
-  xyOffset: number[]
+type PixelLetterSVGFragmentProps = {
   data: PixelLetter['data']
+  xyOffset: XYDimensions
   pixDimensions: XYDimensions
-}) {
-  const [xOff, yOff] = xyOffset
+}
+
+function PixelLetterSVGFragment({ data, xyOffset, pixDimensions }: PixelLetterSVGFragmentProps) {
+  const { x: xOff, y: yOff } = xyOffset
   return (
     <>
       {data.map(({ x, y }, i) => (
@@ -92,12 +91,25 @@ function PixelLetterSVGFragment({
   )
 }
 
-function ZackCheng() {
+function propsAreEqual(
+  prevProps: PixelLetterSVGFragmentProps,
+  nextProps: PixelLetterSVGFragmentProps
+): boolean {
+  // Ignore "data" field... it's not gonna change. Just look at xyOffset and pixDimensions
+  return (
+    prevProps.xyOffset.x === nextProps.xyOffset.x &&
+    prevProps.xyOffset.y === nextProps.xyOffset.y &&
+    prevProps.pixDimensions.x === nextProps.pixDimensions.x &&
+    prevProps.pixDimensions.y === nextProps.pixDimensions.y
+  )
+}
+const PixelLetterSVGFragmentMemoized = React.memo(PixelLetterSVGFragment, propsAreEqual)
+
+function ZackCheng({ hwDimensions: { height, width } }: { hwDimensions: HWDimensions }) {
   const letterArray: PixelLetter[] = [Z, A, C, K, space, C, H, E, N, G]
   const textX = letterArray.reduce((acc, curr) => (acc += curr.width), 0) + letterArray.length - 1
   const textY = 5
 
-  const { height, width } = useWindowDimensions()
   const [className, setClassName] = useState('stars')
 
   const pixDimensions: XYDimensions =
@@ -108,18 +120,18 @@ function ZackCheng() {
     '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(0.7, 0, 0.3, 1)`,
   } as React.CSSProperties
 
-  const baseXOffset = pixDimensions.x / 2 - textX / 2
-  const baseYOffset = pixDimensions.y / 2 - textY / 2
-
   const svgFragment: any[] = []
   let xOffsetAccumulator = 0
+  const baseXOffset = pixDimensions.x / 2 - textX / 2
+  const baseYOffset = pixDimensions.y / 2 - textY / 2
   for (let i = 0; i < letterArray.length; i++) {
     const letter = letterArray[i]
     svgFragment.push(
-      <PixelLetterSVGFragment
+      <PixelLetterSVGFragmentMemoized
         key={i}
-        xyOffset={[xOffsetAccumulator + baseXOffset, baseYOffset]}
         data={letter.data}
+        // Subsequent information no longer necessary once it becomes text
+        xyOffset={{ x: xOffsetAccumulator + baseXOffset, y: baseYOffset }}
         pixDimensions={pixDimensions}
       />
     )
