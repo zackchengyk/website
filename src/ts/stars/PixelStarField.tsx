@@ -4,7 +4,7 @@ import { PixelAnimStarProps, PixelAnimStar } from './PixelAnimStar'
 import { PixelStar, PixelStarProps } from './PixelStar'
 import '../../css/stars.scss'
 
-const pixelSize = 2
+const pixelSize = 3
 
 // Helper function
 function getRandomPosition(pixelDimensions: XY, avoidCenterXFrac: number, avoidCenterYFrac: number): XY {
@@ -34,37 +34,38 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   const [stars, setStars] = useState<PixelStarProps[]>([])
 
   // Figure out how many stars to spawn
-  const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 90000
-  const numAnimStars = Math.floor(10 * areaRatio)
-  const numStars = Math.floor(60 * areaRatio)
+  const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
+  const numAnimStars = Math.floor(1.5 * areaRatio)
+  const numStars = Math.floor(10 * areaRatio)
+  console.log(numAnimStars, numStars)
 
   // Setup stars if pixelDimensions change
   useEffect(() => {
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
       position: getRandomPosition(pixelDimensions, 0, 0),
       color: getRandomColor(),
-      offsetFrac: Math.random(),
     }))
     setAnimStars(animStarsTemp)
     const starsTemp: PixelStarProps[] = [...Array(numStars).keys()].map(() => ({
       position: getRandomPosition(pixelDimensions, 0, 0),
       color: getRandomColor(),
-      scale: { x: 1, y: 1 },
     }))
     setStars(starsTemp)
   }, [windowDimensions])
 
   return (
-    <svg
-      id="stars-svg"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}>
-      {animStars.map((starProps, i) => (
-        <PixelAnimStar key={i} {...starProps} />
-      ))}
-      {stars.map((starProps, i) => (
-        <PixelStar {...starProps} />
-      ))}
-    </svg>
+    <div id="stars-div">
+      <svg
+        id="stars-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}>
+        {animStars.map((starProps, i) => (
+          <PixelAnimStar key={i} {...starProps} />
+        ))}
+        {stars.map((starProps, i) => (
+          <PixelStar key={i} {...starProps} />
+        ))}
+      </svg>
+    </div>
   )
 }

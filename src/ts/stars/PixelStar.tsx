@@ -12,19 +12,17 @@ function _PixelStar({ position, color, extraClass, extraStyle }: PixelStarProps)
   const { x: xPos, y: yPos } = position
 
   const style = {
-    '--star-transform': `translate(${xPos}px, ${yPos}px)`,
-    '--star-fill': color,
     ...extraStyle,
   } as React.CSSProperties
 
   return (
     <rect
       id={`${xPos},${yPos}`}
-      className={'star ' + extraClass}
+      className={`star-rect fill-${color.slice(1)} ${extraClass}`}
       width="1"
       height="1"
-      x="0"
-      y="0"
+      x={xPos}
+      y={yPos}
       style={style}
     />
   )

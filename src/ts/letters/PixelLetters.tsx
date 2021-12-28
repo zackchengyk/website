@@ -4,11 +4,11 @@ import '../../css/letters.scss'
 import { PixelLetterData, Z, A, C, K, space, H, E, N, G } from './PixelLetterData'
 
 const pixSize = 5
-const starPixSizeModifier = 0.4
+const starPixSizeModifier = 0.6
 const starPixMargin = 1
 
 const timing = {
-  starShiftDuration: 2.5,
+  starShiftDuration: 3.5,
   textShiftDuration: 1.5,
   getStarShiftDelay: () => {
     if (Math.random() < 0.1) {
@@ -65,7 +65,6 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
   const transitionTime = timing.starShiftDuration - delay
 
   const style = {
-    '--pix-transition-reduced-motion': `0s ${delay}s`,
     '--pix-transition': `${transitionTime}s cubic-bezier(0.7, 0, 0.3, 1) ${delay}s`,
     '--pix-fill': selectRandomColor(),
     '--pix-transform': `translate(${starOffsetX}px, ${starOffsetY}px) scale(${starPixSizeModifier})`,
