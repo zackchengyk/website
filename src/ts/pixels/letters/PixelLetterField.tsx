@@ -10,6 +10,8 @@ const letterArray: PixelLetterData[] = [Z, A, C, K, space, C, H, E, N, G]
 const textX = letterArray.reduce((acc, curr) => (acc += curr.width), 0) + letterArray.length - 1
 const textY = 5
 
+const pixelPadding = { x: 2, y: 2 }
+
 // ================== Component: PixelLetterField
 
 type PixelLetterFieldProps = { windowDimensions: XY }
@@ -41,7 +43,7 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
   const { x: xDim, y: yDim } = largestWD
   const pixelDimensions: XY =
     className === 'after'
-      ? { x: textX, y: textY }
+      ? { x: textX + 2 * pixelPadding.x, y: textY + 2 * pixelPadding.x }
       : { x: Math.floor(xDim / textPixelSize), y: Math.floor(yDim / textPixelSize) }
 
   // Use state for letters
@@ -69,7 +71,9 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
 
   const divStyle = { height: yDim, width: xDim }
   const svgStyle =
-    className === 'after' ? { height: textY * textPixelSize, width: textX * textPixelSize } : divStyle
+    className === 'after'
+      ? { height: pixelDimensions.y * textPixelSize, width: pixelDimensions.x * textPixelSize }
+      : divStyle
   const otherSvgStyle = { '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(.3,0,.22,1)` }
 
   return (
