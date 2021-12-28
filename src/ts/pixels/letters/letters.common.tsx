@@ -1,7 +1,7 @@
 import { XY } from '../../common'
 import { pixelSize } from '../pixels.common'
 
-export const starPixSizeModifier = 0.6
+export const starPixSizeModifier = 0.4
 export const textPixelSize = pixelSize / starPixSizeModifier
 export const starPixMargin = 1
 
