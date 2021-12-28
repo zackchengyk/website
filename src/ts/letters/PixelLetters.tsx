@@ -8,8 +8,8 @@ const starPixSizeModifier = 0.6
 const starPixMargin = 1
 
 const timing = {
-  starShiftDuration: 3.5,
-  textShiftDuration: 1.5,
+  starShiftDuration: 3.25,
+  textShiftDuration: 1.75,
   getStarShiftDelay: () => {
     if (Math.random() < 0.1) {
       return 0
@@ -118,7 +118,7 @@ function PixelLetters({ windowDimensions }: { windowDimensions: XY }) {
   const style: React.CSSProperties =
     className === 'after' ? { height: textY * pixSize, width: textX * pixSize } : { height, width }
   const otherStyle = {
-    '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(0.7, 0, 0.3, 1)`,
+    '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(.3,0,.22,1)`,
   } as React.CSSProperties
 
   const svgFragment: any[] = []

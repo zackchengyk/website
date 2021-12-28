@@ -1,13 +1,16 @@
-@use 'sass:color';
-
-$hero-text-color: white;
+@import './common.scss';
 
 #letters-div {
   position: fixed;
   inset: 0;
   display: grid;
 
+  pointer-events: none;
+
   #letters-svg {
+    pointer-events: auto;
+    cursor: pointer;
+
     place-self: start center;
     transform: translateY(-50%) translateY(calc(var(--viewport-height) / 2));
 
@@ -28,7 +31,7 @@ $hero-text-color: white;
     .letter-rect {
       transition: var(--pix-transition);
       @media (prefers-reduced-motion) {
-        transition: var(--pix-transition-reduced-motion);
+        transition-duration: 0;
       }
 
       transition-property: fill, transform; // must come after transition property to override "all", which is costly
@@ -39,7 +42,9 @@ $hero-text-color: white;
 
   #letters-svg.after {
     transition: var(--svg-transition);
-    transition-property: transform;
+
+    transition-property: transform, background-color;
     transform: translateY(3rem);
+    background-color: $background-color;
   }
 }

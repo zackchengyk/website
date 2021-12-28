@@ -7,7 +7,11 @@ import '../../css/stars.scss'
 const pixelSize = 3
 
 // Helper function
-function getRandomPosition(pixelDimensions: XY, avoidCenterXFrac: number, avoidCenterYFrac: number): XY {
+function getRandomPosition(
+  pixelDimensions: XY,
+  avoidCenterXFrac: number = 0,
+  avoidCenterYFrac: number = 0
+): XY {
   // Modify distribution to avoid center
   let normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
   while (Math.abs(normalized.x) < avoidCenterXFrac / 2 && Math.abs(normalized.y) < avoidCenterYFrac / 2) {
@@ -15,8 +19,8 @@ function getRandomPosition(pixelDimensions: XY, avoidCenterXFrac: number, avoidC
   }
 
   return {
-    x: Math.round((normalized.x + 0.5) * pixelDimensions.x),
-    y: Math.round((normalized.y + 0.5) * pixelDimensions.y),
+    x: Math.floor((normalized.x + 0.5) * pixelDimensions.x),
+    y: Math.floor((normalized.y + 0.5) * pixelDimensions.y),
   }
 }
 
@@ -42,12 +46,12 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   // Setup stars if pixelDimensions change
   useEffect(() => {
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
-      position: getRandomPosition(pixelDimensions, 0, 0),
+      position: getRandomPosition(pixelDimensions),
       color: getRandomColor(),
     }))
     setAnimStars(animStarsTemp)
     const starsTemp: PixelStarProps[] = [...Array(numStars).keys()].map(() => ({
-      position: getRandomPosition(pixelDimensions, 0, 0),
+      position: getRandomPosition(pixelDimensions),
       color: getRandomColor(),
     }))
     setStars(starsTemp)
