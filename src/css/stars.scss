@@ -3,22 +3,21 @@
 
 #stars-div {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 
   #stars-svg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
   }
 }
 
 .star-rect {
   animation-duration: $anim-star-duration;
   animation-iteration-count: infinite;
+  transform-origin: center;
 }
 @each $color in $star-colors {
   .fill-#{str-slice($color, 1)} {

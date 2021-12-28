@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App" style={style}>
       <PixelStarField windowDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
-      {/* <PixelLetters windowDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} /> */}
+      <PixelLetters windowDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
     </div>
   )
 }

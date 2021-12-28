@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { XY } from '../common'
 import '../../css/letters.scss'
 import { PixelLetterData, Z, A, C, K, space, H, E, N, G } from './PixelLetterData'
 
 const pixSize = 5
+const pixelSize = 5
 const starPixSizeModifier = 0.6
 const starPixMargin = 1
 
@@ -104,41 +105,28 @@ function propsAreEqual(
 }
 const PixelLetterSVGFragmentMemoized = React.memo(PixelLetterSVGFragment, propsAreEqual)
 
-function PixelLetters({ windowDimensions }: { windowDimensions: XY }) {
-  const { x: width, y: height } = windowDimensions
+const letterArray: PixelLetterData[] = [Z, A, C, K, space, C, H, E, N, G]
+const textX = letterArray.reduce((acc, curr) => (acc += curr.width), 0) + letterArray.length - 1
+const textY = 5
 
-  const letterArray: PixelLetterData[] = [Z, A, C, K, space, C, H, E, N, G]
-  const textX = letterArray.reduce((acc, curr) => (acc += curr.width), 0) + letterArray.length - 1
-  const textY = 5
+type PixelLettersProps = { windowDimensions: XY }
 
+function PixelLetters({ windowDimensions }: PixelLettersProps) {
+  // Keep track of largest dimensions seen so far
+  const [largestWD, setLargestWD] = useState<XY>(windowDimensions)
+  // Possibly change largestWD if windowDimensions change
+  useEffect(() => {
+    if (windowDimensions.x > largestWD.x || windowDimensions.y > largestWD.y) {
+      setLargestWD({
+        x: Math.max(largestWD.x, windowDimensions.x),
+        y: Math.max(largestWD.y, windowDimensions.y),
+      })
+    }
+  }, [windowDimensions])
+
+  // Keep track of own animation state
   const [className, setClassName] = useState('before')
-
-  const pixDimensions: XYDimensions =
-    className === 'after' ? { x: textX, y: textY } : { x: width / pixSize, y: height / pixSize }
-  const style: React.CSSProperties =
-    className === 'after' ? { height: textY * pixSize, width: textX * pixSize } : { height, width }
-  const otherStyle = {
-    '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(.3,0,.22,1)`,
-  } as React.CSSProperties
-
-  const svgFragment: any[] = []
-  let xOffsetAccumulator = 0
-  const baseXOffset = pixDimensions.x / 2 - textX / 2
-  const baseYOffset = pixDimensions.y / 2 - textY / 2
-  for (let i = 0; i < letterArray.length; i++) {
-    const letter = letterArray[i]
-    svgFragment.push(
-      <PixelLetterSVGFragmentMemoized
-        key={i}
-        data={letter.data}
-        // Subsequent information no longer necessary once it becomes text
-        xyOffset={{ x: xOffsetAccumulator + baseXOffset, y: baseYOffset }}
-        pixDimensions={pixDimensions}
-      />
-    )
-    xOffsetAccumulator += letter.width + 1
-  }
-
+  // Animation state changes on click
   function onClick() {
     setClassName('during')
     setTimeout(() => {
@@ -146,16 +134,52 @@ function PixelLetters({ windowDimensions }: { windowDimensions: XY }) {
     }, timing.starShiftDuration * 1000)
   }
 
+  // Get pixel dimensions
+  const { x: xDim, y: yDim } = largestWD
+  const pixelDimensions: XY =
+    className === 'after'
+      ? { x: textX, y: textY }
+      : { x: Math.floor(xDim / pixelSize), y: Math.floor(yDim / pixelSize) }
+
+  // Use state for letters
+  const [letters, setLetters] = useState<PixelLetterSVGFragmentProps[]>([])
+  // Setup letters if pixelDimensions changes
+  useEffect(() => {
+    const baseXOffset = pixelDimensions.x / 2 - textX / 2
+    const baseYOffset = pixelDimensions.y / 2 - textY / 2
+
+    // Populate letter prop arrays
+    const lettersTemp: PixelLetterSVGFragmentProps[] = []
+    let xOffsetAccumulator = 0
+    for (let i = 0; i < letterArray.length; i++) {
+      const letter = letterArray[i]
+      lettersTemp.push({
+        data: letter.data,
+        // Subsequent information no longer necessary once it becomes text
+        xyOffset: { x: xOffsetAccumulator + baseXOffset, y: baseYOffset },
+        pixDimensions: pixelDimensions,
+      })
+      xOffsetAccumulator += letter.width + 1
+    }
+    setLetters(lettersTemp)
+  }, [pixelDimensions.x, pixelDimensions.y])
+
+  const divStyle = { height: yDim, width: xDim }
+  const svgStyle = className === 'after' ? { height: textY * pixSize, width: textX * pixSize } : divStyle
+  const otherSvgStyle = { '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(.3,0,.22,1)` }
+
   return (
-    <div id="letters-div">
+    <div id="letters-div" style={divStyle}>
       <svg
         id="letters-svg"
         className={className}
         onClick={className === 'before' ? onClick : undefined}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${pixDimensions.x} ${pixDimensions.y}`}
-        style={{ ...style, ...otherStyle }}>
-        {svgFragment}
+        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}
+        style={{ ...svgStyle, ...otherSvgStyle }}>
+        {letters.map((letterProps, i) => (
+          <PixelLetterSVGFragmentMemoized key={i} {...letterProps} />
+        ))}
       </svg>
     </div>
   )

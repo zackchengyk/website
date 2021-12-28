@@ -24,25 +24,11 @@ function getRandomPosition(
   }
 }
 
-type PixelStarFieldProps = {
-  windowDimensions: XY
-}
+type PixelStarFieldProps = { windowDimensions: XY }
 
 export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
-  // Get pixel dimensions
+  // Keep track of largest dimensions seen so far
   const [largestWD, setLargestWD] = useState<XY>(windowDimensions)
-  const { x: xDim, y: yDim } = largestWD
-  const pixelDimensions: XY = { x: Math.floor(xDim / pixelSize), y: Math.floor(yDim / pixelSize) }
-
-  // Use state for stars
-  const [animStars, setAnimStars] = useState<PixelAnimStarProps[]>([])
-  const [stars, setStars] = useState<PixelStarProps[]>([])
-
-  // Figure out how many stars to spawn
-  const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
-  const numAnimStars = Math.floor(2 * areaRatio)
-  const numStars = Math.floor(10 * areaRatio)
-
   // Possibly change largestWD if windowDimensions change
   useEffect(() => {
     if (windowDimensions.x > largestWD.x || windowDimensions.y > largestWD.y) {
@@ -53,8 +39,20 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
     }
   }, [windowDimensions])
 
-  // Setup stars if largestWD changes
+  // Get pixel dimensions
+  const { x: xDim, y: yDim } = largestWD
+  const pixelDimensions: XY = { x: Math.floor(xDim / pixelSize), y: Math.floor(yDim / pixelSize) }
+
+  // Use state for stars
+  const [animStars, setAnimStars] = useState<PixelAnimStarProps[]>([])
+  const [stars, setStars] = useState<PixelStarProps[]>([])
+  // Setup stars if pixelDimensions changes
   useEffect(() => {
+    const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
+    const numAnimStars = Math.floor(2 * areaRatio)
+    const numStars = Math.floor(10 * areaRatio)
+
+    // Populate star props arrays
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
       position: getRandomPosition(pixelDimensions),
       color: getRandomColor(),
@@ -65,7 +63,7 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
       color: getRandomColor(),
     }))
     setStars(starsTemp)
-  }, [largestWD])
+  }, [pixelDimensions.x, pixelDimensions.y])
 
   const style = {
     height: largestWD.y + 'px',
@@ -73,12 +71,11 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   }
 
   return (
-    <div id="stars-div">
+    <div id="stars-div" style={style}>
       <svg
         id="stars-svg"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}
-        style={style}>
+        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}>
         {animStars.map((starProps, i) => (
           <PixelAnimStar key={i} {...starProps} />
         ))}
