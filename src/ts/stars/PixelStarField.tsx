@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getRandomColor, XY } from '../common'
+import { XY } from '../common'
 import { PixelAnimStarProps, PixelAnimStar } from './PixelAnimStar'
 import { PixelStar, PixelStarProps } from './PixelStar'
+import { getRandomColor, pixelSize } from '../pixels.common'
 import '../../css/stars.scss'
 
-const pixelSize = 3
+// ================== Helpers
 
-// Helper function
 function getRandomPosition(
   pixelDimensions: XY,
   avoidCenterXFrac: number = 0,
@@ -24,9 +24,11 @@ function getRandomPosition(
   }
 }
 
+// ================== Component: PixelStarField
+
 type PixelStarFieldProps = { windowDimensions: XY }
 
-export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
+function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   // Keep track of largest dimensions seen so far
   const [largestWD, setLargestWD] = useState<XY>(windowDimensions)
   // Possibly change largestWD if windowDimensions change
@@ -86,3 +88,5 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
     </div>
   )
 }
+
+export default PixelStarField

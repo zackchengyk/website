@@ -1,6 +1,8 @@
 import React from 'react'
 import { CSSPropertiesEqual, XY, xyEqual } from '../common'
 
+// ================== Component: PixelStar
+
 export type PixelStarProps = {
   position: XY
   color: string

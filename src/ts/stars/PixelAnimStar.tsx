@@ -2,10 +2,7 @@ import { PixelStar } from './PixelStar'
 import { XY, xyEqual } from '../common'
 import React from 'react'
 
-export type PixelAnimStarProps = {
-  position: XY
-  color: string
-}
+// ================== Helpers
 
 const offsets = [
   'frame-0',
@@ -19,6 +16,13 @@ const offsets = [
   'frame-8',
   'frame-9',
 ]
+
+// ================== Component: PixelAnimStar
+
+export type PixelAnimStarProps = {
+  position: XY
+  color: string
+}
 
 export function _PixelAnimStar({ position, color }: PixelAnimStarProps) {
   const { x: xPos, y: yPos } = position

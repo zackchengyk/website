@@ -23,15 +23,15 @@
 
   #letters-svg.before {
     .letter-rect {
-      fill: var(--pix-fill);
-      transform: var(--pix-transform);
+      fill: var(--letter-rect-fill);
+      transform: var(--letter-rect-transform);
     }
   }
 
   #letters-svg.during,
   #letters-svg.after {
     .letter-rect {
-      transition: var(--pix-transition);
+      transition: var(--letter-rect-transition);
       @media (prefers-reduced-motion) {
         transition-duration: 0;
       }

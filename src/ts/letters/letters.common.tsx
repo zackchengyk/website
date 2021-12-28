@@ -1,4 +1,23 @@
 import { XY } from '../common'
+import { pixelSize } from '../pixels.common'
+
+export const starPixSizeModifier = 0.6
+export const textPixelSize = pixelSize / starPixSizeModifier
+export const starPixMargin = 1
+
+export const timing = {
+  starShiftDuration: 3.25,
+  textShiftDuration: 1.75,
+  getStarShiftDelay: () => {
+    if (Math.random() < 0.1) {
+      return 0
+    }
+    const roll1 = Math.random()
+    const roll2 = Math.random()
+    const roll3 = Math.random()
+    return (roll1 + roll2 + roll3 - Math.min(roll1, roll2, roll3)) / 2
+  },
+}
 
 // https://www.fontsquirrel.com/fonts/Munro
 // https://www.reddit.com/r/gamedev/comments/1rl412/favorite_free_8bitpixel_font/
