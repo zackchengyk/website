@@ -1,32 +1,31 @@
 @use 'sass:color';
 
-$hero-text-color: hsl(28, 31%, 87%);
+$hero-text-color: white;
 
-#ZackCheng {
-  position: absolute;
+#letters-div {
+  position: fixed;
   inset: 0;
   display: grid;
-}
 
-#ZackCheng-svg {
-  // background-color: rgba(0, 0, 0, 0.5);
-  place-self: start center;
-  transform: translateY(-50%) translateY(calc(var(--viewport-height) / 2));
+  #letters-svg {
+    place-self: start center;
+    transform: translateY(-50%) translateY(calc(var(--viewport-height) / 2));
 
-  .letterPixel {
-    transform-origin: center;
+    .letter-rect {
+      transform-origin: center;
+    }
   }
 
-  &.stars {
-    .letterPixel {
+  #letters-svg.before {
+    .letter-rect {
       fill: var(--pix-fill);
       transform: var(--pix-transform);
     }
   }
 
-  &.coalesce,
-  &.text {
-    .letterPixel {
+  #letters-svg.during,
+  #letters-svg.after {
+    .letter-rect {
       transition: var(--pix-transition);
       @media (prefers-reduced-motion) {
         transition: var(--pix-transition-reduced-motion);
@@ -38,7 +37,7 @@ $hero-text-color: hsl(28, 31%, 87%);
     }
   }
 
-  &.text {
+  #letters-svg.after {
     transition: var(--svg-transition);
     transition-property: transform;
     transform: translateY(3rem);

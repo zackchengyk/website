@@ -1,17 +1,19 @@
+import { XY } from '../common'
+
 // https://www.fontsquirrel.com/fonts/Munro
 // https://www.reddit.com/r/gamedev/comments/1rl412/favorite_free_8bitpixel_font/
 
-export type PixelLetter = {
+export type PixelLetterData = {
   width: number
-  data: { x: number; y: number }[]
+  data: XY[]
 }
 
-export const space: PixelLetter = {
+export const space: PixelLetterData = {
   width: 3,
   data: [],
 }
 
-export const Z: PixelLetter = {
+export const Z: PixelLetterData = {
   width: 3,
   data: [
     { x: 0, y: 0 },
@@ -25,7 +27,7 @@ export const Z: PixelLetter = {
     { x: 2, y: 4 },
   ],
 }
-export const A: PixelLetter = {
+export const A: PixelLetterData = {
   width: 4,
   data: [
     { x: 1, y: 0 },
@@ -42,7 +44,7 @@ export const A: PixelLetter = {
     { x: 3, y: 4 },
   ],
 }
-export const C: PixelLetter = {
+export const C: PixelLetterData = {
   width: 3,
   data: [
     { x: 1, y: 0 },
@@ -54,7 +56,7 @@ export const C: PixelLetter = {
     { x: 2, y: 4 },
   ],
 }
-export const K: PixelLetter = {
+export const K: PixelLetterData = {
   width: 4,
   data: [
     { x: 0, y: 0 },
@@ -70,7 +72,7 @@ export const K: PixelLetter = {
   ],
 }
 
-export const H: PixelLetter = {
+export const H: PixelLetterData = {
   width: 4,
   data: [
     { x: 0, y: 0 },
@@ -87,7 +89,7 @@ export const H: PixelLetter = {
     { x: 3, y: 4 },
   ],
 }
-export const E: PixelLetter = {
+export const E: PixelLetterData = {
   width: 3,
   data: [
     { x: 0, y: 0 },
@@ -103,7 +105,7 @@ export const E: PixelLetter = {
     { x: 2, y: 4 },
   ],
 }
-export const N: PixelLetter = {
+export const N: PixelLetterData = {
   width: 4,
   data: [
     { x: 0, y: 0 },
@@ -120,7 +122,7 @@ export const N: PixelLetter = {
     { x: 3, y: 4 },
   ],
 }
-export const G: PixelLetter = {
+export const G: PixelLetterData = {
   width: 4,
   data: [
     { x: 1, y: 0 },

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import '../css/ZackCheng.scss'
-import { PixelLetter, Z, A, C, K, space, H, E, N, G } from './PixelLetter.type'
-import { HWDimensions } from './useWindowDimensions'
+import { XY } from '../common'
+import '../../css/letters.scss'
+import { PixelLetterData, Z, A, C, K, space, H, E, N, G } from './PixelLetterData'
 
 const pixSize = 5
-const starPixSizeModifier = 0.6
+const starPixSizeModifier = 0.4
 const starPixMargin = 1
 
 const timing = {
@@ -36,7 +36,7 @@ const colors = [
 function selectRandomColor() {
   const roll = Math.random()
   if (roll > 0.5) {
-    return 'white'
+    return '#ffffff'
   }
   return colors[(roll * 2 * colors.length) >> 0]
 }
@@ -71,11 +71,11 @@ function Pixel({ xy, pixDimensions }: { xy: number[]; pixDimensions: XYDimension
     '--pix-transform': `translate(${starOffsetX}px, ${starOffsetY}px) scale(${starPixSizeModifier})`,
   } as React.CSSProperties
 
-  return <rect id={`${x},${y}`} className="letterPixel" width="1" height="1" x={x} y={y} style={style} />
+  return <rect id={`${x},${y}`} className="letter-rect" width="1" height="1" x={x} y={y} style={style} />
 }
 
 type PixelLetterSVGFragmentProps = {
-  data: PixelLetter['data']
+  data: PixelLetterData['data']
   xyOffset: XYDimensions
   pixDimensions: XYDimensions
 }
@@ -105,17 +105,19 @@ function propsAreEqual(
 }
 const PixelLetterSVGFragmentMemoized = React.memo(PixelLetterSVGFragment, propsAreEqual)
 
-function ZackCheng({ hwDimensions: { height, width } }: { hwDimensions: HWDimensions }) {
-  const letterArray: PixelLetter[] = [Z, A, C, K, space, C, H, E, N, G]
+function PixelLetters({ windowDimensions }: { windowDimensions: XY }) {
+  const { x: width, y: height } = windowDimensions
+
+  const letterArray: PixelLetterData[] = [Z, A, C, K, space, C, H, E, N, G]
   const textX = letterArray.reduce((acc, curr) => (acc += curr.width), 0) + letterArray.length - 1
   const textY = 5
 
-  const [className, setClassName] = useState('stars')
+  const [className, setClassName] = useState('before')
 
   const pixDimensions: XYDimensions =
-    className === 'text' ? { x: textX, y: textY } : { x: width / pixSize, y: height / pixSize }
+    className === 'after' ? { x: textX, y: textY } : { x: width / pixSize, y: height / pixSize }
   const style: React.CSSProperties =
-    className === 'text' ? { height: textY * pixSize, width: textX * pixSize } : { height, width }
+    className === 'after' ? { height: textY * pixSize, width: textX * pixSize } : { height, width }
   const otherStyle = {
     '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(0.7, 0, 0.3, 1)`,
   } as React.CSSProperties
@@ -139,18 +141,18 @@ function ZackCheng({ hwDimensions: { height, width } }: { hwDimensions: HWDimens
   }
 
   function onClick() {
-    setClassName('coalesce')
+    setClassName('during')
     setTimeout(() => {
-      setClassName('text')
+      setClassName('after')
     }, timing.starShiftDuration * 1000)
   }
 
   return (
-    <div id="ZackCheng">
+    <div id="letters-div">
       <svg
-        id="ZackCheng-svg"
+        id="letters-svg"
         className={className}
-        onClick={className === 'stars' ? onClick : undefined}
+        onClick={className === 'before' ? onClick : undefined}
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${pixDimensions.x} ${pixDimensions.y}`}
         style={{ ...style, ...otherStyle }}>
@@ -160,4 +162,4 @@ function ZackCheng({ hwDimensions: { height, width } }: { hwDimensions: HWDimens
   )
 }
 
-export default ZackCheng
+export default PixelLetters

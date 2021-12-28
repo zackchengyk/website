@@ -1,7 +1,7 @@
 import '../css/App.scss'
-import { PixelSVG } from './svgPixels/PixelSVG'
+import { PixelStarField } from './stars/PixelStarField'
 import { useWindowDimensions } from './useWindowDimensions'
-import ZackCheng from './ZackCheng'
+import PixelLetters from './letters/PixelLetters'
 
 function App() {
   const hwDimensions = useWindowDimensions()
@@ -13,8 +13,8 @@ function App() {
 
   return (
     <div className="App" style={style}>
-      <PixelSVG containerDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
-      {/* <ZackCheng hwDimensions={hwDimensions} /> */}
+      <PixelStarField windowDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
+      <PixelLetters windowDimensions={{ x: hwDimensions.width, y: hwDimensions.height }} />
     </div>
   )
 }
