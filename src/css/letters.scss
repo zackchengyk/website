@@ -13,15 +13,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    pointer-events: auto;
-    cursor: pointer;
-
     .letter-rect {
       transform-origin: center;
     }
   }
 
   #letters-svg.before {
+    pointer-events: auto;
+    cursor: pointer;
+
     .letter-rect {
       fill: var(--letter-rect-fill);
       transform: var(--letter-rect-transform);

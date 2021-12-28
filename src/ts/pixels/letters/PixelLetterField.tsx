@@ -63,6 +63,7 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
         // Subsequent information no longer necessary once it becomes text
         offset: { x: xOffsetAccumulator + baseXOffset, y: baseYOffset },
         pixelDimensions: pixelDimensions,
+        letterDelay: (i / (letterArray.length - 1) - 1) * timing.maxLetterDelay,
       })
       xOffsetAccumulator += letter.width + 1
     }

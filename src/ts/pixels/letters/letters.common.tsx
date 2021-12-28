@@ -6,7 +6,8 @@ export const textPixelSize = pixelSize / starPixSizeModifier
 export const starPixMargin = 1
 
 export const timing = {
-  starShiftDuration: 3.25,
+  starShiftDuration: 2.25, // including letter delay
+  maxLetterDelay: 0.25,
   textShiftDuration: 1.75,
   getStarShiftDelay: () => {
     if (Math.random() < 0.1) {
