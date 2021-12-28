@@ -1,4 +1,4 @@
-import { XY } from '../common'
+import { XY } from '../../common'
 import { pixelSize } from '../pixels.common'
 
 export const starPixSizeModifier = 0.6

@@ -1,5 +1,5 @@
 import { PixelStar } from './PixelStar'
-import { XY, xyEqual } from '../common'
+import { XY, xyEqual } from '../../common'
 import React from 'react'
 
 // ================== Helpers

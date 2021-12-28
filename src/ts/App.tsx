@@ -1,7 +1,7 @@
 import '../css/App.scss'
 import { useWindowDimensions } from './useWindowDimensions'
-import PixelStarField from './stars/PixelStarField'
-import PixelLetterField from './letters/PixelLetterField'
+import PixelStarField from './pixels/stars/PixelStarField'
+import PixelLetterField from './pixels/letters/PixelLetterField'
 
 function App() {
   const hwDimensions = useWindowDimensions()

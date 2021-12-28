@@ -1,5 +1,5 @@
 import React from 'react'
-import { XY, xyEqual } from '../common'
+import { XY, xyEqual } from '../../common'
 import { getRandomColor } from '../pixels.common'
 import { PixelLetterData, starPixSizeModifier, timing } from './letters.common'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { CSSPropertiesEqual, XY, xyEqual } from '../common'
+import { CSSPropertiesEqual, XY, xyEqual } from '../../common'
 
 // ================== Component: PixelStar
 

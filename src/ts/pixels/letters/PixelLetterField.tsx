@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { XY } from '../common'
+import { XY } from '../../common'
 import { PixelLetterData, textPixelSize, timing, Z, A, C, K, space, H, E, N, G } from './letters.common'
 import { PixelLetter, PixelLetterProps } from './PixelLetter'
-import '../../css/letters.scss'
+import '../../../css/letters.scss'
 
 // ================== Component: Helpers
 
