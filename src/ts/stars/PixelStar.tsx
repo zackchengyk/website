@@ -5,16 +5,10 @@ export type PixelStarProps = {
   position: XY
   color: string
   extraClass?: string
-  extraStyle?: React.CSSProperties
 }
 
-function _PixelStar({ position, color, extraClass, extraStyle }: PixelStarProps) {
+function _PixelStar({ position, color, extraClass }: PixelStarProps) {
   const { x: xPos, y: yPos } = position
-
-  const style = {
-    ...extraStyle,
-  } as React.CSSProperties
-
   return (
     <rect
       id={`${xPos},${yPos}`}
@@ -23,7 +17,6 @@ function _PixelStar({ position, color, extraClass, extraStyle }: PixelStarProps)
       height="1"
       x={xPos}
       y={yPos}
-      style={style}
     />
   )
 }
@@ -32,8 +25,7 @@ function pixelStarPropsAreEqual(prevProps: PixelStarProps, nextProps: PixelStarP
   return (
     xyEqual(prevProps.position, nextProps.position) &&
     prevProps.color === nextProps.color &&
-    prevProps.extraClass === nextProps.extraClass &&
-    CSSPropertiesEqual(prevProps.extraStyle, nextProps.extraStyle)
+    prevProps.extraClass === nextProps.extraClass
   )
 }
 

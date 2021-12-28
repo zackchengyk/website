@@ -1,5 +1,6 @@
 import { PixelStar } from './PixelStar'
-import { XY } from '../common'
+import { XY, xyEqual } from '../common'
+import React from 'react'
 
 export type PixelAnimStarProps = {
   position: XY
@@ -19,7 +20,7 @@ const offsets = [
   'frame-9',
 ]
 
-export function PixelAnimStar({ position, color }: PixelAnimStarProps) {
+export function _PixelAnimStar({ position, color }: PixelAnimStarProps) {
   const { x: xPos, y: yPos } = position
 
   const i = (Math.random() * offsets.length) >> 0
@@ -41,3 +42,9 @@ export function PixelAnimStar({ position, color }: PixelAnimStarProps) {
     </g>
   )
 }
+
+function pixelAnimStarPropsAreEqual(prevProps: PixelAnimStarProps, nextProps: PixelAnimStarProps): boolean {
+  return xyEqual(prevProps.position, nextProps.position) && prevProps.color === nextProps.color
+}
+
+export const PixelAnimStar = React.memo(_PixelAnimStar, pixelAnimStarPropsAreEqual)

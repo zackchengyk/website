@@ -30,7 +30,8 @@ type PixelStarFieldProps = {
 
 export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   // Get pixel dimensions
-  const { x: xDim, y: yDim } = windowDimensions
+  const [largestWD, setLargestWD] = useState<XY>(windowDimensions)
+  const { x: xDim, y: yDim } = largestWD
   const pixelDimensions: XY = { x: Math.floor(xDim / pixelSize), y: Math.floor(yDim / pixelSize) }
 
   // Use state for stars
@@ -39,11 +40,20 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
 
   // Figure out how many stars to spawn
   const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
-  const numAnimStars = Math.floor(1.5 * areaRatio)
+  const numAnimStars = Math.floor(2 * areaRatio)
   const numStars = Math.floor(10 * areaRatio)
-  console.log(numAnimStars, numStars)
 
-  // Setup stars if pixelDimensions change
+  // Possibly change largestWD if windowDimensions change
+  useEffect(() => {
+    if (windowDimensions.x > largestWD.x || windowDimensions.y > largestWD.y) {
+      setLargestWD({
+        x: Math.max(largestWD.x, windowDimensions.x),
+        y: Math.max(largestWD.y, windowDimensions.y),
+      })
+    }
+  }, [windowDimensions])
+
+  // Setup stars if largestWD changes
   useEffect(() => {
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
       position: getRandomPosition(pixelDimensions),
@@ -55,14 +65,20 @@ export function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
       color: getRandomColor(),
     }))
     setStars(starsTemp)
-  }, [windowDimensions])
+  }, [largestWD])
+
+  const style = {
+    height: largestWD.y + 'px',
+    width: largestWD.x + 'px',
+  }
 
   return (
     <div id="stars-div">
       <svg
         id="stars-svg"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}>
+        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}
+        style={style}>
         {animStars.map((starProps, i) => (
           <PixelAnimStar key={i} {...starProps} />
         ))}

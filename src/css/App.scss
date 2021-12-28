@@ -12,13 +12,15 @@
   padding: 0;
 }
 
-body,
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: $background-color;
+}
+
 #root,
 .App {
   height: 100%;
   width: 100%;
-}
-
-body {
-  background-color: $background-color;
 }
