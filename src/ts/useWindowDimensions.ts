@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const debounceDelay = 100
+const debounceDelay = 10
 
 export type HWDimensions = {
   height: number
@@ -18,10 +18,7 @@ export function useWindowDimensions(): HWDimensions {
     let isWaiting: number = 0
 
     const debouncedHandleResize = () => {
-      if (isWaiting) {
-        return
-      }
-
+      clearTimeout(isWaiting)
       isWaiting = setTimeout(() => {
         isWaiting = 0
         const hw = getWindowDimensions()

@@ -13,14 +13,17 @@ function getRandomPosition(
   avoidCenterYFrac: number = 0
 ): XY {
   // Modify distribution to avoid center
-  let normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
-  while (Math.abs(normalized.x) < avoidCenterXFrac / 2 && Math.abs(normalized.y) < avoidCenterYFrac / 2) {
-    normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
-  }
-
+  // let normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
+  // while (Math.abs(normalized.x) < avoidCenterXFrac / 2 && Math.abs(normalized.y) < avoidCenterYFrac / 2) {
+  //   normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
+  // }
+  // return {
+  //   x: Math.floor((normalized.x + 0.5) * pixelDimensions.x),
+  //   y: Math.floor((normalized.y + 0.5) * pixelDimensions.y),
+  // }
   return {
-    x: Math.floor((normalized.x + 0.5) * pixelDimensions.x),
-    y: Math.floor((normalized.y + 0.5) * pixelDimensions.y),
+    x: Math.floor(Math.random() * pixelDimensions.x),
+    y: Math.floor(Math.random() * pixelDimensions.y),
   }
 }
 

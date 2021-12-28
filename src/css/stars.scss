@@ -3,9 +3,9 @@
 
 #stars-div {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   pointer-events: none;
 
   #stars-svg {
@@ -26,10 +26,14 @@
 }
 
 .core {
+  opacity: 1;
   animation-name: coreKeyframes;
+  -webkit-animation-name: coreKeyframes;
 }
 .splash {
+  opacity: 1;
   animation-name: splashKeyframes;
+  -webkit-animation-name: splashKeyframes;
 }
 @for $i from 0 through ($anim-star-num-frames - 1) {
   .frame-#{$i} {
@@ -38,7 +42,7 @@
 }
 @keyframes coreKeyframes {
   0%,
-  79.9999999999% {
+  79% {
     opacity: 1;
   }
   80%,
@@ -48,7 +52,7 @@
 }
 @keyframes splashKeyframes {
   0%,
-  9.9999999999% {
+  9% {
     opacity: 1;
   }
   10%,
