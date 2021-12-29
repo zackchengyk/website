@@ -34,11 +34,11 @@ $color: #edc8c4;
 $color: #cf8acb;
 $color: #5f556a;
 
-$background-color: rgb(34, 39, 55);
+$background-color: hsl(27, 52%, 6%); // hsl(17, 31%, 8%);
 $hero-text-color: white;
 $panel-color: white;
 
-$star-colors: 'ffffff', 'f0e5bb', 'fcedb3', 'fabb93', 'd16a45', 'cf5a4a', '5992e3', 'c7deff', 'f0bbde';
+$star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;
 $anim-star-duration: 7.5s;
 $anim-star-num-frames: 10;
 

@@ -20,8 +20,9 @@
   transform-origin: center;
 }
 @each $color in $star-colors {
-  .fill-#{str-slice($color, 1)} {
-    fill: #{'#' + $color};
+  $color-string: str-slice(#{$color}, -6);
+  .fill-#{$color-string} {
+    fill: $color;
   }
 }
 
