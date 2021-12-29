@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 $white: #f2f0e5;
-$color: #b8b5b9;
+$light: #b8b5b9;
 $color: #868188;
 $color: #646365;
 $color: #45444f;
@@ -34,12 +34,11 @@ $color: #edc8c4;
 $color: #cf8acb;
 $color: #5f556a;
 
-$background-color: $black;
-$hero-text-color: $white;
+$background-color: rgb(34, 39, 55);
+$hero-text-color: white;
+$panel-color: white;
 
-$star-colors: 'f2f0e5', 'b8b5b9', '868188', '646365', '4b80ca', '68c2d3', 'a2dcc7', 'ede19e', 'd3a068',
-  'b45252', '6a536e', '80493a', 'a77b5b', 'e5ceb4', 'c2d368', '8ab060', '567b79', '7b7243', 'b2b47e', 'edc8c4',
-  'cf8acb', '5f556a';
+$star-colors: 'ffffff', 'f0e5bb', 'fcedb3', 'fabb93', 'd16a45', 'cf5a4a', '5992e3', 'c7deff', 'f0bbde';
 $anim-star-duration: 7.5s;
 $anim-star-num-frames: 10;
 
