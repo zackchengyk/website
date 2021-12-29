@@ -1,49 +1,60 @@
 @use 'sass:color';
 @use 'sass:math';
-
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@100;200;300;335;350;360;400;500;550;570;600;650;675;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@100;200;300;335;350;400;425;450;475;500;550;570;600;650;675;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-$white: #f2f0e5;
-$light: #b8b5b9;
-$color: #868188;
-$color: #646365;
-$color: #45444f;
-$color: #3a3858;
-$black: #212123;
-$color: #352b42;
-$color: #43436a;
-$color: #4b80ca;
-$color: #68c2d3;
-$color: #a2dcc7;
-$color: #ede19e;
-$color: #d3a068;
-$color: #b45252;
-$color: #6a536e;
-$color: #4b4158;
-$color: #80493a;
-$color: #a77b5b;
-$color: #e5ceb4;
-$color: #c2d368;
-$color: #8ab060;
-$color: #567b79;
-$color: #4e584a;
-$color: #7b7243;
-$color: #b2b47e;
-$color: #edc8c4;
-$color: #cf8acb;
-$color: #5f556a;
+$smaller-b: 480;
+$larger-b: 800;
+$smaller-breakpoint: $smaller-b * 1px;
+$larger-breakpoint: $larger-b * 1px;
 
-$background-color: #2b2b2b; //rgb(254, 249, 239); //hsl(27, 52%, 6%); // hsl(17, 31%, 8%);
-$hero-text-color: #ffefd6; // rgb(34, 36, 35);
-$panel-color: black;
+@function _linear($x1, $y1, $x2, $y2) {
+  $gradient: math.div($y2 - $y1, $x2 - $x1);
+  $offset: $y2 - $x2 * $gradient;
+  @if $y1 < $y2 {
+    @return clamp($y1 * 1px, $gradient * 100vw + $offset * 1px, $y2 * 1px);
+  } @else {
+    @return clamp($y2 * 1px, $gradient * 100vw + $offset * 1px, $y1 * 1px);
+  }
+}
+@function linear($y1, $y2) {
+  @return _linear($smaller-b, $y1, $larger-b, $y2);
+}
 
-$star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;
-$anim-star-duration: 7.5s;
-$anim-star-num-frames: 10;
+// ================== PRIMARY PALETTE
+
+$dark-light: #2b2b2b;
+$dark: #1f1f1f;
+$dark-dark: #121212;
+$black: #000000;
+
+$white: #ffffff;
+$light-light: hsl(28, 100%, 97%);
+$light: hsl(30, 100%, 92%);
+$light-dark: hsl(33, 100%, 86%);
+
+$blue: #81a4cd;
+$brown: #9e643c;
+
+$green: #005c3a;
+$green-dark: #005c3a;
+
+// ================== COLORS
+
+$background-color: $light;
+
+$temporary: color.change($brown, $alpha: 0);
+
+$side-padding: linear(15, 25);
+
+// ================== FONTS
 
 $inconsolata: 'Inconsolata', monospace;
 $outfit: 'Outfit', sans-serif;
+$munro: 'Munro', monospace;
+$munro-narrow: 'Munro Narrow', monospace;
+$munro-small: 'Munro Small', monospace;
 
 @font-face {
   font-family: 'Munro';
@@ -57,3 +68,7 @@ $outfit: 'Outfit', sans-serif;
   font-family: 'Munro Small';
   src: local('Munro Small'), url(../assets/munro-font/MunroSmall.ttf) format('truetype');
 }
+
+// $star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;
+// $anim-star-duration: 7.5s;
+// $anim-star-num-frames: 10;

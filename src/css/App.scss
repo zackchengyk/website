@@ -13,19 +13,21 @@
 }
 
 html,
-body,
-#root {
+body {
   background-color: $background-color;
 }
 
-.App {
-  position: relative;
+body {
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
-
   // Attempt at fixing iOS Safari
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
   }
+}
+
+#root,
+#App {
+  position: absolute;
+  inset: 0;
 }

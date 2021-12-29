@@ -1,0 +1,61 @@
+@use 'sass:color';
+@import './common.scss';
+
+#banner-section {
+  position: relative; // Required to create a stacking context
+  z-index: 1; // Required to create a stacking context
+
+  height: max(75%, 400px);
+  width: 100%;
+
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr) minmax(0, min-content);
+  gap: 100px;
+
+  background-color: $blue; // Temporary
+}
+
+#banner-right {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  padding: 25px $side-padding 25px 0;
+
+  h1 {
+    height: 100%;
+    display: grid;
+
+    img {
+      place-self: center end;
+      height: 100%;
+      min-height: 0;
+      max-height: 100%;
+    }
+  }
+}
+
+#banner-left {
+  place-self: end start;
+  padding: 25px 0 25px $side-padding;
+
+  grid-row: 1;
+  grid-column: 1;
+
+  > h2 {
+    color: $light;
+    font-family: $munro;
+    font-size: linear(30, 50);
+    font-weight: 600;
+  }
+}
+
+#banner-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  background: linear-gradient($dark-light, color.change($dark-light, $lightness: 10%)); // Temporary
+}
