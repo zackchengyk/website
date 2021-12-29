@@ -41,7 +41,7 @@ function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   // Setup stars if pixelDimensions changes
   useEffect(() => {
     const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
-    const numAnimStars = Math.floor(1 * areaRatio)
+    const numAnimStars = Math.floor(0.5 * areaRatio)
     const numStars = Math.floor(8 * areaRatio)
 
     // Populate star props arrays
