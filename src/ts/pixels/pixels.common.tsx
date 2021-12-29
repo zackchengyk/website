@@ -1,4 +1,4 @@
-export const pixelSize = 2
+export const pixelSize = 3
 
 const pixelColors = [
   '#f0e5bb', // yellow

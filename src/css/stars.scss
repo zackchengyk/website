@@ -22,7 +22,7 @@
 @each $color in $star-colors {
   $color-string: str-slice(#{$color}, -6);
   .fill-#{$color-string} {
-    fill: $color;
+    fill: #ffefd6; //$color;
   }
 }
 

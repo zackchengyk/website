@@ -34,6 +34,7 @@ function PixelRect({ textPosition, starPosition, letterDelay }: PixelRectProps) 
     '--letter-rect-transition': `${transitionTime}s cubic-bezier(0.7, 0, 0.3, 1) ${delay}s`,
     '--letter-rect-fill': getRandomColor(),
     '--letter-rect-transform': `translate(${xTransform}px, ${yTransform}px) scale(${starPixSizeModifier})`,
+    '--letter-rect-final-transform': `rotate(90deg)`,
   } as React.CSSProperties
 
   return (

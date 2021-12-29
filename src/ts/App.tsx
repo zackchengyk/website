@@ -2,7 +2,7 @@ import '../css/App.scss'
 import { useWindowDimensions } from './useWindowDimensions'
 import PixelStarField from './pixels/stars/PixelStarField'
 import PixelLetterField from './pixels/letters/PixelLetterField'
-import ContentField from './content/ContentField'
+import FixedContentField from './content/FixedContentField'
 import { useState } from 'react'
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
     <div className="App" style={style}>
       <PixelStarField windowDimensions={windowDimensions} />
       <PixelLetterField windowDimensions={windowDimensions} callback={() => setClassName('')} />
+      <FixedContentField className={className} />
     </div>
   )
 }

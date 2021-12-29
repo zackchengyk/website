@@ -1,0 +1,162 @@
+@import './common.scss';
+
+$panel-gap: 40px;
+
+#fixed-content-div {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  display: grid;
+
+  visibility: visible;
+  pointer-events: auto;
+
+  > #title {
+    margin-top: 18px;
+
+    color: $hero-text-color;
+    font-family: 'Munro Small';
+    font-size: 51px;
+    letter-spacing: -0.5px;
+  }
+
+  > #subtitle {
+    position: absolute;
+    left: 50%;
+    top: 81px;
+    transform: translateX(-50%);
+
+    color: $hero-text-color;
+    font-family: 'Munro Narrow';
+    font-size: 25px;
+    font-weight: 300;
+    text-shadow: 0 0 1rem $background-color;
+  }
+
+  &.hidden {
+    // visibility: hidden;
+    pointer-events: none;
+
+    * {
+      animation: none !important;
+    }
+  }
+}
+
+#scrolling-content-div {
+  place-self: center stretch;
+  height: 200px;
+
+  display: flex;
+  gap: $panel-gap;
+
+  > .panel {
+    flex-shrink: 0;
+    background-color: $panel-color;
+    height: 100%;
+    width: 200px;
+    border-radius: $panel-gap;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    animation: fallIn 1s forwards ease var(--animation-delay);
+  }
+}
+
+@keyframes fallIn {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(-50%));
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+$panel-border-radius: 10px;
+$planetarium-container-height: 800px;
+$planetarium-shadow-normal-delay: 0.1s;
+$planetarium-shadow-hover-delay: 0.2s;
+$planetarium-shadow-active-delay: 0.05s;
+$fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
+$shadow-color: hsl(24, 69%, 15%);
+$planetarium-shadow: soft-shadow($shadow-color, 2);
+$planetarium-shadow-normal-opacity: 0.5;
+$planetarium-shadow-hover-opacity: 1;
+$planetarium-shadow-active-opacity: 0.4;
+
+#planetarium-container {
+  place-self: center;
+  position: relative;
+  display: block;
+  height: 500px;
+  width: 800px;
+}
+#planetarium {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+
+  border-radius: $panel-border-radius;
+  overflow: hidden;
+
+  // cursor: pointer;
+
+  // transform: scale(1);
+  // transition: transform $planetarium-shadow-normal-delay $fade-ease-out;
+  // &:hover,
+  // &:focus {
+  //   transform: scale(1.006);
+  //   transition: transform $planetarium-shadow-hover-delay $fade-ease-out;
+  //   outline: none;
+  //   + #planetarium-shadow-provider {
+  //     opacity: $planetarium-shadow-hover-opacity;
+  //     transition: opacity $planetarium-shadow-hover-delay $fade-ease-out;
+  //   }
+  // }
+  // &.active,
+  // &:active {
+  //   transform: scale(1);
+  //   transition: transform $planetarium-shadow-active-delay $fade-ease-out;
+  //   outline: none;
+  //   + #planetarium-shadow-provider {
+  //     opacity: $planetarium-shadow-active-opacity;
+  //     transition: opacity $planetarium-shadow-active-delay $fade-ease-out;
+  //   }
+  // }
+}
+// #planetarium-shadow-provider {
+//   position: absolute;
+//   z-index: 1;
+//   inset: 0;
+
+//   border-radius: $panel-border-radius;
+//   background-color: transparent;
+
+//   pointer-events: none;
+
+//   box-shadow: $planetarium-shadow;
+//   opacity: $planetarium-shadow-normal-opacity;
+
+//   transition: opacity $planetarium-shadow-normal-delay $fade-ease-out;
+// }
+// #planetarium-noscript {
+//   position: absolute;
+//   z-index: 2;
+//   inset: 0;
+
+//   display: grid;
+//   align-content: center;
+//   justify-items: center;
+//   > div {
+//     display: inline;
+//     text-align: center;
+//     max-width: 50%;
+//   }
+// }
