@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react'
+import { XY } from './common'
 
 const debounceDelay = 10
 
-export type HWDimensions = {
-  height: number
-  width: number
+function getWindowDimensions(): XY {
+  const hw = { x: document.documentElement.clientWidth, y: document.documentElement.clientHeight }
+  return hw
 }
 
-function getWindowDimensions(): HWDimensions {
-  return { height: window.innerHeight, width: window.innerWidth }
-}
-
-export function useWindowDimensions(): HWDimensions {
-  const [windowDimensions, setWindowDimensions] = useState<HWDimensions>(getWindowDimensions)
+export function useWindowDimensions(): XY {
+  const [windowDimensions, setWindowDimensions] = useState<XY>(getWindowDimensions)
 
   useEffect(() => {
     let isWaiting: number = 0
@@ -22,7 +19,7 @@ export function useWindowDimensions(): HWDimensions {
       isWaiting = setTimeout(() => {
         isWaiting = 0
         const hw = getWindowDimensions()
-        if (hw.height === windowDimensions.height && hw.width === windowDimensions.width) {
+        if (hw.x === windowDimensions.x && hw.y === windowDimensions.y) {
           return
         }
         setWindowDimensions(hw)
