@@ -14,9 +14,12 @@ const pixelPadding = { x: 2, y: 2 }
 
 // ================== Component: PixelLetterField
 
-type PixelLetterFieldProps = { windowDimensions: XY }
+type PixelLetterFieldProps = {
+  windowDimensions: XY
+  callback: () => void
+}
 
-function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
+function PixelLetterField({ windowDimensions, callback }: PixelLetterFieldProps) {
   // Keep track of largest dimensions seen so far
   const [largestWD, setLargestWD] = useState<XY>(windowDimensions)
   // Possibly change largestWD if windowDimensions change
@@ -37,6 +40,9 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
     setTimeout(() => {
       setClassName('after')
     }, timing.starShiftDuration * 1000)
+    setTimeout(() => {
+      callback()
+    }, (timing.starShiftDuration + timing.textShiftDuration) * 1000)
   }
 
   // Get text pixel dimensions
