@@ -5,18 +5,18 @@ import { PixelLetterData, starPixSizeModifier, timing } from './letters.common'
 
 // ================== Helpers
 
-function getRandomPosition(pixelDimensions: XY): XY {
+function getRandomStarPosition(textPixelDimensions: XY): XY {
   return {
-    x: ((Math.random() - 0.5) / starPixSizeModifier + 0.5) * pixelDimensions.x,
-    y: ((Math.random() - 0.5) / starPixSizeModifier + 0.5) * pixelDimensions.y,
+    x: Math.floor(Math.random() * (textPixelDimensions.x / starPixSizeModifier - 1)),
+    y: Math.floor(Math.random() * (textPixelDimensions.y / starPixSizeModifier - 1)),
   }
 }
 
 // ================== Component: PixelRect
 
 type PixelRectProps = {
-  textPosition: XY
-  starPosition: XY
+  textPosition: XY // in text pixel coordinate space
+  starPosition: XY // in star pixel coordinate space, which explains the math required...
   letterDelay: number
 }
 
@@ -54,11 +54,11 @@ function PixelRect({ textPosition, starPosition, letterDelay }: PixelRectProps) 
 export type PixelLetterProps = {
   data: PixelLetterData['data']
   offset: XY
-  pixelDimensions: XY
+  textPixelDimensions: XY
   letterDelay: number
 }
 
-function _PixelLetter({ data, offset, pixelDimensions, letterDelay }: PixelLetterProps) {
+function _PixelLetter({ data, offset, textPixelDimensions, letterDelay }: PixelLetterProps) {
   const { x: xOff, y: yOff } = offset
 
   return (
@@ -67,7 +67,7 @@ function _PixelLetter({ data, offset, pixelDimensions, letterDelay }: PixelLette
         <PixelRect
           key={i}
           textPosition={{ x: x + xOff, y: y + yOff }}
-          starPosition={getRandomPosition(pixelDimensions)}
+          starPosition={getRandomStarPosition(textPixelDimensions)}
           letterDelay={letterDelay}
         />
       ))}
@@ -79,7 +79,7 @@ function pixelLetterPropsAreEqual(prevProps: PixelLetterProps, nextProps: PixelL
   // Ignore "data" field... it's not gonna change. Just look at xyOffset and pixDimensions
   return (
     xyEqual(prevProps.offset, nextProps.offset) &&
-    xyEqual(prevProps.pixelDimensions, nextProps.pixelDimensions) &&
+    xyEqual(prevProps.textPixelDimensions, nextProps.textPixelDimensions) &&
     prevProps.letterDelay === nextProps.letterDelay
   )
 }

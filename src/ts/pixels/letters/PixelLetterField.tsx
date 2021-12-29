@@ -39,19 +39,19 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
     }, timing.starShiftDuration * 1000)
   }
 
-  // Get pixel dimensions
+  // Get text pixel dimensions
   const { x: xDim, y: yDim } = largestWD
-  const pixelDimensions: XY =
+  const textPixelDimensions: XY =
     className === 'after'
       ? { x: textX + 2 * pixelPadding.x, y: textY + 2 * pixelPadding.x }
       : { x: Math.floor(xDim / textPixelSize), y: Math.floor(yDim / textPixelSize) }
 
   // Use state for letters
   const [letters, setLetters] = useState<PixelLetterProps[]>([])
-  // Setup letters if pixelDimensions changes
+  // Setup letters if textPixelDimensions changes
   useEffect(() => {
-    const baseXOffset = pixelDimensions.x / 2 - textX / 2
-    const baseYOffset = pixelDimensions.y / 2 - textY / 2
+    const baseXOffset = textPixelDimensions.x / 2 - textX / 2
+    const baseYOffset = textPixelDimensions.y / 2 - textY / 2
 
     // Populate letter prop arrays
     const lettersTemp: PixelLetterProps[] = []
@@ -62,18 +62,18 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
         data: letter.data,
         // Subsequent information no longer necessary once it becomes text
         offset: { x: xOffsetAccumulator + baseXOffset, y: baseYOffset },
-        pixelDimensions: pixelDimensions,
+        textPixelDimensions: textPixelDimensions,
         letterDelay: (i / (letterArray.length - 1) - 1) * timing.maxLetterDelay,
       })
       xOffsetAccumulator += letter.width + 1
     }
     setLetters(lettersTemp)
-  }, [pixelDimensions.x, pixelDimensions.y])
+  }, [textPixelDimensions.x, textPixelDimensions.y])
 
   const divStyle = { height: yDim, width: xDim }
   const svgStyle =
     className === 'after'
-      ? { height: pixelDimensions.y * textPixelSize, width: pixelDimensions.x * textPixelSize }
+      ? { height: textPixelDimensions.y * textPixelSize, width: textPixelDimensions.x * textPixelSize }
       : divStyle
   const otherSvgStyle = { '--svg-transition': `${timing.textShiftDuration}s cubic-bezier(.3,0,.22,1)` }
 
@@ -84,7 +84,7 @@ function PixelLetterField({ windowDimensions }: PixelLetterFieldProps) {
         className={className}
         onClick={className === 'before' ? onClick : undefined}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${pixelDimensions.x} ${pixelDimensions.y}`}
+        viewBox={`0 0 ${textPixelDimensions.x} ${textPixelDimensions.y}`}
         style={{ ...svgStyle, ...otherSvgStyle }}>
         {letters.map((letterProps, i) => (
           <PixelLetter key={i} {...letterProps} />

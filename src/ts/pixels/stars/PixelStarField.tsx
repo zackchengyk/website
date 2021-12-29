@@ -7,23 +7,10 @@ import '../../../css/stars.scss'
 
 // ================== Helpers
 
-function getRandomPosition(
-  pixelDimensions: XY,
-  avoidCenterXFrac: number = 0,
-  avoidCenterYFrac: number = 0
-): XY {
-  // Modify distribution to avoid center
-  // let normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
-  // while (Math.abs(normalized.x) < avoidCenterXFrac / 2 && Math.abs(normalized.y) < avoidCenterYFrac / 2) {
-  //   normalized = { x: Math.random() - 0.5, y: Math.random() - 0.5 }
-  // }
-  // return {
-  //   x: Math.floor((normalized.x + 0.5) * pixelDimensions.x),
-  //   y: Math.floor((normalized.y + 0.5) * pixelDimensions.y),
-  // }
+function getRandomStarPosition(pixelDimensions: XY): XY {
   return {
-    x: Math.floor(Math.random() * pixelDimensions.x),
-    y: Math.floor(Math.random() * pixelDimensions.y),
+    x: Math.floor(Math.random() * (pixelDimensions.x - 1)),
+    y: Math.floor(Math.random() * (pixelDimensions.y - 1)),
   }
 }
 
@@ -59,12 +46,12 @@ function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
 
     // Populate star props arrays
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({
-      position: getRandomPosition(pixelDimensions),
+      position: getRandomStarPosition(pixelDimensions),
       color: getRandomColor(),
     }))
     setAnimStars(animStarsTemp)
     const starsTemp: PixelStarProps[] = [...Array(numStars).keys()].map(() => ({
-      position: getRandomPosition(pixelDimensions),
+      position: getRandomStarPosition(pixelDimensions),
       color: getRandomColor(),
     }))
     setStars(starsTemp)
