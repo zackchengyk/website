@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import './common.scss';
+@import '../common.scss';
 
 #banner-section {
   position: relative; // Required to create a stacking context

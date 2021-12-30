@@ -3,7 +3,7 @@ import { XY } from '../../common'
 import { PixelAnimStarProps, PixelAnimStar } from './PixelAnimStar'
 import { PixelStar, PixelStarProps } from './PixelStar'
 import { getRandomColor, pixelSize } from '../pixels.common'
-import '../../../css/stars.scss'
+import '../../../css/pixels/stars.scss'
 
 // ================== Helpers
 

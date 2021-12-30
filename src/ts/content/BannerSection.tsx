@@ -1,4 +1,4 @@
-import '../../css/BannerSection.scss'
+import '../../css/content/BannerSection.scss'
 import NameSVG from './NameSVG'
 
 type BannerSectionProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../css/OutLink.scss'
+import '../../css/content/OutLink.scss'
 
 type OutLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 

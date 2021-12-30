@@ -8,21 +8,21 @@
 
 $inconsolata: 'Inconsolata', monospace;
 $outfit: 'Outfit', sans-serif;
-$munro: 'Munro', monospace;
-$munro-narrow: 'Munro Narrow', monospace;
-$munro-small: 'Munro Small', monospace;
+$munro: Munro, monospace;
+$munro-narrow: Munro Narrow, monospace;
+$munro-small: Munro Small, monospace;
 
 @font-face {
   font-family: 'Munro';
-  src: local('Munro'), url(../assets/munro-font/Munro.ttf) format('truetype');
+  src: local('Munro'), url(../fonts/munro-font/Munro.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Munro Narrow';
-  src: local('Munro Narrow'), url(../assets/munro-font/MunroNarrow.ttf) format('truetype');
+  src: local('Munro Narrow'), url(../fonts/munro-font/MunroNarrow.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Munro Small';
-  src: local('Munro Small'), url(../assets/munro-font/MunroSmall.ttf) format('truetype');
+  src: local('Munro Small'), url(../fonts/munro-font/MunroSmall.ttf) format('truetype');
 }
 
 // ================== RESPONSIVE

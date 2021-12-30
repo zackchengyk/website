@@ -1,4 +1,4 @@
-import '../../css/AboutSection.scss'
+import '../../css/content/AboutSection.scss'
 import { personalBlurb, personalIntro } from './text'
 import src from '../../img/me.jpg'
 
