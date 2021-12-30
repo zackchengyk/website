@@ -1,6 +1,6 @@
 @use 'sass:color';
 @use 'sass:math';
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;325;350;375;400;425;450;475;500;525;550;575;600;625;650;675;700;723&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;325;350;375;400;425;450;475;500;525;550;575;600;625;650;675;700;725;750;775;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -11,19 +11,6 @@ $outfit: 'Outfit', sans-serif;
 $munro: Munro, monospace;
 $munro-narrow: Munro Narrow, monospace;
 $munro-small: Munro Small, monospace;
-
-@font-face {
-  font-family: 'Munro';
-  src: local('Munro'), url(../fonts/munro-font/Munro.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Munro Narrow';
-  src: local('Munro Narrow'), url(../fonts/munro-font/MunroNarrow.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Munro Small';
-  src: local('Munro Small'), url(../fonts/munro-font/MunroSmall.ttf) format('truetype');
-}
 
 // ================== RESPONSIVE
 

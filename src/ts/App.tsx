@@ -1,4 +1,5 @@
 import '../css/App.scss'
+import '../css/font.css'
 import AboutSection from './content/AboutSection'
 import BannerSection from './content/BannerSection'
 import { useWindowDimensions } from './useWindowDimensions'
