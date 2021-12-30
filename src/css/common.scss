@@ -1,8 +1,31 @@
 @use 'sass:color';
 @use 'sass:math';
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@100;200;300;335;350;400;425;450;475;500;550;570;600;650;675;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;325;350;375;400;425;450;475;500;525;550;575;600;625;650;675;700;723&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// ================== FONTS
+
+$inconsolata: 'Inconsolata', monospace;
+$outfit: 'Outfit', sans-serif;
+$munro: 'Munro', monospace;
+$munro-narrow: 'Munro Narrow', monospace;
+$munro-small: 'Munro Small', monospace;
+
+@font-face {
+  font-family: 'Munro';
+  src: local('Munro'), url(../assets/munro-font/Munro.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Munro Narrow';
+  src: local('Munro Narrow'), url(../assets/munro-font/MunroNarrow.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Munro Small';
+  src: local('Munro Small'), url(../assets/munro-font/MunroSmall.ttf) format('truetype');
+}
+
+// ================== RESPONSIVE
 
 $smaller-b: 480;
 $larger-b: 800;
@@ -30,43 +53,113 @@ $dark-dark: #121212;
 $black: #000000;
 
 $white: #ffffff;
-$light-light: hsl(28, 100%, 97%);
-$light: hsl(30, 100%, 92%);
-$light-dark: hsl(33, 100%, 86%);
+$light-light: #fff6f0;
+$light: #ffe7d1;
+$light-dark: #ffd8ad;
 
+$blue-highlight: #e5f3ff;
 $blue: #81a4cd;
+
+$brown-highlight: hsl(32, 100%, 81%);
 $brown: #9e643c;
 
-$green: #005c3a;
+$green-highlight: hsl(135, 100%, 90%);
+$green: #61ae86;
 $green-dark: #005c3a;
 
 // ================== COLORS
 
-$background-color: $light;
+$background-color: color.mix($light, $light-light, 75%);
 
 $temporary: color.change($brown, $alpha: 0);
 
 $side-padding: linear(15, 25);
 
-// ================== FONTS
+// ================== CONTENT TEXT
 
-$inconsolata: 'Inconsolata', monospace;
-$outfit: 'Outfit', sans-serif;
-$munro: 'Munro', monospace;
-$munro-narrow: 'Munro Narrow', monospace;
-$munro-small: 'Munro Small', monospace;
+$text-padding: 0.25rem;
+$title-subtitle-vert-space: -0.3rem;
 
-@font-face {
-  font-family: 'Munro';
-  src: local('Munro'), url(../assets/munro-font/Munro.ttf) format('truetype');
+$title-font-family: $inconsolata;
+$title-font-size: 1.5rem;
+$title-font-weight: 675;
+$title-font-color: $dark-dark;
+
+$subtitle-font-family: $inconsolata;
+$subtitle-font-size: 1rem;
+$subtitle-font-weight: 425;
+$subtitle-font-color: $dark-dark;
+
+$body-font-family: $inconsolata;
+$body-font-size: 1rem;
+$body-font-weight: 425;
+$body-font-color: $dark;
+$body-bold-font-weight: 675;
+$body-bold-font-color: $dark-dark;
+$body-line-height: 1.4;
+
+$link-font-weight: $body-font-weight + 50;
+$link-bold-font-weight: $body-bold-font-weight + 50;
+$link-font-color: $green-dark;
+$link-visited-font-color: $green-dark;
+$link-highlight-color: $green-highlight;
+
+@mixin content-text {
+  text-underline-offset: 0.125rem;
+  // padding: $text-padding;
+
+  a,
+  abbr {
+    text-decoration: none;
+  }
+
+  b,
+  strong {
+    font-weight: $body-bold-font-weight;
+    color: $body-bold-font-color;
+  }
+
+  cite,
+  em,
+  i {
+    font-style: italic;
+  }
 }
-@font-face {
-  font-family: 'Munro Narrow';
-  src: local('Munro Narrow'), url(../assets/munro-font/MunroNarrow.ttf) format('truetype');
+
+.title-text {
+  @include content-text;
+  margin-bottom: $title-font-size * $body-line-height * 0.65 !important;
+
+  font-family: $title-font-family;
+  font-size: $title-font-size;
+  font-weight: $title-font-weight;
+  color: $title-font-color;
+
+  line-height: $body-line-height;
 }
-@font-face {
-  font-family: 'Munro Small';
-  src: local('Munro Small'), url(../assets/munro-font/MunroSmall.ttf) format('truetype');
+.subtitle-text {
+  @include content-text;
+  margin-top: -($body-font-size * $body-line-height * 0.65) + $title-subtitle-vert-space !important;
+  margin-bottom: $body-font-size * $body-line-height * 0.65 !important;
+
+  font-family: $subtitle-font-family;
+  font-size: $subtitle-font-size;
+  font-weight: $subtitle-font-weight;
+  color: $subtitle-font-color;
+}
+.body-text {
+  @include content-text;
+
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  font-weight: $body-font-weight;
+  color: $body-font-color;
+
+  line-height: $body-line-height;
+
+  > p:not(:last-child) {
+    margin-bottom: $body-font-size * $body-line-height * 0.65;
+  }
 }
 
 // $star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;

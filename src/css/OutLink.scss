@@ -1,0 +1,79 @@
+@use 'sass:color';
+@import './common.scss';
+
+$delay: 0.4s;
+
+@mixin animated-anchor($delay) {
+  display: inline-block;
+  position: relative;
+
+  color: $link-font-color;
+  text-decoration: none;
+
+  overflow-x: hidden;
+  vertical-align: top;
+
+  // Highlight
+  background: linear-gradient(
+    to right,
+    color.change($link-highlight-color, $alpha: 0) 50%,
+    $link-highlight-color 50%
+  );
+  background-size: 200%;
+  background-position: 0 0;
+  transition: background-position $delay ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    bottom: 1px;
+    left: 0;
+
+    // Underline
+    background: linear-gradient(
+      to right,
+      color.change($link-font-color, $alpha: 0.5) 50%,
+      color.change($link-font-color, $alpha: 0.8) 50%
+    );
+    background-size: 200%;
+    background-position: 0 0;
+    transition: background-position $delay ease;
+  }
+
+  &:visited {
+    color: $link-visited-font-color;
+
+    ::after {
+      // Underline
+      background: linear-gradient(
+        to right,
+        color.change($link-visited-font-color, $alpha: 0.5) 50%,
+        color.change($link-visited-font-color, $alpha: 0.8) 50%
+      );
+    }
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+
+    // Highlight
+    background-position: -100% 0;
+
+    &::after {
+      // Underline
+      background-position: -100% 0;
+    }
+  }
+}
+
+p a {
+  @include animated-anchor($delay);
+  font-weight: $link-font-weight;
+}
+strong a a strong {
+  font-weight: $link-bold-font-weight;
+}

@@ -14,6 +14,7 @@ function App() {
   return (
     <div id="App" style={style}>
       <BannerSection extraClassName={''} />
+      {/* <NavBar extraClassName={''} /> */}
       <AboutSection extraClassName={''} />
     </div>
   )

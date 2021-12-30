@@ -1,0 +1,27 @@
+@use 'sass:color';
+@use 'sass:math';
+@import './common.scss';
+
+$gap: 50px;
+
+#about-section {
+  width: 100%;
+
+  padding: 50px $side-padding;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, math.div($larger-breakpoint, 2) - $gap), 1fr));
+  place-items: center;
+
+  gap: $gap;
+}
+
+#about-left {
+  max-width: 60ch;
+}
+
+#about-right {
+  position: relative;
+  min-width: 0;
+  max-width: 400px;
+}
