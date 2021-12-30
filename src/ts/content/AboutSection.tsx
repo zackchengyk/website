@@ -14,7 +14,7 @@ function AboutSection({ extraClassName }: AboutSectionProps) {
         <div className="body-text">{personalBlurb}</div>
       </div>
       <div id="about-right">
-        <img src={src} alt="todo" />
+        <img src={src} alt="Cropped photo of Zack Cheng" />
       </div>
     </section>
   )

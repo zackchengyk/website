@@ -5,7 +5,7 @@
 #about-section {
   width: 100%;
 
-  padding: 50px $side-padding;
+  padding: $inter-section-gap $side-padding math.div($inter-section-gap, 2);
 
   @include section-two-grid;
 }

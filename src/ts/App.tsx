@@ -3,6 +3,7 @@ import '../css/font.css'
 import AboutSection from './content/AboutSection'
 import BannerSection from './content/BannerSection'
 import Navbar from './content/Navbar'
+import ProjectsSection from './content/ProjectsSection'
 import { useWindowDimensions } from './useWindowDimensions'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <BannerSection extraClassName={''} />
       <Navbar extraClassName={''} />
       <AboutSection extraClassName={''} />
+      <ProjectsSection extraClassName={''} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 @use 'sass:color';
 @import '../common.scss';
 
-$delay: 0.4s;
+$link-highlight-delay: $delay;
 
 @mixin animated-anchor($delay) {
   display: inline-block;
@@ -21,7 +21,7 @@ $delay: 0.4s;
   );
   background-size: 200%;
   background-position: 0 0;
-  transition: background-position $delay ease;
+  transition: background-position $link-highlight-delay ease;
 
   &::after {
     content: '';

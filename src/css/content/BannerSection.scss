@@ -2,6 +2,12 @@
 @use 'sass:math';
 @import '../common.scss';
 
+$banner-left-font-family: $munro-small;
+$banner-left-font-size: linear(30, 50);
+$banner-left-font-weight: normal;
+$banner-left-font-color: $light;
+$banner-left-line-height: 1;
+
 #banner-section {
   position: relative; // Required to create a stacking context
   z-index: 1; // Required to create a stacking context
@@ -11,7 +17,7 @@
 
   display: grid;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr) minmax(0, 1fr);
-  gap: $section-inner-gap;
+  gap: $inner-section-grid-gap;
 
   background-color: $blue; // Temporary
 }
@@ -35,20 +41,21 @@
 
 #banner-left {
   place-self: end start;
-  padding: 50px 0 50px calc(2 * $side-padding);
+  padding: 50px 0 50px $side-padding-x-2;
 
   grid-row: 1;
   grid-column: 1;
 
   > h2 {
-    color: $light;
-    font-family: $munro-small;
-    font-size: linear(30, 50);
+    font-family: $banner-left-font-family;
+    font-size: $banner-left-font-size;
+    font-weight: $banner-left-font-weight;
+    color: $banner-left-font-color;
+    line-height: $banner-left-line-height;
 
     // Some magic numbers to make munro-small look good
     position: relative;
     bottom: calc(linear(30, 40) * math.div(-6, 40));
-    line-height: 1;
   }
 }
 

@@ -1,0 +1,104 @@
+@use 'sass:color';
+@use 'sass:math';
+@import '../common.scss';
+
+$projects-item-border-bottom: $line;
+
+$projects-button-font-family: $outfit;
+$projects-button-font-size: linear(24, 48);
+$projects-button-font-weight: 400;
+$projects-button-font-color: $dark;
+$projects-button-line-height: 1;
+
+$projects-button-highlight-font-color: $black;
+$projects-button-highlight-color: $blue-highlight;
+$projects-button-highlight-delay: $delay;
+
+#projects-section {
+  width: 100%;
+
+  padding: math.div($inter-section-gap, 2) $side-padding;
+}
+
+#projects-list-container {
+  width: 100%;
+}
+
+#projects-ul {
+  border-top: $projects-item-border-bottom;
+  list-style: none;
+}
+
+.projects-li {
+  border-bottom: $projects-item-border-bottom;
+}
+
+.projects-li-button {
+  display: block;
+  text-align: left;
+
+  color: inherit;
+  font-family: inherit;
+
+  background: 0 0;
+  border: none;
+  outline: 0;
+
+  cursor: pointer;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 100%;
+  padding: 25px $side-padding;
+
+  > span {
+    display: inline-block;
+
+    font-family: $projects-button-font-family;
+    font-size: $projects-button-font-size;
+    font-weight: $projects-button-font-weight;
+    color: $projects-button-font-color;
+
+    line-height: $projects-button-line-height;
+
+    // Highlight
+    background: linear-gradient(
+      to right,
+      color.change($projects-button-highlight-color, $alpha: 0) 50%,
+      $projects-button-highlight-color 50%
+    );
+    background-size: 200%;
+    background-position: 0 0;
+    transition: background-position $projects-button-highlight-delay ease;
+  }
+
+  &:hover > span,
+  &:focus > span {
+    color: $projects-button-highlight-font-color;
+
+    // Highlight
+    background-position: -100% 0;
+  }
+}
+
+.projects-li-div {
+  height: auto;
+  width: 100%;
+
+  overflow: hidden;
+
+  transition: height 0.5s ease;
+
+  &.collapsed {
+    height: 0;
+  }
+
+  > div {
+    width: 100%;
+    padding: 25px $side-padding;
+
+    background-color: $light-light;
+  }
+}

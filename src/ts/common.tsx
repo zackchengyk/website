@@ -16,3 +16,10 @@ export function CSSPropertiesEqual(
   }
   return Object.entries(left).sort().toString() === Object.entries(right).sort().toString()
 }
+
+export function stringToId(str: string) {
+  return str
+    .replace(/\s/gi, '-')
+    .replace(/[^\dA-Z\-]+/gi, '')
+    .toLowerCase()
+}

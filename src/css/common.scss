@@ -34,16 +34,21 @@ $larger-breakpoint: $larger-b * 1px;
 
 // ================== PRIMARY PALETTE
 
-$dark-light: #2b2b2b;
-$dark: #1f1f1f;
-$dark-dark: #121212;
-$black: #000000;
-
 $white: #ffffff;
 $light-light: #fff5ee;
 $light: #ffead9;
 $light-dark: #ffe0c4;
 
+$mid-tone-light: #cab4a6;
+$mid-tone: #958782;
+$mid-tone-dark: #605a59;
+
+$dark-light: #2b2a2a;
+$dark: #1f1f1f;
+$dark-dark: #121212;
+$black: #000000;
+
+$blue-highlight: #93dbff;
 $blue: #81a4cd;
 
 $brown: #9e643c;
@@ -56,9 +61,19 @@ $green-dark: #00502e;
 
 $background-color: $light;
 
-$temporary: color.change($brown, $alpha: 0);
+$temporary: color.change($brown, $alpha: 0.2);
+
+// ================== SPACING
 
 $side-padding: linear(15, 25);
+$side-padding-x-2: linear(30, 50);
+
+$line: 1px solid $mid-tone;
+$delay: 0.3s;
+
+$inner-section-grid-gap: 40px;
+
+$inter-section-gap: 80px;
 
 // ================== CONTENT TEXT
 
@@ -148,16 +163,19 @@ $link-highlight-color: $green-highlight;
   }
 }
 
-$section-inner-gap: 50px;
+// ================== SECTIONS
 
 @mixin section-two-grid($repeat-method: auto-fit) {
   display: grid;
   grid-template-columns: repeat(
     $repeat-method,
-    minmax(clamp(50% - $section-inner-gap, math.div($larger-breakpoint, 2) - $section-inner-gap, 100%), 1fr)
+    minmax(
+      clamp(50% - $inner-section-grid-gap, math.div($larger-breakpoint, 2) - $inner-section-grid-gap, 100%),
+      1fr
+    )
   );
   place-items: center;
-  gap: $section-inner-gap;
+  gap: $inner-section-grid-gap;
 }
 
 // $star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;
