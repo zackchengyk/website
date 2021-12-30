@@ -41,10 +41,14 @@
   grid-column: 1;
 
   > h2 {
-    color: $light;
-    font-family: $munro;
-    font-size: linear(30, 50);
-    font-weight: 600;
+    color: $light-light;
+    font-family: $munro-small;
+    font-size: linear(30, 40);
+
+    // Some magic numbers to make munro-small look good
+    position: relative;
+    bottom: calc(linear(30, 40) * math.div(-6, 40));
+    line-height: 1;
   }
 }
 

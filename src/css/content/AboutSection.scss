@@ -7,14 +7,7 @@
 
   padding: 50px $side-padding;
 
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, math.div($larger-breakpoint, 2) - $section-inner-gap), 1fr)
-  );
-  place-items: center;
-
-  gap: $section-inner-gap;
+  @include section-two-grid;
 }
 
 #about-left {
@@ -24,5 +17,5 @@
 #about-right {
   position: relative;
   min-width: 0;
-  max-width: 400px;
+  max-width: min(400px, 60vw);
 }
