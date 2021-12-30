@@ -35,15 +35,15 @@
 
 #banner-left {
   place-self: end start;
-  padding: 25px 0 25px $side-padding;
+  padding: 50px 0 50px calc(2 * $side-padding);
 
   grid-row: 1;
   grid-column: 1;
 
   > h2 {
-    color: $light-light;
+    color: $light;
     font-family: $munro-small;
-    font-size: linear(30, 40);
+    font-size: linear(30, 50);
 
     // Some magic numbers to make munro-small look good
     position: relative;

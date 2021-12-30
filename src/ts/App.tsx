@@ -2,6 +2,7 @@ import '../css/App.scss'
 import '../css/font.css'
 import AboutSection from './content/AboutSection'
 import BannerSection from './content/BannerSection'
+import Navbar from './content/Navbar'
 import { useWindowDimensions } from './useWindowDimensions'
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   return (
     <div id="App" style={style}>
       <BannerSection extraClassName={''} />
-      {/* <NavBar extraClassName={''} /> */}
+      <Navbar extraClassName={''} />
       <AboutSection extraClassName={''} />
     </div>
   )
