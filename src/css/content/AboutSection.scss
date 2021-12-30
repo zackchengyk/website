@@ -2,18 +2,19 @@
 @use 'sass:math';
 @import '../common.scss';
 
-$gap: 50px;
-
 #about-section {
   width: 100%;
 
   padding: 50px $side-padding;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, math.div($larger-breakpoint, 2) - $gap), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, math.div($larger-breakpoint, 2) - $section-inner-gap), 1fr)
+  );
   place-items: center;
 
-  gap: $gap;
+  gap: $section-inner-gap;
 }
 
 #about-left {
