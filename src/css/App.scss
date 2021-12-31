@@ -62,4 +62,22 @@ body {
 
 #App {
   overflow-y: scroll;
+  > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: start stretch;
+    > #navbar,
+    #about-section {
+      grid-row: 1;
+      grid-column: 1;
+    }
+    > #experience-section {
+      grid-row: 2;
+      grid-column: 1;
+    }
+    > #projects-section {
+      grid-row: 3;
+      grid-column: 1;
+    }
+  }
 }

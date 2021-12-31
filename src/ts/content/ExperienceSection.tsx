@@ -44,16 +44,18 @@ type ExperienceSectionProps = {
 function ExperienceSection({ extraClassName }: ExperienceSectionProps) {
   return (
     <section id="experience-section" className={extraClassName}>
-      <h3 id="experience-header" className="subtitle-text">
-        {'experience'}
+      <h3 id="experience-header" className="section-header subtitle-text">
+        {'EXPERIENCE'}
       </h3>
-      <div id="experience-body">
-        <ul id="experience-ul">
-          <ExperienceListItem {...experienceText.govtech} />
-          <ExperienceListItem {...experienceText.brgd} />
-          <ExperienceListItem {...experienceText.csci1430} />
-          <ExperienceListItem {...experienceText.engn0031} />
-        </ul>
+      <div id="experience-body" className="section-body">
+        <div id="experience-body-grid">
+          <ul id="experience-ul">
+            <ExperienceListItem {...experienceText.govtech} />
+            <ExperienceListItem {...experienceText.brgd} />
+            <ExperienceListItem {...experienceText.csci1430} />
+            <ExperienceListItem {...experienceText.engn0031} />
+          </ul>
+        </div>
       </div>
     </section>
   )

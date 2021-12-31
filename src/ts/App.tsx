@@ -18,11 +18,12 @@ function App() {
   return (
     <div id="App" style={style}>
       <BannerSection extraClassName={''} />
-      <Navbar extraClassName={''} />
-      <AboutSection extraClassName={''} />
-      <ExperienceSection extraClassName={''} />
-      <ProjectsSection extraClassName={''} />
-      <AboutSection extraClassName={''} />
+      <div>
+        <Navbar extraClassName={''} />
+        <AboutSection extraClassName={''} />
+        <ExperienceSection extraClassName={''} />
+        <ProjectsSection extraClassName={''} />
+      </div>
     </div>
   )
 }

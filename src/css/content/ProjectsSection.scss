@@ -12,28 +12,9 @@ $projects-button-highlight-font-color: $black;
 $projects-button-highlight-color: $blue-highlight;
 $projects-button-highlight-delay: $delay;
 
-#projects-section {
-}
-
-#projects-header {
-  top: 0;
-  position: sticky;
-  z-index: 1000000000000;
-
-  font-family: $inconsolata;
-
-  width: 100%;
-  border-bottom: $line;
-  margin: 0;
-  padding: 10px 0;
-}
-
-#projects-list-container {
-  width: 100%;
-}
-
 #projects-ul {
   list-style: none;
+  border-top: $line;
 }
 
 .projects-li {

@@ -10,7 +10,7 @@ $banner-left-line-height: 1;
 
 #banner-section {
   position: relative; // Required to create a stacking context
-  z-index: 1; // Required to create a stacking context
+  z-index: 1000000000000000; // Required to create a stacking context
 
   height: max(75%, 400px);
   width: 100%;

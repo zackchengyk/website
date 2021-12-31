@@ -2,24 +2,8 @@
 @use 'sass:math';
 @import '../common.scss';
 
-#experience-header {
-  grid-row: 1;
-  grid-column: 1 / -1;
-  width: 100%;
-
-  top: 0;
-  position: sticky;
-  z-index: 1000000000000;
-
-  font-family: $inconsolata;
-
-  margin: 0;
-  padding: 10px 0;
-}
-
-#experience-body {
+#experience-body-grid {
   border-top: $line;
-
   @include section-two-grid(auto-fill);
 }
 
