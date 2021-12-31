@@ -38,7 +38,7 @@ function ExperienceListItem({
 }
 
 type ExperienceSectionProps = {
-  extraClassName: string
+  extraClassName?: string
 }
 
 function ExperienceSection({ extraClassName }: ExperienceSectionProps) {

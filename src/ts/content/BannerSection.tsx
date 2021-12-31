@@ -2,7 +2,7 @@ import '../../css/content/BannerSection.scss'
 import src from '../../img/name.svg'
 
 type BannerSectionProps = {
-  extraClassName: string
+  extraClassName?: string
 }
 
 function BannerSection({ extraClassName }: BannerSectionProps) {

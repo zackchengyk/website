@@ -3,7 +3,7 @@ import { personalBlurb, personalIntro } from './text'
 import src from '../../img/me.jpg'
 
 type AboutSectionProps = {
-  extraClassName: string
+  extraClassName?: string
 }
 
 function AboutSection({ extraClassName }: AboutSectionProps) {

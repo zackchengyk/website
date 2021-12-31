@@ -1,7 +1,7 @@
 import '../../css/content/Navbar.scss'
 
 type NavbarProps = {
-  extraClassName: string
+  extraClassName?: string
 }
 
 function Navbar({ extraClassName }: NavbarProps) {

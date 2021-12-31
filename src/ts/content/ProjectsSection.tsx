@@ -42,7 +42,7 @@ function ProjectsListItem({
 }
 
 type ProjectsSectionProps = {
-  extraClassName: string
+  extraClassName?: string
 }
 
 function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
