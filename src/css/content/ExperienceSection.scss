@@ -2,41 +2,40 @@
 @use 'sass:math';
 @import '../common.scss';
 
-#experience-section {
+#experience-header {
+  grid-row: 1;
+  grid-column: 1 / -1;
   width: 100%;
 
-  padding: $inter-section-gap $side-padding;
+  top: 0;
+  position: sticky;
+  z-index: 1000000000000;
+
+  font-family: $inconsolata;
+
+  margin: 0;
+  padding: 10px 0;
+}
+
+#experience-body {
+  border-top: $line;
 
   @include section-two-grid(auto-fill);
 }
 
-.line {
-  grid-row: 1;
-  grid-column: 1 / -1;
-  width: 100%;
-  border-top: $line;
-  padding-top: 15px;
-  // background-color: $temporary;
-}
-
-#experience-right {
-  grid-row: 2;
+#experience-ul {
   grid-column: -2;
   width: 100%;
-}
-
-#experience-ul {
   list-style: none;
 }
 
 .experience-li {
-  padding: 15px $side-padding;
-  padding-left: 0;
+  padding: $experience-li-vert-space $section-li-horz-space;
   border-bottom: $line;
 
   display: grid;
   grid-template: 1fr / minmax(min(15%, 80px), 3fr) minmax(min(85%, 200px), 17fr);
-  gap: 25px; //todo
+  gap: 15px; //todo
 
   > *,
   img {
@@ -49,7 +48,7 @@
   place-self: stretch;
   grid-column: 1;
   object-fit: contain;
-  // background-color: color.mix($light-light, $light, 50%);
+  background-color: color.mix($light-light, $light, 100%);
 }
 .experience-li-div {
   place-self: center start;

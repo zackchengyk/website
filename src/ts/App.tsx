@@ -22,6 +22,7 @@ function App() {
       <AboutSection extraClassName={''} />
       <ExperienceSection extraClassName={''} />
       <ProjectsSection extraClassName={''} />
+      <AboutSection extraClassName={''} />
     </div>
   )
 }

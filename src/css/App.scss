@@ -24,6 +24,20 @@ img {
   max-width: 100%;
 }
 
+button {
+  display: block;
+  text-align: left;
+  color: inherit;
+  font-family: inherit;
+  background: 0 0;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 // ================== MAIN STUFF
 
 html,

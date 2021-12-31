@@ -51,9 +51,12 @@ function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
 
   return (
     <section id="projects-section" className={extraClassName}>
+      <h3 id="projects-header" className="subtitle-text">
+        {'projects'}
+      </h3>
       <div id="projects-list-container">
         <ul id="projects-ul">
-          <ProjectsListItem projectName={'Planetarium'} {...common}>
+          <ProjectsListItem projectName={'This Website'} {...common}>
             {'Hello!'}
           </ProjectsListItem>
           <ProjectsListItem projectName={'Cityscape'} {...common}>

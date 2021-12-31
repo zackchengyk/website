@@ -7,7 +7,7 @@ type BannerSectionProps = {
 
 function BannerSection({ extraClassName }: BannerSectionProps) {
   return (
-    <section id="banner-section" className={extraClassName}>
+    <header id="banner-section" className={extraClassName}>
       <div id="banner-left">
         <h2>{'Hello, World!'}</h2>
       </div>
@@ -15,7 +15,7 @@ function BannerSection({ extraClassName }: BannerSectionProps) {
         <img src={src} alt="Zack Cheng" />
       </h1>
       <div id="banner-background" />
-    </section>
+    </header>
   )
 }
 

@@ -4,14 +4,20 @@
 $link-highlight-delay: $delay;
 
 @mixin animated-anchor($delay) {
-  display: inline-block;
-  position: relative;
+  display: inline;
 
   color: $link-font-color;
-  text-decoration: none;
+  text-underline-offset: 0.125rem;
+  text-decoration: underline;
+  text-decoration-color: $link-font-color;
 
   overflow-x: hidden;
   vertical-align: top;
+
+  &:visited {
+    color: $link-visited-font-color;
+    text-decoration-color: $link-visited-font-color;
+  }
 
   // Highlight
   background: linear-gradient(
@@ -23,38 +29,6 @@ $link-highlight-delay: $delay;
   background-position: 0 0;
   transition: background-position $link-highlight-delay ease;
 
-  &::after {
-    content: '';
-    position: absolute;
-    height: 1px;
-    width: 100%;
-    bottom: 1px;
-    left: 0;
-
-    // Underline
-    background: linear-gradient(
-      to right,
-      color.change($link-font-color, $alpha: 0.9) 50%,
-      color.change($link-highlight-font-color, $alpha: 0.9) 50%
-    );
-    background-size: 200%;
-    background-position: 0 0;
-    transition: background-position $delay ease;
-  }
-
-  &:visited {
-    color: $link-visited-font-color;
-
-    ::after {
-      // Underline
-      background: linear-gradient(
-        to right,
-        color.change($link-visited-font-color, $alpha: 0.9) 50%,
-        color.change($link-highlight-font-color, $alpha: 0.9) 50%
-      );
-    }
-  }
-
   &:hover,
   &:focus {
     outline: none;
@@ -63,11 +37,6 @@ $link-highlight-delay: $delay;
 
     // Highlight
     background-position: -100% 0;
-
-    &::after {
-      // Underline
-      background-position: -100% 0;
-    }
   }
 }
 

@@ -10,7 +10,7 @@ function AboutSection({ extraClassName }: AboutSectionProps) {
   return (
     <section id="about-section" className={extraClassName}>
       <div id="about-left">
-        <div className="title-text">{personalIntro}</div>
+        <h3 className="title-text">{personalIntro}</h3>
         <div className="body-text">{personalBlurb}</div>
       </div>
       <div id="about-right">

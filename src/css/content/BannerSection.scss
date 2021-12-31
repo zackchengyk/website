@@ -22,27 +22,9 @@ $banner-left-line-height: 1;
   background-color: $blue; // Temporary
 }
 
-#banner-right {
-  height: 100%;
-
-  padding: 25px $side-padding 25px 0;
-
-  grid-row: 1;
-  grid-column: 2;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  > img {
-    height: 100%;
-  }
-}
-
 #banner-left {
   place-self: end start;
-  padding: 0 0 $side-padding-1-2 $side-padding-1-2;
-
+  padding: $banner-vert-space 0 $banner-vert-space $banner-horz-space;
   grid-row: 1;
   grid-column: 1;
 
@@ -53,9 +35,24 @@ $banner-left-line-height: 1;
     color: $banner-left-font-color;
     line-height: $banner-left-line-height;
 
-    // Some magic numbers to make munro-small look good
+    // Some magic numbers to shift munro-small's baseline down
     position: relative;
-    bottom: calc(linear(30, 40) * math.div(-6, 40));
+    bottom: calc($banner-left-font-size * math.div(-6, 40));
+  }
+}
+
+#banner-right {
+  place-self: stretch;
+  padding: $banner-vert-space $banner-horz-space $banner-vert-space 0;
+  grid-row: 1;
+  grid-column: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  > img {
+    height: 100%;
   }
 }
 

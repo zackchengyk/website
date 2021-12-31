@@ -3,21 +3,15 @@
 @import '../common.scss';
 
 #about-section {
-  width: 100%;
-
-  padding: $inter-section-gap $side-padding;
-
   @include section-two-grid;
 }
 
 #about-left {
-  padding: 0 $side-padding-0-1;
-  max-width: 70ch;
+  max-width: 65ch;
 }
 
 #about-right {
   position: relative;
   min-width: 0;
-  max-width: min(400px, 75vw);
-  padding: 25px; // todo
+  max-width: min(300px, 50vw);
 }

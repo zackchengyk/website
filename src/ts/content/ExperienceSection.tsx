@@ -44,9 +44,10 @@ type ExperienceSectionProps = {
 function ExperienceSection({ extraClassName }: ExperienceSectionProps) {
   return (
     <section id="experience-section" className={extraClassName}>
-      {/* <div id="experience-left"></div> */}
-      <div className="line"></div>
-      <div id="experience-right">
+      <h3 id="experience-header" className="subtitle-text">
+        {'experience'}
+      </h3>
+      <div id="experience-body">
         <ul id="experience-ul">
           <ExperienceListItem {...experienceText.govtech} />
           <ExperienceListItem {...experienceText.brgd} />
