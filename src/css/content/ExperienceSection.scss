@@ -1,0 +1,57 @@
+@use 'sass:color';
+@use 'sass:math';
+@import '../common.scss';
+
+#experience-section {
+  width: 100%;
+
+  padding: $inter-section-gap $side-padding;
+
+  @include section-two-grid(auto-fill);
+}
+
+.line {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  width: 100%;
+  border-top: $line;
+  padding-top: 15px;
+  // background-color: $temporary;
+}
+
+#experience-right {
+  grid-row: 2;
+  grid-column: -2;
+  width: 100%;
+}
+
+#experience-ul {
+  list-style: none;
+}
+
+.experience-li {
+  padding: 15px $side-padding;
+  padding-left: 0;
+  border-bottom: $line;
+
+  display: grid;
+  grid-template: 1fr / minmax(min(15%, 80px), 3fr) minmax(min(85%, 200px), 17fr);
+  gap: 25px; //todo
+
+  > *,
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.experience-li-img {
+  place-self: stretch;
+  grid-column: 1;
+  object-fit: contain;
+  // background-color: color.mix($light-light, $light, 50%);
+}
+.experience-li-div {
+  place-self: center start;
+  grid-column: 2;
+}

@@ -2,6 +2,7 @@ import '../css/App.scss'
 import '../css/font.css'
 import AboutSection from './content/AboutSection'
 import BannerSection from './content/BannerSection'
+import ExperienceSection from './content/ExperienceSection'
 import Navbar from './content/Navbar'
 import ProjectsSection from './content/ProjectsSection'
 import { useWindowDimensions } from './useWindowDimensions'
@@ -19,6 +20,7 @@ function App() {
       <BannerSection extraClassName={''} />
       <Navbar extraClassName={''} />
       <AboutSection extraClassName={''} />
+      <ExperienceSection extraClassName={''} />
       <ProjectsSection extraClassName={''} />
     </div>
   )
