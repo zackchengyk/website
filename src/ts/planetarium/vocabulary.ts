@@ -189,8 +189,8 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
   },
 }
 
-export const planetsPopulation = makePopulation(
-  Object.entries(planetsRecord).map(([k, v]) => [k, v.probabilityWeight])
+export const planetsPopulation: Population<PlanetType> = makePopulation(
+  Object.entries(planetsRecord).map(([k, v]) => [k as PlanetType, v.probabilityWeight])
 )
 
 // ======================================================================== Rings

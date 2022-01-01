@@ -4,6 +4,7 @@ import {
   ColorLevelsType,
   ColorLevelThresholdsType,
   moonsMaterialsPopulation,
+  planetsPopulation,
   planetsRecord,
   PlanetType,
   planetTypes,
@@ -58,7 +59,7 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
 
   // Planet
   const prevPlanetType = prevInstanceParameters?.planet?.type
-  const planetType = randFromArray(planetTypes.filter((x) => x !== prevPlanetType))
+  const planetType = randFromArray(planetsPopulation.filter((x) => x !== prevPlanetType))
   const planetRadius = randFloat(...planetsRecord[planetType].radiusRange)
   const planetStretchFactor = randFloat(...planetsRecord[planetType].stretchFactorRange)
   const planetIcecapFactor = randFloat(...planetsRecord[planetType].icecapFactorRange)
