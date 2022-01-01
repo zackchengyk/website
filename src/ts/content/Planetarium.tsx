@@ -4,6 +4,7 @@ import '../../css/content/Planetarium.scss'
 import { main, PlanetariumType, resetAll } from '../planetarium/main'
 
 function Planetarium() {
+  const fullWindowElement = useRef(null)
   const containerElement = useRef(null)
   const canvasElement = useRef(null)
 
@@ -17,6 +18,7 @@ function Planetarium() {
   const planetarium = useRef<PlanetariumType>()
 
   useEffect(() => {
+    // Create the instance
     console.warn("WARNING! THIS SHOULDN'T HAPPEN MORE THAN ONCE")
     planetarium.current = main(containerElement.current!, canvasElement.current!)
 
@@ -30,8 +32,15 @@ function Planetarium() {
   }, [])
 
   return (
-    <div id="planetarium-container" ref={containerElement}>
-      <canvas id="planetarium" onClick={resetFunction} ref={canvasElement} tabIndex={0} />
+    <div
+      id="planetarium-full-window"
+      ref={fullWindowElement}
+      onClick={resetFunction}
+      onMouseLeave={() => fullWindowElement.current?.blur()}
+      tabIndex={0}>
+      <div id="planetarium-container" ref={containerElement}>
+        <canvas id="planetarium" ref={canvasElement} />
+      </div>
     </div>
   )
 }

@@ -4,13 +4,14 @@ import { initInstanceParameters } from './instanceParameters'
 import { PlanetariumType } from './main'
 import { initSecondScene, populateSecondScene } from './secondScene'
 
+// Called when the planetarium needs to start up or reset
 export function init(container: Element, canvas: Element, planetarium?: PlanetariumType): PlanetariumType {
   // Get screen size
   const iw = container.clientWidth
   const ih = container.clientHeight
 
   // Initialize instance parameters
-  const instanceParameters = initInstanceParameters()
+  const instanceParameters = initInstanceParameters(planetarium?.instanceParameters)
 
   // Initialize camera + scenes
   let firstSceneHandles: any, secondSceneHandles: any
@@ -18,7 +19,7 @@ export function init(container: Element, canvas: Element, planetarium?: Planetar
     firstSceneHandles = initFirstScene(iw, ih, instanceParameters)
     secondSceneHandles = initSecondScene(iw, ih, instanceParameters)
   } else {
-    firstSceneHandles = { ...planetarium.firstSceneHandles }
+    firstSceneHandles = planetarium.firstSceneHandles
     secondSceneHandles = planetarium.secondSceneHandles
   }
 

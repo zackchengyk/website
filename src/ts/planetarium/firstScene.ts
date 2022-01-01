@@ -1,8 +1,6 @@
 import * as THREE from 'three'
 import { InstanceParametersType } from './instanceParameters'
 import { randFloatTriangular, randFromArray } from './common'
-import { moonsMaterialsPopulation } from './vocabulary'
-import { E } from '../pixels/letters/letters.common'
 
 type RingBitType = {
   speed: number
@@ -25,9 +23,10 @@ export type FirstSceneHandlesType = {
   planetMesh?: THREE.Mesh
   ringsData?: RingsDataType
   moonsData?: MoonsDataType
+  starsPoints?: THREE.Points
 }
 
-// ================== Init
+// ======================================================================== Init
 
 export function initFirstScene(
   iw: number,
@@ -38,17 +37,19 @@ export function initFirstScene(
   const camera = new THREE.PerspectiveCamera(
     instanceParameters.camera.dof,
     iw / ih,
-    0.1,
-    2 * instanceParameters.camera.distance + 2 * instanceParameters.starField.boundingBoxRadius + 1000
+    instanceParameters.camera.near,
+    instanceParameters.camera.far
   )
   camera.position.setZ(instanceParameters.camera.distance)
+
   // Scene
   const scene = new THREE.Scene()
   scene.background = null
+
   return { camera, scene }
 }
 
-// ================== Populate
+// ======================================================================== Populate
 
 export function populateFirstScene(
   iw: number,
@@ -59,36 +60,31 @@ export function populateFirstScene(
   // Get scene
   const scene = firstSceneHandles.scene
 
-  // Planet
+  // Despawn + spawn planet
   if (firstSceneHandles.planetMesh) {
     despawnPlanet(scene, firstSceneHandles.planetMesh)
   }
   firstSceneHandles.planetMesh = spawnPlanet(scene, instanceParameters.planet)
 
-  // Rings
+  // Despawn + spawn rings
   if (firstSceneHandles.ringsData) {
     despawnRings(scene, firstSceneHandles.ringsData)
   }
   firstSceneHandles.ringsData = spawnRings(scene, instanceParameters.planet, instanceParameters.rings)
 
-  // Moons
+  // Despawn + spawn moons
   if (firstSceneHandles.moonsData) {
     despawnMoons(scene, firstSceneHandles.moonsData)
   }
   firstSceneHandles.moonsData = spawnMoons(scene, instanceParameters.moons)
 
-  // // Stars
-  // if (!starsMesh) {
-  //   starsMesh = spawnStars(instanceParameters.starField)
-  // }
-  // // Lights
-  // if (!ambientLight) {
-  //   ambientLight = new THREE.AmbientLight(0xffffff)
-  //   firstScene.add(ambientLight)
-  // }
+  /* // Stars
+  if (!firstSceneHandles.starsPoints) {
+    firstSceneHandles.starsPoints = spawnStars(scene, instanceParameters.stars)
+  } */
 }
 
-// Planet
+// Helper: Planet
 
 function spawnPlanet(scene: THREE.Scene, planetParameters: InstanceParametersType['planet']): THREE.Mesh {
   const { radius } = planetParameters
@@ -107,6 +103,234 @@ function despawnPlanet(scene: THREE.Scene, planetMesh: THREE.Mesh) {
     planetMesh.material.dispose()
   }
 }
+
+// Helper: Rings
+
+function spawnRings(
+  scene: THREE.Scene,
+  planetParameters: InstanceParametersType['planet'],
+  ringsParameters: InstanceParametersType['rings']
+): RingsDataType {
+  return ringsParameters.map((x) => spawnRingBits(scene, planetParameters, x))
+}
+function spawnRingBits(
+  scene: THREE.Scene,
+  { phi, theta, axis }: InstanceParametersType['planet'],
+  {
+    materialSet,
+    bitCount,
+    minBitSize,
+    maxBitSize,
+    innerRad,
+    outerRad,
+  }: InstanceParametersType['rings'][number]
+): RingsDatumType {
+  if (!bitCount) {
+    return []
+  }
+  const ringDatum = Array(bitCount).fill(0)
+  const phi2 = phi + Math.PI / 2
+  for (let i = 0; i < bitCount; i++) {
+    // Geometry
+    const size = randFloatTriangular(minBitSize, maxBitSize)
+    const geometry = new THREE.SphereGeometry(size, 2, 2)
+    // Material
+    const material = randFromArray(materialSet)
+    // Object
+    const ringBitMesh = new THREE.Mesh(geometry, material)
+    // Position
+    const axialOffset =
+      THREE.MathUtils.randFloatSpread(1) +
+      THREE.MathUtils.randFloatSpread(1) +
+      THREE.MathUtils.randFloatSpread(1)
+    const radius =
+      randFloatTriangular(innerRad / 2, outerRad / 2) +
+      randFloatTriangular(innerRad / 2, outerRad / 2) +
+      THREE.MathUtils.randFloatSpread(3 - Math.abs(axialOffset))
+    const theta2 = THREE.MathUtils.randFloatSpread(Math.PI * 2)
+    ringBitMesh.position.set(
+      radius * Math.sin(theta) * Math.sin(phi2),
+      radius * Math.cos(phi2),
+      radius * Math.cos(theta) * Math.sin(phi2)
+    )
+    ringBitMesh.position.applyAxisAngle(axis, theta2)
+    ringBitMesh.position.add(
+      new THREE.Vector3(axis.x * axialOffset, axis.y * axialOffset, axis.z * axialOffset)
+    )
+    const speed = Math.sqrt(radius) * 0.15
+    // Add
+    scene.add(ringBitMesh)
+    // Save data
+    ringDatum[i] = { speed, ringBitMesh }
+  }
+  return ringDatum
+}
+function despawnRings(scene: THREE.Scene, ringsData: RingsDataType) {
+  ringsData.forEach((ringDatum) => {
+    ringDatum.forEach((ringBitDatum) => {
+      scene.remove(ringBitDatum.ringBitMesh)
+      ringBitDatum.ringBitMesh.geometry.dispose()
+    })
+  })
+  ringsData = []
+}
+
+// Helper: Moons
+
+function spawnMoons(scene: THREE.Scene, moonsParameters: InstanceParametersType['moons']) {
+  return moonsParameters.map((x) => spawnMoon(scene, x))
+}
+function spawnMoon(
+  scene: THREE.Scene,
+  { material }: InstanceParametersType['moons'][number]
+): MoonsDatumType {
+  // Geometry
+  const moonSize = randFloatTriangular(0.5, 3)
+  const geometry = new THREE.SphereGeometry(moonSize, 10, 10)
+  // Material is provided
+  // Object
+  const moonMesh = new THREE.Mesh(geometry, material)
+  // Axis
+  const phi = THREE.MathUtils.randFloatSpread(Math.PI / 3)
+  const theta = THREE.MathUtils.randFloatSpread(Math.PI * 2)
+  const axis = new THREE.Vector3(
+    Math.sin(theta) * Math.sin(phi),
+    Math.cos(phi),
+    Math.cos(theta) * Math.sin(phi)
+  ).normalize()
+  // Position
+  const radius = randFloatTriangular(40, 80)
+  const phi2 = phi + Math.PI / 2
+  const theta2 = theta
+  moonMesh.position.set(
+    radius * Math.sin(theta2) * Math.sin(phi2),
+    radius * Math.cos(phi2),
+    radius * Math.cos(theta2) * Math.sin(phi2)
+  )
+  // Speed
+  const speed = Math.sqrt(radius) * 0.05
+  // Add
+  scene.add(moonMesh)
+  return { radius, axis, speed, moonMesh }
+}
+function despawnMoons(scene: THREE.Scene, moonsData: MoonsDataType) {
+  moonsData.forEach((moonDatum) => {
+    scene.remove(moonDatum.moonMesh)
+    moonDatum.moonMesh.geometry.dispose()
+  })
+  moonsData.length = 0
+}
+
+/* // Helper: Stars
+
+function spawnStars(scene: THREE.Scene, starsParameters: InstanceParametersType['stars']): THREE.Points {
+  const { starCount, boundingBoxRadius, noGoZoneRadius, colors } = starsParameters
+  const starsMaterial = new THREE.ShaderMaterial(getStarShaderParameters(pixelSize))
+
+  // Geometry
+  const geometry = new THREE.BufferGeometry()
+  const positionArray = Array(starCount * 3).fill(0)
+  const colorArray = Array(starCount * 3).fill(0)
+  for (let i = 0; i < starCount; i++) {
+    const I = 3 * i
+    // Position
+    const [x, y, z] = [
+      THREE.MathUtils.randFloatSpread(boundingBoxRadius),
+      THREE.MathUtils.randFloatSpread(boundingBoxRadius),
+      THREE.MathUtils.randFloat(-boundingBoxRadius / 2, 0),
+    ]
+    const offset = new THREE.Vector3(x, y, z).normalize().multiplyScalar(noGoZoneRadius)
+    positionArray[I] = x + offset.x
+    positionArray[I + 1] = y + offset.y
+    positionArray[I + 2] = z + offset.z
+    // Color
+    const color = new THREE.Color(randFromArray(colors))
+    colorArray[I] = color.r
+    colorArray[I + 1] = color.g
+    colorArray[I + 2] = color.b
+  }
+  geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positionArray), 3))
+  geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colorArray), 3))
+  // Material
+  const material = starsMaterial
+  // Object
+  const starsMesh = new THREE.Points(geometry, material)
+  // Add
+  scene.add(starsMesh)
+  return starsMesh
+}
+function despawnStars(scene: THREE.Scene, starsMesh: THREE.Mesh) {
+  scene.remove(starsMesh)
+  starsMesh.geometry.dispose()
+} */
+
+// ======================================================================== Update
+
+export function updateFirstScene(
+  deltaTime: number,
+  iw: number,
+  ih: number,
+  instanceParameters: InstanceParametersType,
+  firstSceneHandles: FirstSceneHandlesType
+) {
+  // Get delta time and things to update
+  const deltaTimeInSeconds = deltaTime / 1000
+  const { camera, planetMesh, ringsData, moonsData } = firstSceneHandles
+
+  // Update camera
+  camera.aspect = iw / ih
+  camera.updateProjectionMatrix()
+
+  // Update planet
+  const planetRotationAxis = instanceParameters.planet.axis
+  planetMesh.rotateOnAxis(planetRotationAxis, deltaTimeInSeconds * 0.15)
+
+  // Update rings
+  ringsData.forEach((ringDatum) => {
+    ringDatum.forEach((ringBitDatum) => {
+      const ang = deltaTimeInSeconds * ringBitDatum.speed
+      ringBitDatum.ringBitMesh.position.applyAxisAngle(planetRotationAxis, ang) // Rotate the position
+      ringBitDatum.ringBitMesh.rotateOnAxis(planetRotationAxis, ang) // Rotate the object
+    })
+  })
+
+  // Update moon
+  moonsData.forEach((moonDatum) => {
+    const ang = deltaTimeInSeconds * moonDatum.speed
+    moonDatum.moonMesh.position.applyAxisAngle(moonDatum.axis, ang) // Rotate the position
+    moonDatum.moonMesh.rotateOnAxis(moonDatum.axis, ang) // Rotate the object
+  })
+}
+
+// ======================================================================== Shaders
+
+/* function getStarShaderParameters(pixelSize: number): THREE.ShaderMaterialParameters {
+  return {
+    uniforms: {
+      size: { value: pixelSize > 1 ? 1 : 2 },
+    },
+    vertexShader: `
+      varying vec3 vColor;
+
+      attribute vec3 color;
+
+      uniform float size;
+
+      void main() {
+        vColor = color;
+        gl_PointSize = size;
+        gl_Position = projectionMatrix * modelViewMatrix  * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor;
+      void main() {
+        gl_FragColor = vec4(vColor,1);
+      }
+    `,
+  }
+} */
+
 function getPlanetShaderParameters(
   planetParameters: InstanceParametersType['planet']
 ): THREE.ShaderMaterialParameters {
@@ -286,203 +510,4 @@ function getPlanetShaderParameters(
     }
   `,
   }
-}
-
-// Rings
-
-function spawnRings(
-  scene: THREE.Scene,
-  planetParameters: InstanceParametersType['planet'],
-  ringsParameters: InstanceParametersType['rings']
-): RingsDataType {
-  return ringsParameters.map((x) => spawnRingBits(scene, planetParameters, x))
-}
-function spawnRingBits(
-  scene: THREE.Scene,
-  { phi, theta, axis }: InstanceParametersType['planet'],
-  {
-    materialSet,
-    bitCount,
-    minBitSize,
-    maxBitSize,
-    innerRad,
-    outerRad,
-  }: InstanceParametersType['rings'][number]
-): RingsDatumType {
-  if (!bitCount) {
-    return []
-  }
-  const ringDatum = Array(bitCount).fill(0)
-  const phi2 = phi + Math.PI / 2
-  for (let i = 0; i < bitCount; i++) {
-    // Geometry
-    const size = randFloatTriangular(minBitSize, maxBitSize)
-    const geometry = new THREE.SphereGeometry(size, 2, 2)
-    // Material
-    const material = randFromArray(materialSet)
-    // Object
-    const ringBitMesh = new THREE.Mesh(geometry, material)
-    // Position
-    const axialOffset =
-      THREE.MathUtils.randFloatSpread(1) +
-      THREE.MathUtils.randFloatSpread(1) +
-      THREE.MathUtils.randFloatSpread(1)
-    const radius =
-      randFloatTriangular(innerRad / 2, outerRad / 2) +
-      randFloatTriangular(innerRad / 2, outerRad / 2) +
-      THREE.MathUtils.randFloatSpread(3 - Math.abs(axialOffset))
-    const theta2 = THREE.MathUtils.randFloatSpread(Math.PI * 2)
-    ringBitMesh.position.set(
-      radius * Math.sin(theta) * Math.sin(phi2),
-      radius * Math.cos(phi2),
-      radius * Math.cos(theta) * Math.sin(phi2)
-    )
-    ringBitMesh.position.applyAxisAngle(axis, theta2)
-    ringBitMesh.position.add(
-      new THREE.Vector3(axis.x * axialOffset, axis.y * axialOffset, axis.z * axialOffset)
-    )
-    const speed = Math.sqrt(radius) * 0.15
-    // Add
-    scene.add(ringBitMesh)
-    // Save data
-    ringDatum[i] = { speed, ringBitMesh }
-  }
-  return ringDatum
-}
-function despawnRings(scene: THREE.Scene, ringsData: RingsDataType) {
-  ringsData.forEach((ringDatum) => {
-    ringDatum.forEach((ringBitDatum) => {
-      scene.remove(ringBitDatum.ringBitMesh)
-      ringBitDatum.ringBitMesh.geometry.dispose()
-    })
-  })
-  ringsData = []
-}
-
-// Moons
-
-function spawnMoons(scene: THREE.Scene, moonsParameters: InstanceParametersType['moons']) {
-  return moonsParameters.map((x) => spawnMoon(scene, x))
-}
-function spawnMoon(
-  scene: THREE.Scene,
-  { material }: InstanceParametersType['moons'][number]
-): MoonsDatumType {
-  // Geometry
-  const moonSize = randFloatTriangular(0.5, 3)
-  const geometry = new THREE.SphereGeometry(moonSize, 10, 10)
-  // Material is provided
-  // Object
-  const moonMesh = new THREE.Mesh(geometry, material)
-  // Axis
-  const phi = THREE.MathUtils.randFloatSpread(Math.PI / 3)
-  const theta = THREE.MathUtils.randFloatSpread(Math.PI * 2)
-  const axis = new THREE.Vector3(
-    Math.sin(theta) * Math.sin(phi),
-    Math.cos(phi),
-    Math.cos(theta) * Math.sin(phi)
-  ).normalize()
-  // Position
-  const radius = randFloatTriangular(40, 80)
-  const phi2 = phi + Math.PI / 2
-  const theta2 = theta
-  moonMesh.position.set(
-    radius * Math.sin(theta2) * Math.sin(phi2),
-    radius * Math.cos(phi2),
-    radius * Math.cos(theta2) * Math.sin(phi2)
-  )
-  // Speed
-  const speed = Math.sqrt(radius) * 0.05
-  // Add
-  scene.add(moonMesh)
-  return { radius, axis, speed, moonMesh }
-}
-function despawnMoons(scene: THREE.Scene, moonsData: MoonsDataType) {
-  moonsData.forEach((moonDatum) => {
-    scene.remove(moonDatum.moonMesh)
-    moonDatum.moonMesh.geometry.dispose()
-  })
-  moonsData.length = 0
-}
-
-// // Stars
-
-// let starsMesh
-// let starsMaterial = new THREE.ShaderMaterial(starShaderParameters)
-
-// function spawnStars({ starCount, boundingBoxRadius, noGoZoneRadius, colors }) {
-//   // Geometry
-//   const geometry = new THREE.BufferGeometry()
-//   const positionArray = Array(starCount * 3).fill(0)
-//   const colorArray = Array(starCount * 3).fill(0)
-//   for (let i = 0; i < starCount; i++) {
-//     const I = 3 * i
-//     // Position
-//     const [x, y, z] = [
-//       THREE.MathUtils.randFloatSpread(boundingBoxRadius),
-//       THREE.MathUtils.randFloatSpread(boundingBoxRadius),
-//       THREE.MathUtils.randFloat(-boundingBoxRadius / 2, 0),
-//     ]
-//     const offset = new THREE.Vector3(x, y, z).normalize().multiplyScalar(noGoZoneRadius)
-//     positionArray[I] = x + offset.x
-//     positionArray[I + 1] = y + offset.y
-//     positionArray[I + 2] = z + offset.z
-//     // Color
-//     const color = new THREE.Color(randFromArray(colors))
-//     colorArray[I] = color.r
-//     colorArray[I + 1] = color.g
-//     colorArray[I + 2] = color.b
-//   }
-//   geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positionArray), 3))
-//   geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colorArray), 3))
-//   // Material
-//   const material = starsMaterial
-//   // Object
-//   const starsMesh = new THREE.Points(geometry, material)
-//   // Add
-//   firstScene.add(starsMesh)
-//   return starsMesh
-// }
-
-// function deleteStars() {
-//   firstScene.remove(starsMesh)
-//   starsMesh.geometry.dispose()
-// }
-
-// ================== Update
-
-export function updateFirstScene(
-  deltaTime: number,
-  iw: number,
-  ih: number,
-  instanceParameters: InstanceParametersType,
-  firstSceneHandles: FirstSceneHandlesType
-) {
-  // Get delta time and things to update
-  const deltaTimeInSeconds = deltaTime / 1000
-  const { camera, planetMesh, ringsData, moonsData } = firstSceneHandles
-
-  // Update camera
-  camera.aspect = iw / ih
-  camera.updateProjectionMatrix()
-
-  // Update planet
-  const planetRotationAxis = instanceParameters.planet.axis
-  planetMesh.rotateOnAxis(planetRotationAxis, deltaTimeInSeconds * 0.15)
-
-  // Update rings
-  ringsData.forEach((ringDatum) => {
-    ringDatum.forEach((ringBitDatum) => {
-      const ang = deltaTimeInSeconds * ringBitDatum.speed
-      ringBitDatum.ringBitMesh.position.applyAxisAngle(planetRotationAxis, ang) // Rotate the position
-      ringBitDatum.ringBitMesh.rotateOnAxis(planetRotationAxis, ang) // Rotate the object
-    })
-  })
-
-  // Update moon
-  moonsData.forEach((moonDatum) => {
-    const ang = deltaTimeInSeconds * moonDatum.speed
-    moonDatum.moonMesh.position.applyAxisAngle(moonDatum.axis, ang) // Rotate the position
-    moonDatum.moonMesh.rotateOnAxis(moonDatum.axis, ang) // Rotate the object
-  })
 }

@@ -10,13 +10,14 @@ import {
   Population,
   ringsRecord,
   RingType,
-  starColorPopulation,
 } from './vocabulary'
 
 export type InstanceParametersType = {
   camera: {
     dof: number
     distance: number
+    near: number
+    far: number
   }
   planet: {
     type: PlanetType
@@ -39,18 +40,21 @@ export type InstanceParametersType = {
     outerRad: number
   }[]
   moons: { material: THREE.Material }[]
-  starField: {
+  /* stars: {
     starCount: number
     boundingBoxRadius: number
     noGoZoneRadius: number
     colors: Population<number>
-  }
+  } */
 }
 
+// Called by init to randomly generate parameters for this planet
 export function initInstanceParameters(prevInstanceParameters?: InstanceParametersType) {
   // Camera
-  const cameraDof = 25
-  const cameraDistance = 225
+  const cameraDof = 20
+  const cameraDistance = 350
+  const cameraNear = 200
+  const cameraFar = 500
 
   // Planet
   const prevPlanetType = prevInstanceParameters?.planet?.type
@@ -93,6 +97,8 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
     camera: {
       dof: cameraDof,
       distance: cameraDistance,
+      near: cameraNear,
+      far: cameraFar,
     },
     planet: {
       type: planetType,
@@ -107,17 +113,18 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
     },
     rings: rings,
     moons: moons,
-    starField: {
+    /* stars: {
       starCount: 2000,
       boundingBoxRadius: 5000,
       noGoZoneRadius: 1.5 * cameraDistance,
       colors: starColorPopulation,
-    },
+    }, */
   }
   // console.log(nextInstanceParameters)
   return nextInstanceParameters
 }
 
+// Helper to generate an axis of rotation
 function generatePlanetAxis(): [number, number, THREE.Vector3] {
   const phi = THREE.MathUtils.randFloatSpread(Math.PI / 2)
   const theta = THREE.MathUtils.randFloatSpread(Math.PI * 2)

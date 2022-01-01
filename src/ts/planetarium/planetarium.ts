@@ -4,37 +4,6 @@ const clearColor = 0x191108
 
 const autoResetInterval = 15000 // 3428.6 // 140 BPM
 
-// ================== SHADERS
-
-const starShaderParameters = {
-  uniforms: {
-    size: { type: 'f', value: pixelSize > 1 ? 1 : 2 },
-  },
-  vertexShader: `
-      varying vec3 vColor;
-
-      attribute vec3 color;
-
-      uniform float size;
-
-      void main() {
-        vColor = color;
-        gl_PointSize = size;
-        gl_Position = projectionMatrix * modelViewMatrix  * vec4(position, 1.0);
-      }
-    `,
-  fragmentShader: `
-      varying vec3 vColor;
-      void main() {
-        gl_FragColor = vec4(vColor,1);
-      }
-    `,
-}
-
-// ================== FIRST SCENE FUNCTIONS
-
-// ================== MAIN
-
 // ================== RESET HANDLING
 
 const resetData = {

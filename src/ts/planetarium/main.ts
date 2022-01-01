@@ -4,11 +4,8 @@ import { init } from './init'
 import { InstanceParametersType } from './instanceParameters'
 import { SecondSceneHandlesType } from './secondScene'
 
-// Todo: move to own file
+export const pixelSize = 2
 
-// End
-
-// This should not change
 export type PlanetariumType = Readonly<{
   // Data
   instanceParameters: InstanceParametersType
@@ -25,21 +22,31 @@ export type PlanetariumType = Readonly<{
   prevTime: DOMHighResTimeStamp
 }
 
+// ======================================================================== Main
+
 export function main(container: Element, canvas: Element): PlanetariumType {
+  // Create a new instance of the planetarium
   const planetarium = init(container, canvas)
 
+  // Start the animation loop
   planetarium.nextFrameReq = requestAnimationFrame((t) => animate(t, planetarium))
 
+  // Return the planetarium object
   return planetarium
 }
 
+// ======================================================================== Reset (on click, say)
+
 export function resetAll(planetarium: PlanetariumType) {
-  console.log('HELL')
+  // Cancel the previous animation loop
   cancelAnimationFrame(planetarium.nextFrameReq)
 
+  // Create a new instance of the planetarium, based on the previous one
   const newPlanetarium = init(planetarium.container, planetarium.canvas, planetarium)
 
+  // Start the animation loop
   newPlanetarium.nextFrameReq = requestAnimationFrame((t) => animate(t, newPlanetarium))
 
+  // Return the planetarium object
   return newPlanetarium
 }

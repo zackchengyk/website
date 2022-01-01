@@ -18,8 +18,6 @@ $banner-left-line-height: 1;
   display: grid;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr) minmax(0, 1fr);
   gap: $inner-section-grid-gap;
-
-  background-color: $blue; // Temporary
 }
 
 #banner-left {
@@ -61,8 +59,6 @@ $banner-left-line-height: 1;
   position: absolute;
   z-index: -1;
   inset: 0;
-
-  background: linear-gradient($dark-light, color.change($dark-light, $lightness: 10%)); // Temporary
 
   display: grid;
   place-items: center;

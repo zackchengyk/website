@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-// ================== Helpers
+// ======================================================================== Helpers
 
 export type RangeType = [number, number]
 export type Population<T> = T[]
@@ -17,7 +17,7 @@ function materialFromColor(n: number): THREE.Material {
   return new THREE.MeshBasicMaterial({ color: new THREE.Color(n) })
 }
 
-// ================== Planets
+// ======================================================================== Planets
 
 export type ColorLevelThresholdsType = [number, number, number, number, number]
 export type ColorLevelsType = [number, number, number, number, number, number]
@@ -193,7 +193,7 @@ export const planetsPopulation = makePopulation(
   Object.entries(planetsRecord).map(([k, v]) => [k, v.probabilityWeight])
 )
 
-// Rings
+// ======================================================================== Rings
 
 export const ringTypes = ['icy', 'metallic', 'dusty'] as const
 export type RingType = typeof ringTypes[number]
@@ -212,7 +212,7 @@ export const ringsRecord: Record<RingType, RingDataType> = {
   },
 }
 
-// Moons
+// ======================================================================== Moons
 
 export const moonsMaterialsPopulation: Population<THREE.Material> = [
   ...makePopulation([
@@ -224,7 +224,7 @@ export const moonsMaterialsPopulation: Population<THREE.Material> = [
   ...planetsRecord.earth.colors.map((x) => materialFromColor(x)),
 ]
 
-// Stars
+// ======================================================================== Stars
 
 export const starColorPopulation: Population<number> = [
   0xf0e5bb, // yellow

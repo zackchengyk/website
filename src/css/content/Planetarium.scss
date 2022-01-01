@@ -2,9 +2,54 @@
 @use 'sass:math';
 @import '../common.scss';
 
+$planetarium-normal-delay: 0.1s;
+$planetarium-hover-delay: 0.2s;
+$planetarium-active-delay: 0.05s;
+$fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
+
+#planetarium-full-window {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  place-items: center;
+
+  background-color: $dark; // Temporary
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+
+    > #planetarium-container {
+      transform: scale(1);
+      transition: transform $planetarium-hover-delay $fade-ease-out;
+    }
+  }
+
+  &.active,
+  &:active {
+    outline: none;
+
+    > #planetarium-container {
+      transform: scale(0.96);
+      transition: transform $planetarium-active-delay $fade-ease-out;
+    }
+  }
+}
+
 #planetarium-container {
   position: absolute;
-  height: min(100%, 600px);
+  height: min(100%, 500px);
   width: min(100%, 900px);
-  // background-color: color.change(purple, $alpha: 0.25);
+
+  transform: scale(0.94);
+  transition: transform $planetarium-normal-delay $fade-ease-out;
+}
+
+#planetarium {
+  height: 100%;
+  width: 100%;
 }

@@ -38,13 +38,13 @@ $light-light: #fff3eb;
 $light: #ffebda;
 $light-dark: #ffe7d0;
 
-$mid-tone-light: #cab4a7;
-$mid-tone: #958782;
-$mid-tone-dark: #605a59;
+$mid-tone-light: #cab2a2;
+$mid-tone: #958278;
+$mid-tone-dark: #60544f;
 
-$dark-light: #2b2a2a;
-$dark: #1f1f1f;
-$dark-dark: #121212;
+$dark-light: #352f2d;
+$dark: #191817;
+$dark-dark: #0d0d0c;
 $black: #000000;
 
 $blue-highlight: #93dbff;
@@ -172,6 +172,18 @@ $navbar-item-horz-padding: 0.5rem;
 $navbar-item-padding: $navbar-item-vert-padding $navbar-item-horz-padding;
 
 // ================== TEXT MIXINS
+
+@mixin no-select {
+  -webkit-touch-callout: none; // iOS Safari
+  -webkit-user-select: none; // Safari
+  -khtml-user-select: none; // Konqueror HTML
+  -moz-user-select: none; // Old versions of Firefox
+  -ms-user-select: none; // Internet Explorer/Edge
+  user-select: none; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
+}
+.no-select {
+  @include no-select;
+}
 
 @mixin content-text {
   abbr {
