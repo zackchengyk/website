@@ -3,10 +3,12 @@
 @import '../common.scss';
 
 $banner-left-font-family: $munro-small;
-$banner-left-font-size: linear(30, 50);
+$banner-left-font-size: 45px;
 $banner-left-font-weight: normal;
 $banner-left-font-color: $light;
 $banner-left-line-height: 1;
+
+$banner-content-shadow: 0 10px 15px $black;
 
 #banner-header {
   position: relative; // Required to create a stacking context
@@ -26,7 +28,13 @@ $banner-left-line-height: 1;
   grid-row: 1;
   grid-column: 1;
 
+  pointer-events: none;
+  @include user-select(none);
+
   > h2 {
+    pointer-events: auto;
+    @include user-select(text);
+
     font-family: $banner-left-font-family;
     font-size: $banner-left-font-size;
     font-weight: $banner-left-font-weight;
@@ -36,6 +44,8 @@ $banner-left-line-height: 1;
     // Some magic numbers to shift munro-small's baseline down
     position: relative;
     bottom: calc($banner-left-font-size * math.div(-6, 40));
+
+    text-shadow: $banner-content-shadow;
   }
 }
 
@@ -48,10 +58,15 @@ $banner-left-line-height: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   pointer-events: none;
+  @include user-select(none);
 
   > img {
+    pointer-events: auto;
+
     height: 100%;
+    filter: drop-shadow($banner-content-shadow);
   }
 }
 

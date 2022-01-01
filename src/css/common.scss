@@ -173,16 +173,13 @@ $navbar-item-padding: $navbar-item-vert-padding $navbar-item-horz-padding;
 
 // ======================================================================== TEXT MIXINS
 
-@mixin no-select {
-  -webkit-touch-callout: none; // iOS Safari
-  -webkit-user-select: none; // Safari
-  -khtml-user-select: none; // Konqueror HTML
-  -moz-user-select: none; // Old versions of Firefox
-  -ms-user-select: none; // Internet Explorer/Edge
-  user-select: none; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
-}
-.no-select {
-  @include no-select;
+@mixin user-select($value) {
+  -webkit-touch-callout: $value; // iOS Safari
+  -webkit-user-select: $value; // Safari
+  -khtml-user-select: $value; // Konqueror HTML
+  -moz-user-select: $value; // Old versions of Firefox
+  -ms-user-select: $value; // Internet Explorer/Edge
+  user-select: $value; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
 }
 
 @mixin content-text {

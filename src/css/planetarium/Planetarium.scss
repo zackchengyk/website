@@ -9,6 +9,7 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
 
 #planetarium-full-window {
   position: absolute;
+  z-index: 0;
   height: 100%;
   width: 100%;
 
@@ -42,6 +43,7 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
 }
 
 #planetarium-container {
+  z-index: 1;
   height: min(100%, 500px);
   width: min(100%, 900px);
 
@@ -51,6 +53,5 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
 
 #planetarium {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  inset: 0;
 }

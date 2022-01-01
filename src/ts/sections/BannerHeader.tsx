@@ -9,13 +9,13 @@ type BannerHeaderProps = {
 function BannerHeader({ extraClassName }: BannerHeaderProps) {
   return (
     <header id="banner-header" className={extraClassName}>
-      <div id="banner-left" className="no-select">
+      <div id="banner-left">
         <h2>{'Hello, World!'}</h2>
       </div>
-      <h1 id="banner-right" className="no-select">
+      <h1 id="banner-right">
         <img src={src} alt="Zack Cheng" />
       </h1>
-      <div id="banner-background" className="no-select">
+      <div id="banner-background">
         <Planetarium />
       </div>
     </header>
