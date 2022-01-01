@@ -45,7 +45,7 @@ function ExperienceSection({ extraClassName }: ExperienceSectionProps) {
   return (
     <section id="experience-section" className={extraClassName}>
       <h3 id="experience-header" className="section-header subtitle-text">
-        {'EXPERIENCE'}
+        <span>{'EXPERIENCE'}</span>
       </h3>
       <div id="experience-body" className="section-body">
         <div id="experience-body-grid">

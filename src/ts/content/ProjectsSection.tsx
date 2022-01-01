@@ -52,7 +52,7 @@ function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
   return (
     <section id="projects-section" className={extraClassName}>
       <h3 id="projects-header" className="section-header subtitle-text">
-        {'PROJECTS'}
+        <span>{'PROJECTS'}</span>
       </h3>
       <div id="projects-body" className="section-body">
         <ul id="projects-ul">
