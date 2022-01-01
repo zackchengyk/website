@@ -1,0 +1,10 @@
+@use 'sass:color';
+@use 'sass:math';
+@import '../common.scss';
+
+#planetarium-container {
+  position: absolute;
+  height: min(100%, 600px);
+  width: min(100%, 900px);
+  // background-color: color.change(purple, $alpha: 0.25);
+}

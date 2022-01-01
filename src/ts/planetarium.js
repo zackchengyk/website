@@ -823,14 +823,7 @@ let renderer
 let prevTime = 0
 let nextAnimationReq
 
-// const container = document.getElementById('planetarium-container')
-// const canvas = document.getElementById('planetarium')
-// window.onload = firstSet
-
-let container, canvas
 export function firstSet(container, canvas) {
-  container = document.getElementById('planetarium-container')
-  canvas = document.getElementById('planetarium')
   init(container, canvas)
   requestAnimationFrame(animate)
   // Add resize listener

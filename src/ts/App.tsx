@@ -1,7 +1,7 @@
 import '../css/App.scss'
 import '../css/font.css'
 import AboutSection from './content/AboutSection'
-import BannerSection from './content/BannerSection'
+import BannerHeader from './content/BannerHeader'
 import ExperienceSection from './content/ExperienceSection'
 import Navbar from './content/Navbar'
 import ProjectsSection from './content/ProjectsSection'
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div id="App" style={style}>
-      <BannerSection />
+      <BannerHeader />
       <div>
         <Navbar />
         <AboutSection />
