@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useEffect, useRef } from 'react'
-import { main, PlanetariumType, resetAll } from '../planetarium/main'
+import { main, PlanetariumType, resetAll } from './planetarium-three/main'
 import PlanetariumBackground from './PlanetariumBackground'
-import '../../css/content/Planetarium.scss'
+import '../../css/planetarium/Planetarium.scss'
 
 function Planetarium() {
   const fullWindowElement = useRef(null)

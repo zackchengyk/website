@@ -1,6 +1,6 @@
-import '../../css/content/ExperienceSection.scss'
 import { stringToId } from '../common'
-import { experienceText } from './text'
+import { experienceText } from '../content/text'
+import '../../css/sections/ExperienceSection.scss'
 
 export type ExperienceListItemProps = {
   experienceName: string

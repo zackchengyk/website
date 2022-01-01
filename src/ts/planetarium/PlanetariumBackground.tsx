@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { XY } from '../common'
-import '../../css/content/PlanetariumBackground.scss'
+import '../../css/planetarium/PlanetariumBackground.scss'
 
 const pixelSize = 2
 const numColors = 10

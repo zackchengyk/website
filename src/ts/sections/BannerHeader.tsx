@@ -1,6 +1,6 @@
-import '../../css/content/BannerHeader.scss'
 import src from '../../img/name.svg'
-import Planetarium from './Planetarium'
+import Planetarium from '../planetarium/Planetarium'
+import '../../css/sections/BannerHeader.scss'
 
 type BannerHeaderProps = {
   extraClassName?: string

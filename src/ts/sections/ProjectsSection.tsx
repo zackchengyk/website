@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import '../../css/content/ProjectsSection.scss'
 import { stringToId } from '../common'
+import '../../css/sections/ProjectsSection.scss'
 
 type ProjectsListItemProps = {
   projectName: string

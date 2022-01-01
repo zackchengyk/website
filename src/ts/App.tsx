@@ -1,10 +1,10 @@
 import '../css/App.scss'
 import '../css/font.css'
-import AboutSection from './content/AboutSection'
-import BannerHeader from './content/BannerHeader'
-import ExperienceSection from './content/ExperienceSection'
-import Navbar from './content/Navbar'
-import ProjectsSection from './content/ProjectsSection'
+import AboutSection from './sections/AboutSection'
+import BannerHeader from './sections/BannerHeader'
+import ExperienceSection from './sections/ExperienceSection'
+import Navbar from './sections/Navbar'
+import ProjectsSection from './sections/ProjectsSection'
 import { useWindowDimensions } from './useWindowDimensions'
 
 function App() {

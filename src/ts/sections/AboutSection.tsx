@@ -1,6 +1,6 @@
-import '../../css/content/AboutSection.scss'
-import { personalBlurb, personalIntro } from './text'
+import { personalBlurb, personalIntro } from '../content/text'
 import src from '../../img/me.jpg'
+import '../../css/sections/AboutSection.scss'
 
 type AboutSectionProps = {
   extraClassName?: string

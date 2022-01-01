@@ -1,4 +1,4 @@
-import '../../css/content/Navbar.scss'
+import '../../css/sections/Navbar.scss'
 
 type NavbarProps = {
   extraClassName?: string
