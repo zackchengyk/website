@@ -7,19 +7,10 @@ import '../../../css/pixels/stars.scss'
 
 // ================== Helpers
 
-let count = 0
-let layer = 1
 function getRandomStarPosition(pixelDimensions: XY): XY {
-  if (count >= pixelDimensions.x) {
-    count = 0
-    layer += 2
-  }
-  count += layer
-  const x = count
-  const y = (x % 2) - layer + Math.floor(1 * (pixelDimensions.y - 56))
   return {
-    x: x,
-    y: y,
+    x: Math.floor(Math.random() * (pixelDimensions.x - 1)),
+    y: Math.floor(Math.random() * (pixelDimensions.y - 1)),
   }
 }
 
@@ -51,7 +42,7 @@ function PixelStarField({ windowDimensions }: PixelStarFieldProps) {
   useEffect(() => {
     const areaRatio = (pixelDimensions.x * pixelDimensions.y) / 10000
     const numAnimStars = Math.floor(0 * areaRatio)
-    const numStars = Math.floor(160 * areaRatio)
+    const numStars = Math.floor(40 * areaRatio)
 
     // Populate star props arrays
     const animStarsTemp: PixelAnimStarProps[] = [...Array(numAnimStars).keys()].map(() => ({

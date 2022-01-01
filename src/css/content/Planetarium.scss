@@ -15,7 +15,8 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
   display: grid;
   place-items: center;
 
-  background-color: $dark; // Temporary
+  overflow: hidden;
+  background-color: $dark;
 
   cursor: pointer;
 
@@ -24,7 +25,7 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
     outline: none;
 
     > #planetarium-container {
-      transform: scale(1);
+      transform: scale(1.06);
       transition: transform $planetarium-hover-delay $fade-ease-out;
     }
   }
@@ -34,22 +35,22 @@ $fade-ease-out: cubic-bezier(0.1, 0.5, 0.35, 1);
     outline: none;
 
     > #planetarium-container {
-      transform: scale(0.96);
+      transform: scale(1.02);
       transition: transform $planetarium-active-delay $fade-ease-out;
     }
   }
 }
 
 #planetarium-container {
-  position: absolute;
   height: min(100%, 500px);
   width: min(100%, 900px);
 
-  transform: scale(0.94);
+  transform: scale(1);
   transition: transform $planetarium-normal-delay $fade-ease-out;
 }
 
 #planetarium {
+  position: absolute;
   height: 100%;
   width: 100%;
 }

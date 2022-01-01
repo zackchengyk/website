@@ -1,0 +1,34 @@
+@use 'sass:color';
+@use 'sass:math';
+@import '../common.scss';
+
+#planetarium-background {
+  position: absolute;
+}
+
+$indexed-star-colors:
+  // yellow
+  '0' #f0e5bb,
+  // yellow
+  '1' #fcedb3,
+  // orange
+  '2' #fabb93,
+  // orange-red
+  '3' #d16a45,
+  // red
+  '4' #cf5a4a,
+  // blue
+  '5' #5992e3,
+  // white-blue
+  '6' #c7deff,
+  // pink
+  '7' #f0bbde,
+  // white
+  '8' #ffffff,
+  '9' #ffffff, '10' #ffffff;
+
+@each $index, $color in $indexed-star-colors {
+  .fill-#{$index} {
+    fill: $color;
+  }
+}

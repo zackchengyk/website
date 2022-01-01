@@ -1,6 +1,10 @@
 @use 'sass:math';
 @import '../common.scss';
 
+$star-colors: #ffffff, #f0e5bb, #fcedb3, #fabb93, #d16a45, #cf5a4a, #5992e3, #c7deff, #f0bbde;
+$anim-star-duration: 7.5s;
+$anim-star-num-frames: 10;
+
 #stars-div {
   position: absolute;
   top: 0;
@@ -22,7 +26,7 @@
 @each $color in $star-colors {
   $color-string: str-slice(#{$color}, -6);
   .fill-#{$color-string} {
-    fill: #ffefd6; //$color;
+    fill: $color;
   }
 }
 
