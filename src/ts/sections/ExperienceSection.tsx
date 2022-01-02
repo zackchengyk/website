@@ -4,7 +4,7 @@ import '../../css/sections/ExperienceSection.scss'
 
 // ======================================================================== Component: ExperienceListItem
 
-export type ExperienceListItemProps = {
+export type ExperienceListItemContentProps = {
   experienceName: string
   extraClassName?: string
   imgSrc: string
@@ -12,6 +12,7 @@ export type ExperienceListItemProps = {
   experienceSubtitle: React.ReactNode
   experienceBody: React.ReactNode
 }
+type ExperienceListItemProps = {} & ExperienceListItemContentProps
 
 function ExperienceListItem({
   experienceName,
@@ -41,6 +42,9 @@ function ExperienceListItem({
 
 // ======================================================================== Component: ExperienceSection
 
+const experienceNames = ['govtech', 'brgd', 'csci1430', 'engn0031']
+export type ExperienceName = typeof experienceNames[number]
+
 type ExperienceSectionProps = {
   extraClassName?: string
 }
@@ -54,10 +58,9 @@ function ExperienceSection({ extraClassName }: ExperienceSectionProps) {
       <div id="experience-body" className="section-body">
         <div id="experience-body-grid">
           <ul id="experience-ul">
-            <ExperienceListItem {...experienceText.govtech} />
-            <ExperienceListItem {...experienceText.brgd} />
-            <ExperienceListItem {...experienceText.csci1430} />
-            <ExperienceListItem {...experienceText.engn0031} />
+            {experienceNames.map((experienceName) => (
+              <ExperienceListItem {...experienceText[experienceName]} />
+            ))}
           </ul>
         </div>
       </div>

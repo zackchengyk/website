@@ -1,26 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { stringToId } from '../common'
 import '../../css/sections/ProjectsSection.scss'
+import { projectsText } from '../content/text'
 
 // ======================================================================== Component: ProjectsListItem
 
-type ProjectsListItemProps = {
+export type ProjectsListItemContentProps = {
   projectName: string
   extraClassName?: string
   children?: React.ReactNode
-  currentOpen: string
-  setCurrentOpen: (id: string) => void
 }
+type ProjectsListItemProps = {
+  isOpen: boolean
+  toggleIsOpen: () => void
+} & ProjectsListItemContentProps
 
 function ProjectsListItem({
   projectName,
   extraClassName,
   children,
-  currentOpen,
-  setCurrentOpen,
+  isOpen,
+  toggleIsOpen,
 }: ProjectsListItemProps) {
   const id = 'projects-' + stringToId(projectName)
-  const isOpen = currentOpen === id
 
   const liId = id
   const buttonId = id + '-button'
@@ -32,7 +34,7 @@ function ProjectsListItem({
         <button
           id={buttonId}
           className="projects-li-button"
-          onClick={() => (isOpen ? setCurrentOpen('') : setCurrentOpen(id))}
+          onClick={toggleIsOpen}
           aria-controls={divId}
           aria-expanded={isOpen}>
           <span>{projectName}</span>
@@ -47,13 +49,21 @@ function ProjectsListItem({
 
 // ======================================================================== Component: ProjectsSection
 
+const projectNames = ['website', 'cityscape', 'maps', 'voxels', 'override', 'spacewar'] as const
+export type ProjectName = typeof projectNames[number]
+
 type ProjectsSectionProps = {
   extraClassName?: string
 }
 
 function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
-  const [currentOpen, setCurrentOpen] = useState<string>('')
-  const common = { currentOpen, setCurrentOpen }
+  const [currentOpen, setCurrentOpen] = useState<Record<ProjectName, boolean>>(
+    projectNames.reduce((acc, ele) => ((acc[ele] = false), acc), {} as Record<ProjectName, boolean>)
+  )
+
+  function getToggleIsOpenFunction(projectName: ProjectName): () => void {
+    return () => setCurrentOpen((prev) => ({ ...currentOpen, [projectName]: !prev[projectName] }))
+  }
 
   return (
     <section id="projects" className={extraClassName}>
@@ -62,24 +72,13 @@ function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
       </h2>
       <div id="projects-body" className="section-body">
         <ul id="projects-ul">
-          <ProjectsListItem projectName={'This Website'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
-          <ProjectsListItem projectName={'Cityscape'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
-          <ProjectsListItem projectName={'Maps'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
-          <ProjectsListItem projectName={'Voxel Coloring'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
-          <ProjectsListItem projectName={'Override'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
-          <ProjectsListItem projectName={'Spacewar!'} {...common}>
-            {'Hello!'}
-          </ProjectsListItem>
+          {projectNames.map((projectName) => (
+            <ProjectsListItem
+              isOpen={currentOpen[projectName]}
+              toggleIsOpen={getToggleIsOpenFunction(projectName)}
+              {...projectsText[projectName]}
+            />
+          ))}
         </ul>
       </div>
     </section>

@@ -2,7 +2,8 @@ import brgdSrc from '../../img/experience/brgd-logo-small.png'
 import brownSrc from '../../img/experience/brown-logo.svg'
 import govtechSrc from '../../img/experience/govtech-logo-purple-small.png'
 import OutLink from './OutLink'
-import { ExperienceListItemProps } from '../sections/ExperienceSection'
+import { ExperienceListItemContentProps, ExperienceName } from '../sections/ExperienceSection'
+import { ProjectName, ProjectsListItemContentProps } from '../sections/ProjectsSection'
 
 // ================== About
 
@@ -47,7 +48,7 @@ export const personalBlurb = (
 
 // ================== Experience
 
-export const experienceText: { [k in string]: ExperienceListItemProps } = {
+export const experienceText: Record<ExperienceName, ExperienceListItemContentProps> = {
   govtech: {
     experienceName: 'Govtech',
     imgSrc: govtechSrc,
@@ -117,3 +118,30 @@ export const experienceText: { [k in string]: ExperienceListItemProps } = {
 }
 
 // ================== Projects
+
+export const projectsText: Record<ProjectName, ProjectsListItemContentProps> = {
+  website: {
+    projectName: 'Website',
+    children: <>{'Hello'}</>,
+  },
+  cityscape: {
+    projectName: 'Cityscape',
+    children: <>{'Hello'}</>,
+  },
+  maps: {
+    projectName: 'Maps',
+    children: <>{'Hello'}</>,
+  },
+  voxels: {
+    projectName: 'Voxel Reconstruction',
+    children: <>{'Hello'}</>,
+  },
+  override: {
+    projectName: 'Override',
+    children: <>{'Hello'}</>,
+  },
+  spacewar: {
+    projectName: 'Spacewar!',
+    children: <>{'Hello'}</>,
+  },
+}
