@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../../css/sections/Navbar.scss'
-import { stringToId } from '../common'
+import { XY } from '../common'
 
 // ======================================================================== Helpers
 
@@ -18,23 +18,29 @@ function helper() {
 // ======================================================================== Component: Navbar
 
 type NavbarProps = {
+  windowDimensions: XY
   scrollTop: number
   extraClassName?: string
 }
 
-function Navbar({ scrollTop, extraClassName }: NavbarProps) {
+function Navbar({ windowDimensions, scrollTop, extraClassName }: NavbarProps) {
   const [active, setActive] = useState<string>(helper())
+  const [sortedNamesAndTops, setSortedNamesAndTops] = useState<{ name: string; offsetTop: number }[]>([])
+
+  // Get list of section names and offsetTops when window dimensions change
+  useEffect(() => {
+    setSortedNamesAndTops(
+      sectionNames
+        .map((sectionName) => {
+          const navbarTarget = document.getElementById(sectionName)
+          return { name: sectionName, offsetTop: navbarTarget!.offsetTop }
+        })
+        .sort((a, b) => a.offsetTop - b.offsetTop)
+    )
+  }, [windowDimensions])
 
   // Change active navbar item based on scrollTop
   useEffect(() => {
-    // Get list of names and their respective offsetTops
-    const sortedNamesAndTops = sectionNames
-      .map((sectionName) => {
-        const navbarTarget = document.getElementById(sectionName)
-        return { name: sectionName, offsetTop: navbarTarget!.offsetTop }
-      })
-      .sort((a, b) => a.offsetTop - b.offsetTop)
-
     // Find our current position
     for (let i = 0; i < sortedNamesAndTops.length; i++) {
       if (scrollTop > sortedNamesAndTops[i].offsetTop) {

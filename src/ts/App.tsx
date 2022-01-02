@@ -39,7 +39,7 @@ function App() {
     <div id="scroll-container" ref={scrollContainer} style={style}>
       <BannerHeader />
       <div>
-        <Navbar scrollTop={scrollTop} />
+        <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
