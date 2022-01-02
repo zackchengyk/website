@@ -2,10 +2,14 @@ import * as THREE from 'three'
 import { PlanetariumType } from './main'
 
 const origin = new THREE.Vector3(0)
+const thetaRange = 3
+const phiRange = 1.5
 
 export function rotateCamera(planetarium: PlanetariumType): void {
-  const targetTheta = -planetarium.normMousePos.x
-  const targetPhi = planetarium.normMousePos.y
+  const targetTheta =
+    -thetaRange * THREE.MathUtils.smoothstep(planetarium.normMousePos.x, -1, 0.5) + thetaRange / 2
+  const targetPhi =
+    phiRange * THREE.MathUtils.smoothstep(planetarium.normMousePos.y, -0.75, 0.75) - phiRange / 2
 
   const theta = THREE.MathUtils.lerp(planetarium.currentTheta, targetTheta, 0.05)
   const phi = THREE.MathUtils.lerp(planetarium.currentPhi, targetPhi, 0.05)
