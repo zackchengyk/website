@@ -13,9 +13,9 @@ export type PlanetariumType = Readonly<{
   firstSceneHandles: FirstSceneHandlesType
   secondSceneHandles: SecondSceneHandlesType
   renderer: THREE.WebGLRenderer
-  // Elements
-  container: Element
-  canvas: Element
+  // HTMLElements
+  container: HTMLElement
+  canvas: HTMLElement
 }> & {
   // Animation data (mutable)
   nextFrameReq: number
@@ -24,7 +24,7 @@ export type PlanetariumType = Readonly<{
 
 // ======================================================================== Main
 
-export function main(container: Element, canvas: Element): PlanetariumType {
+export function main(container: HTMLElement, canvas: HTMLElement): PlanetariumType {
   // Create a new instance of the planetarium
   const planetarium = init(container, canvas)
 

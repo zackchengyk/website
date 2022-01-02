@@ -82,8 +82,8 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
         type: ringType,
         materialSet: ringMaterialsPopulation,
         bitCount: Math.floor((ringOuterRad * ringOuterRad - ringInnerRad * ringInnerRad) / 2),
-        minBitSize: 0.25,
-        maxBitSize: 0.75,
+        minBitSize: 0.35,
+        maxBitSize: 1,
         innerRad: ringInnerRad,
         outerRad: ringOuterRad,
       }

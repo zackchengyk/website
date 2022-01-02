@@ -5,7 +5,11 @@ import { PlanetariumType } from './main'
 import { initSecondScene, populateSecondScene } from './secondScene'
 
 // Called when the planetarium needs to start up or reset
-export function init(container: Element, canvas: Element, planetarium?: PlanetariumType): PlanetariumType {
+export function init(
+  container: HTMLElement,
+  canvas: HTMLElement,
+  planetarium?: PlanetariumType
+): PlanetariumType {
   // Get screen size
   const iw = container.clientWidth
   const ih = container.clientHeight
@@ -39,15 +43,32 @@ export function init(container: Element, canvas: Element, planetarium?: Planetar
     renderer = planetarium.renderer
   }
 
+  // Animation stuff
+  let nextFrameReq = 0,
+    prevTime = 0,
+    normMousePos = { x: 0, y: 0 },
+    currentTheta = 0,
+    currentPhi = 0
+  if (planetarium) {
+    nextFrameReq = planetarium.nextFrameReq
+    prevTime = planetarium.prevTime
+    normMousePos = planetarium.normMousePos
+    currentTheta = planetarium.currentTheta
+    currentPhi = planetarium.currentPhi
+  }
+
   // Return planetarium object
   return {
     instanceParameters,
-    firstSceneHandles: firstSceneHandles,
+    firstSceneHandles,
     secondSceneHandles,
     renderer,
     container,
     canvas,
-    nextFrameReq: planetarium ? planetarium.nextFrameReq : 0, // return some nonsense number if unavailable
-    prevTime: planetarium ? planetarium.prevTime : 0, // return zero (start of animation) if unavailable
+    nextFrameReq,
+    prevTime,
+    normMousePos,
+    currentTheta,
+    currentPhi,
   }
 }
