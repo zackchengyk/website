@@ -5,6 +5,9 @@
 #planetarium-background {
   position: absolute;
   z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   pointer-events: none;
   @include user-select(none);
