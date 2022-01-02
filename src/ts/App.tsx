@@ -1,11 +1,11 @@
-import '../css/App.scss'
-import '../css/font.css'
 import AboutSection from './sections/AboutSection'
 import BannerHeader from './sections/BannerHeader'
 import ExperienceSection from './sections/ExperienceSection'
 import Navbar from './sections/Navbar'
 import ProjectsSection from './sections/ProjectsSection'
 import { useWindowDimensions } from './useWindowDimensions'
+import '../css/App.scss'
+import '../css/font.css'
 
 function App() {
   const windowDimensions = useWindowDimensions()

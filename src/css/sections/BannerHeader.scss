@@ -63,8 +63,6 @@ $banner-content-shadow: 0 10px 15px $black;
   @include user-select(none);
 
   > img {
-    pointer-events: auto;
-
     height: 100%;
     filter: drop-shadow($banner-content-shadow);
   }

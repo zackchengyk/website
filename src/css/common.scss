@@ -66,10 +66,10 @@ $temporary: color.change($brown, $alpha: 0.2);
 
 $side-padding: 20px;
 $banner-horz-space: 20px;
-$banner-vert-space: 20px;
+$banner-vert-space: 25px;
 
 $section-horz-space: 20px;
-$section-vert-space: linear(40, 80);
+$section-vert-space: linear(60, 80);
 $section-vert-space-first-last: linear(20, 80);
 
 $section-li-horz-space: 0;
@@ -112,8 +112,6 @@ section:first-of-type > .section-body {
 section:last-of-type > .section-body {
   padding-bottom: $section-vert-space-first-last;
 }
-
-$side-padding-0-1: 0; //linear(0, 25);
 
 $line: 1px solid $mid-tone;
 $delay: 0.3s;

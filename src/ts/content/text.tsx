@@ -1,8 +1,8 @@
 import brgdSrc from '../../img/experience/brgd-logo-small.png'
 import brownSrc from '../../img/experience/brown-logo.svg'
-import govtechSrc from '../../img/experience/govtech-logo-small.png'
+import govtechSrc from '../../img/experience/govtech-logo-purple-small.png'
 import OutLink from './OutLink'
-import { ExperienceListItemProps } from './ExperienceSection'
+import { ExperienceListItemProps } from '../sections/ExperienceSection'
 
 // ================== About
 
