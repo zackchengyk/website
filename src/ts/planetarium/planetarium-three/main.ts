@@ -1,3 +1,4 @@
+import { XY } from '../../common'
 import { animate } from './animate'
 import { FirstSceneHandlesType } from './firstScene'
 import { init } from './init'
@@ -20,6 +21,10 @@ export type PlanetariumType = Readonly<{
   // Animation data (mutable)
   nextFrameReq: number
   prevTime: DOMHighResTimeStamp
+  // Rotation stuff
+  normMousePos: XY
+  currentTheta: number
+  currentPhi: number
 }
 
 // ======================================================================== Main

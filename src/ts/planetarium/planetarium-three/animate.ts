@@ -1,6 +1,7 @@
 import { updateFirstScene } from './firstScene'
 import { PlanetariumType } from './main'
 import { updateSecondScene } from './secondScene'
+import { rotateCamera } from './rotate'
 import Stats from 'three/examples/jsm/libs/stats.module'
 
 // Temporary fps counter
@@ -34,6 +35,7 @@ function render(time: DOMHighResTimeStamp, planetarium: PlanetariumType) {
   renderer.setSize(iw, ih)
 
   // Update scenes
+  rotateCamera(planetarium)
   updateFirstScene(deltaTime, iw, ih, planetarium.instanceParameters, planetarium.firstSceneHandles)
   updateSecondScene(deltaTime, iw, ih, planetarium.instanceParameters, planetarium.secondSceneHandles)
 
