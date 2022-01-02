@@ -14,8 +14,12 @@ type MoonsDatumType = {
   axis: THREE.Vector3
   speed: number
   moonMesh: THREE.Mesh
+  /* trailPoints: THREE.Points */
 }
 type MoonsDataType = MoonsDatumType[]
+
+/* const numTrailPoints = 200
+const numTrailPointsX3 = numTrailPoints * 3 */
 
 export type FirstSceneHandlesType = {
   camera: THREE.PerspectiveCamera
@@ -23,6 +27,8 @@ export type FirstSceneHandlesType = {
   planetMesh?: THREE.Mesh
   ringsData?: RingsDataType
   moonsData?: MoonsDataType
+  /* trailTick?: number
+  drawRange?: number */
   starsPoints?: THREE.Points
 }
 
@@ -211,12 +217,33 @@ function spawnMoon(
   const speed = Math.sqrt(radius) * 0.05
   // Add
   scene.add(moonMesh)
-  return { radius, axis, speed, moonMesh }
+
+  /* // Trail
+  const trailGeometry = new THREE.BufferGeometry()
+  const trailPointsPositionArray = Array(numTrailPoints * 3).fill(0)
+  trailPointsPositionArray[0] = moonMesh.position.x
+  trailPointsPositionArray[1] = moonMesh.position.y
+  trailPointsPositionArray[2] = moonMesh.position.z
+  trailGeometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(new Float32Array(trailPointsPositionArray), 3)
+  )
+  const trailPoints = new THREE.Points(trailGeometry, trailMaterial)
+  scene.add(trailPoints) */
+
+  return {
+    radius,
+    axis,
+    speed,
+    moonMesh,
+    /* trailPoints */
+  }
 }
 function despawnMoons(scene: THREE.Scene, moonsData: MoonsDataType) {
   moonsData.forEach((moonDatum) => {
     scene.remove(moonDatum.moonMesh)
     moonDatum.moonMesh.geometry.dispose()
+    /* scene.remove(moonDatum.trailPoints) */
   })
   moonsData.length = 0
 }
@@ -277,6 +304,8 @@ export function updateFirstScene(
   const deltaTimeInSeconds = deltaTime / 1000
   const { camera, planetMesh, ringsData, moonsData } = firstSceneHandles
 
+  if (!camera || !planetMesh || !ringsData || !moonsData) return
+
   // Update camera
   camera.aspect = iw / ih
   camera.updateProjectionMatrix()
@@ -294,15 +323,49 @@ export function updateFirstScene(
     })
   })
 
+  /* // Update trail
+  if (firstSceneHandles.trailTick == null || firstSceneHandles.drawRange == null) {
+    firstSceneHandles.trailTick = -1
+    firstSceneHandles.drawRange = -1
+  }
+  firstSceneHandles.drawRange = Math.min(firstSceneHandles.drawRange + 1, numTrailPoints)
+  firstSceneHandles.trailTick = (firstSceneHandles.trailTick + 1) % numTrailPointsX3
+  const t = firstSceneHandles.trailTick */
+
   // Update moon
   moonsData.forEach((moonDatum) => {
     const ang = deltaTimeInSeconds * moonDatum.speed
+
+    /* if (firstSceneHandles.trailTick! % 3 === 0) {
+      moonDatum.trailPoints.geometry.attributes.position.array[t] = moonDatum.moonMesh.position.x
+      moonDatum.trailPoints.geometry.attributes.position.array[t + 1] = moonDatum.moonMesh.position.y
+      moonDatum.trailPoints.geometry.attributes.position.array[t + 2] = moonDatum.moonMesh.position.z
+    }
+    moonDatum.trailPoints.geometry.attributes.position.needsUpdate = true */
+
     moonDatum.moonMesh.position.applyAxisAngle(moonDatum.axis, ang) // Rotate the position
+
     moonDatum.moonMesh.rotateOnAxis(moonDatum.axis, ang) // Rotate the object
   })
 }
 
 // ======================================================================== Shaders
+
+/* const trailMaterial = new THREE.ShaderMaterial({
+  uniforms: { size: { value: 1 } },
+  vertexShader: `
+      uniform float size;
+      void main() {
+        gl_PointSize = size;
+        gl_Position = projectionMatrix * modelViewMatrix  * vec4(position, 1.0);
+      }
+    `,
+  fragmentShader: `
+      void main() {
+        gl_FragColor = vec4(0.5,0.5,0.5,0.5);
+      }
+    `,
+}) */
 
 /* function getStarShaderParameters(pixelSize: number): THREE.ShaderMaterialParameters {
   return {
