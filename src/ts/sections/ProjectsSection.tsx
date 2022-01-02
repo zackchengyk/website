@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { stringToId } from '../common'
 import '../../css/sections/ProjectsSection.scss'
 
+// ======================================================================== Component: ProjectsListItem
+
 type ProjectsListItemProps = {
   projectName: string
   extraClassName?: string
@@ -26,20 +28,24 @@ function ProjectsListItem({
 
   return (
     <li id={liId} className={'projects-li ' + extraClassName}>
-      <button
-        id={buttonId}
-        className="projects-li-button"
-        onClick={() => (isOpen ? setCurrentOpen('') : setCurrentOpen(id))}
-        aria-controls={divId}
-        aria-expanded={isOpen}>
-        <span>{projectName}</span>
-      </button>
+      <h3>
+        <button
+          id={buttonId}
+          className="projects-li-button"
+          onClick={() => (isOpen ? setCurrentOpen('') : setCurrentOpen(id))}
+          aria-controls={divId}
+          aria-expanded={isOpen}>
+          <span>{projectName}</span>
+        </button>
+      </h3>
       <div id={divId} aria-labelledby={buttonId} className={'projects-li-div ' + (isOpen ? '' : 'collapsed')}>
         <div>{children}</div>
       </div>
     </li>
   )
 }
+
+// ======================================================================== Component: ProjectsSection
 
 type ProjectsSectionProps = {
   extraClassName?: string
@@ -50,10 +56,10 @@ function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
   const common = { currentOpen, setCurrentOpen }
 
   return (
-    <section id="projects-section" className={extraClassName}>
-      <h3 id="projects-header" className="section-header subtitle-text">
+    <section id="projects" className={extraClassName}>
+      <h2 id="projects-header" className="section-header subtitle-text">
         <span>{'PROJECTS'}</span>
-      </h3>
+      </h2>
       <div id="projects-body" className="section-body">
         <ul id="projects-ul">
           <ProjectsListItem projectName={'This Website'} {...common}>

@@ -27,13 +27,13 @@ function Planetarium() {
     }
 
     // Create a function to set the mouse position on mouse move
-    let debouncing = false
-    const delay = 1000 / 60
+    const throttleDelay = 1000 / 60
+    let waiting = false
     function tempMouseMoveHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      // Debounce
-      if (debouncing) return
-      debouncing = true
-      setTimeout(() => (debouncing = false), delay)
+      // Throttle
+      if (waiting) return
+      waiting = true
+      setTimeout(() => (waiting = false), throttleDelay)
       // Get normalized mouse position
       const rect = fullWindowElement.current!.getBoundingClientRect()
       const minDim = Math.min(rect.width, rect.height)

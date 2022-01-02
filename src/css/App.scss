@@ -55,27 +55,28 @@ body {
 }
 
 #root,
-#App {
+#scroll-container {
   position: absolute;
   inset: 0;
 }
 
-#App {
+#scroll-container {
   overflow-y: scroll;
+  scroll-behavior: smooth;
   > div {
     display: grid;
     grid-template-columns: 1fr;
     place-items: start stretch;
     > #navbar,
-    #about-section {
+    #about {
       grid-row: 1;
       grid-column: 1;
     }
-    > #experience-section {
+    > #experience {
       grid-row: 2;
       grid-column: 1;
     }
-    > #projects-section {
+    > #projects {
       grid-row: 3;
       grid-column: 1;
     }

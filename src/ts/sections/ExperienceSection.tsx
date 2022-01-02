@@ -2,6 +2,8 @@ import { stringToId } from '../common'
 import { experienceText } from '../content/text'
 import '../../css/sections/ExperienceSection.scss'
 
+// ======================================================================== Component: ExperienceListItem
+
 export type ExperienceListItemProps = {
   experienceName: string
   extraClassName?: string
@@ -29,13 +31,15 @@ function ExperienceListItem({
     <li id={liId} className={'experience-li ' + extraClassName}>
       <img id={imgId} className={'experience-li-img'} src={imgSrc} />
       <div id={divId} className={'experience-li-div'}>
-        <h4 className={'title-text'}>{experienceTitle}</h4>
-        <h5 className={'subtitle-text'}>{experienceSubtitle}</h5>
+        <h3 className={'title-text'}>{experienceTitle}</h3>
+        <h4 className={'subtitle-text'}>{experienceSubtitle}</h4>
         <div className={'body-text'}>{experienceBody}</div>
       </div>
     </li>
   )
 }
+
+// ======================================================================== Component: ExperienceSection
 
 type ExperienceSectionProps = {
   extraClassName?: string
@@ -43,10 +47,10 @@ type ExperienceSectionProps = {
 
 function ExperienceSection({ extraClassName }: ExperienceSectionProps) {
   return (
-    <section id="experience-section" className={extraClassName}>
-      <h3 id="experience-header" className="section-header subtitle-text">
+    <section id="experience" className={extraClassName}>
+      <h2 id="experience-header" className="section-header subtitle-text">
         <span>{'EXPERIENCE'}</span>
-      </h3>
+      </h2>
       <div id="experience-body" className="section-body">
         <div id="experience-body-grid">
           <ul id="experience-ul">

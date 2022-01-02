@@ -8,7 +8,7 @@ type BannerHeaderProps = {
 
 function BannerHeader({ extraClassName }: BannerHeaderProps) {
   return (
-    <header id="banner-header" className={extraClassName}>
+    <header id="home" className={extraClassName}>
       <div id="banner-left">
         <h2>{'Hello, World!'}</h2>
       </div>

@@ -2,12 +2,6 @@
 @use 'sass:math';
 @import '../common.scss';
 
-// $section-header-scroll-margin-top: 2 * ($navbar-vert-space + $navbar-item-vert-padding) +
-//   $navbar-item-line-height + $central-axis-vert-space;
-// $section-content-scroll-margin-top: calc(
-//   $section-vert-space + 2 * ($navbar-vert-space + $navbar-item-vert-padding) + $navbar-item-line-height
-// );
-
 #navbar {
   position: sticky;
   z-index: 100000;
