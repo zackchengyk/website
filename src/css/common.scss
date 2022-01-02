@@ -113,10 +113,18 @@ section:last-of-type > .section-body {
   padding-bottom: $section-vert-space-first-last;
 }
 
+$inner-section-grid-gap: 15px;
+
 $line: 1px solid $mid-tone;
 $delay: 0.3s;
 
-$inner-section-grid-gap: 15px;
+$slide-up-transition: transform 0.6s ease var(--slide-up-delay);
+@mixin slide-up {
+  transform: translateY(0);
+  &.sleeved {
+    transform: translateY(200%);
+  }
+}
 
 // ======================================================================== CONTENT TEXT
 

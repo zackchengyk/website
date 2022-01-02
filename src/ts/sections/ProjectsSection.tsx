@@ -1,62 +1,34 @@
-import { useEffect, useState } from 'react'
-import { stringToId } from '../common'
+import { useEffect, useRef, useState } from 'react'
+import { XY } from '../common'
 import '../../css/sections/ProjectsSection.scss'
 import { projectsText } from '../content/text'
-
-// ======================================================================== Component: ProjectsListItem
-
-export type ProjectsListItemContentProps = {
-  projectName: string
-  extraClassName?: string
-  children?: React.ReactNode
-}
-type ProjectsListItemProps = {
-  isOpen: boolean
-  toggleIsOpen: () => void
-} & ProjectsListItemContentProps
-
-function ProjectsListItem({
-  projectName,
-  extraClassName,
-  children,
-  isOpen,
-  toggleIsOpen,
-}: ProjectsListItemProps) {
-  const id = 'projects-' + stringToId(projectName)
-
-  const liId = id
-  const buttonId = id + '-button'
-  const divId = id + '-content'
-
-  return (
-    <li id={liId} className={'projects-li ' + extraClassName}>
-      <h3>
-        <button
-          id={buttonId}
-          className="projects-li-button"
-          onClick={toggleIsOpen}
-          aria-controls={divId}
-          aria-expanded={isOpen}>
-          <span>{projectName}</span>
-        </button>
-      </h3>
-      <div id={divId} aria-labelledby={buttonId} className={'projects-li-div ' + (isOpen ? '' : 'collapsed')}>
-        <div>{children}</div>
-      </div>
-    </li>
-  )
-}
-
-// ======================================================================== Component: ProjectsSection
+import ProjectsListItem from './ProjectsListItem'
 
 const projectNames = ['website', 'cityscape', 'maps', 'voxels', 'override', 'spacewar'] as const
 export type ProjectName = typeof projectNames[number]
 
+// ======================================================================== Component: ProjectsSection
+
 type ProjectsSectionProps = {
+  windowDimensions: XY
+  scrollTop: number
   extraClassName?: string
 }
 
-function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
+function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: ProjectsSectionProps) {
+  // Animate
+
+  const self = useRef<any>()
+  const [sleeved, setSleeved] = useState<string>('sleeved')
+
+  useEffect(() => {
+    if (scrollTop + 0.8 * windowDimensions.y > self.current!.offsetTop) {
+      setSleeved('')
+    }
+  }, [scrollTop])
+
+  // Accordion
+
   const [currentOpen, setCurrentOpen] = useState<Record<ProjectName, boolean>>(
     projectNames.reduce((acc, ele) => ((acc[ele] = false), acc), {} as Record<ProjectName, boolean>)
   )
@@ -66,14 +38,16 @@ function ProjectsSection({ extraClassName }: ProjectsSectionProps) {
   }
 
   return (
-    <section id="projects" className={extraClassName}>
+    <section id="projects" className={extraClassName} ref={self}>
       <h2 id="projects-header" className="section-header subtitle-text">
         <span>{'PROJECTS'}</span>
       </h2>
       <div id="projects-body" className="section-body">
         <ul id="projects-ul">
-          {projectNames.map((projectName) => (
+          {projectNames.map((projectName, i) => (
             <ProjectsListItem
+              sleeved={sleeved}
+              sleevedStyle={{ '--slide-up-delay': i / 10 + 's' }}
               isOpen={currentOpen[projectName]}
               toggleIsOpen={getToggleIsOpenFunction(projectName)}
               {...projectsText[projectName]}

@@ -16,7 +16,10 @@ function App() {
 
   // Attach passive scroll listener to self
   useEffect(() => {
-    const throttleDelay = 100
+    // Set first value
+    setScrollTop(scrollContainer.current.scrollTop)
+    // Create listener handler
+    const throttleDelay = 50
     let waiting = false
     function scrollHandler() {
       // Throttle
@@ -42,7 +45,7 @@ function App() {
         <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
         <AboutSection />
         <ExperienceSection />
-        <ProjectsSection />
+        <ProjectsSection windowDimensions={windowDimensions} scrollTop={scrollTop} />
       </div>
     </div>
   )

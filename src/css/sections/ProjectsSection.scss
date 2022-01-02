@@ -24,6 +24,7 @@ $projects-button-highlight-delay: $delay;
 .projects-li-button {
   width: 100%;
   padding: $projects-li-vert-space $section-li-horz-space;
+  overflow: hidden;
 
   > span {
     display: inline-block;
@@ -43,7 +44,10 @@ $projects-button-highlight-delay: $delay;
     );
     background-size: 200%;
     background-position: 0 0;
-    transition: background-position $projects-button-highlight-delay ease;
+
+    // Slide up
+    @include slide-up();
+    transition: $slide-up-transition, background-position $projects-button-highlight-delay ease;
   }
 
   &:hover > span,
