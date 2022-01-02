@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { XY } from './common'
 
-const throttleDelay = 100
+const debounceDelay = 50
 
 function getWindowDimensions(): XY {
   const hw = { x: document.documentElement.clientWidth, y: document.documentElement.clientHeight }
@@ -13,18 +13,18 @@ export function useWindowDimensions(): XY {
 
   useEffect(() => {
     // Attach *passive* scroll listener to self
-    let waiting = false
+    let handle = 0
     function resizeHandler() {
-      // Throttle
-      if (waiting) return
-      waiting = true
-      setTimeout(() => (waiting = false), throttleDelay)
-      // Set window dimensions
-      const hw = getWindowDimensions()
-      if (hw.x === windowDimensions.x && hw.y === windowDimensions.y) {
-        return
-      }
-      setWindowDimensions(hw)
+      // Debounce
+      clearTimeout(handle)
+      handle = setTimeout(() => {
+        // Set window dimensions
+        const hw = getWindowDimensions()
+        if (hw.x === windowDimensions.x && hw.y === windowDimensions.y) {
+          return
+        }
+        setWindowDimensions(hw)
+      }, debounceDelay)
     }
 
     window.addEventListener('resize', resizeHandler)
