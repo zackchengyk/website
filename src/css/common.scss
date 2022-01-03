@@ -34,19 +34,19 @@ $larger-breakpoint: $larger-b * 1px;
 // ======================================================================== PRIMARY PALETTE
 
 $white: #ffffff;
-$light-light: hsl(24, 100%, 96%);
-$light: hsl(29, 100%, 92%);
-$light-dark: hsl(29, 100%, 91%);
-$light-dark-dark: hsl(26, 69%, 86%);
+$light-light: #fff2eb;
+$light: #feeadb;
+$light-dark: #fbe4cd;
+$light-dark-dark: #f4dbc4;
 
-$mid-tone-light: #cab2a2;
-$mid-tone: #958278;
-$mid-tone-dark: #60544f;
+$mid-tone-light: #b5a291;
+$mid-tone: #84756c;
+$mid-tone-dark: #534b47;
 
-$dark-light: #352f2d;
-$dark: #191817;
-$dark-mid: #131212;
-$dark-dark: #0d0d0c;
+$dark-light-light: #231f1f;
+$dark-light: #1d1a1a;
+$dark: #1a1717;
+$dark-dark: #141212;
 $black: #000000;
 
 $blue-white: #93dbff;
@@ -68,9 +68,9 @@ $green-black: #00311b;
 // Light mode
 :root {
   --background-color: #{$light};
-  --text-color: #{$dark};
+  --text-color: #{$dark-light-light};
   --text-weight: 400;
-  --strong-text-color: #{$dark-dark};
+  --strong-text-color: #{$dark-light};
   --strong-text-weight: 675;
   --link-text-weight-bonus: 100;
 
@@ -78,13 +78,13 @@ $green-black: #00311b;
   --link-highlight-text-color: #{$green-dark-dark};
   --link-highlight-color: #{$green-white};
 
-  --project-button-text-color: #{$dark};
-  --project-highlight-text-color: #{$black};
+  --project-button-text-color: #{$dark-light-light};
+  --project-highlight-text-color: #{$dark};
   --project-highlight-color: #{$blue-white};
   --projects-div-background-color: #{$light-light};
 
-  --navbar-active-text-color: #{$dark-dark};
-  --navbar-inactive-text-color: #{dark};
+  --navbar-active-text-color: #{$dark-light};
+  --navbar-inactive-text-color: #{dark-light-light};
 }
 
 // Dark mode
@@ -112,7 +112,7 @@ $green-black: #00311b;
 // ======================================================================== COLORS
 
 $background-color: var(--background-color);
-$banner-background-color: $dark-mid;
+$banner-background-color: $dark-dark;
 $projects-div-background-color: var(--projects-div-background-color);
 
 $temporary: color.change($brown, $alpha: 0.2);
@@ -143,8 +143,8 @@ $navbar-inner-horz-space: 0.375rem;
 $navbar-item-font-family: $inconsolata;
 $navbar-item-font-size: 1rem;
 $navbar-item-line-height: 1;
-$navbar-item-active-font-weight: var(--strong-text-weight);
-$navbar-item-inactive-font-weight: var(--text-weight);
+$navbar-item-active-font-weight: calc(var(--strong-text-weight) + var(--link-text-weight-bonus));
+$navbar-item-inactive-font-weight: calc(var(--text-weight) + var(--link-text-weight-bonus));
 $navbar-item-active-color: var(--navbar-active-text-color);
 $navbar-item-inactive-color: var(--navbar-inactive-text-color);
 
