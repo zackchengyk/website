@@ -40,14 +40,16 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 2,
     radiusRange: [9.5, 11],
     possibleRingCounts: makePopulation([
-      [0, 2],
+      [0, 1],
       [1, 2],
       [2, 1],
+      [3, 1],
+      [4, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 1],
-      ['metallic', 3],
-      ['dusty', 3],
+      ['metallic', 1],
+      ['dusty', 1],
     ]),
     possibleMoonCounts: makePopulation([
       [0, 2],
@@ -70,7 +72,8 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
       [2, 3],
       [3, 2],
       [4, 1],
-      [5, 1],
+      [5, 3],
+      [6, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 3],
@@ -100,7 +103,8 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
       [2, 3],
       [3, 2],
       [4, 1],
-      [5, 1],
+      [5, 3],
+      [6, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 3],
@@ -125,10 +129,11 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 1,
     radiusRange: [8, 9.5],
     possibleRingCounts: makePopulation([
-      [0, 3],
+      [0, 2],
       [1, 3],
       [2, 1],
       [3, 1],
+      [4, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 1],
@@ -150,10 +155,11 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 1,
     radiusRange: [8, 9.5],
     possibleRingCounts: makePopulation([
-      [0, 3],
+      [0, 2],
       [1, 3],
       [2, 1],
       [3, 1],
+      [4, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 1],
@@ -179,8 +185,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
       [1, 1],
       [2, 1],
       [3, 1],
+      [4, 1],
     ]),
     possibleRingTypes: makePopulation([
+      ['icy', 1],
       ['metallic', 2],
       ['dusty', 3],
     ]),
