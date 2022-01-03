@@ -67,6 +67,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     place-items: start stretch;
+
     > #navbar,
     #about {
       grid-row: 1;

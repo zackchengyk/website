@@ -1,8 +1,6 @@
 @use 'sass:color';
 @import '../common.scss';
 
-$link-highlight-delay: $delay;
-
 @mixin animated-anchor($delay) {
   display: inline;
 
@@ -20,14 +18,8 @@ $link-highlight-delay: $delay;
   }
 
   // Highlight
-  background: linear-gradient(
-    to right,
-    color.change($link-highlight-color, $alpha: 0) 50%,
-    $link-highlight-color 50%
-  );
-  background-size: 200%;
-  background-position: 0 0;
-  transition: background-position $link-highlight-delay ease;
+  @include highlight-base($link-highlight-color);
+  transition: $highlight-base-transition;
 
   &:hover,
   &:focus {
@@ -36,7 +28,7 @@ $link-highlight-delay: $delay;
     color: $link-highlight-font-color;
 
     // Highlight
-    background-position: -100% 0;
+    @include highlight-hover();
   }
 }
 

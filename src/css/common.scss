@@ -34,9 +34,10 @@ $larger-breakpoint: $larger-b * 1px;
 // ======================================================================== PRIMARY PALETTE
 
 $white: #ffffff;
-$light-light: #fff3eb;
-$light: #ffebda;
-$light-dark: #ffe7d0;
+$light-light: hsl(24, 100%, 96%);
+$light: hsl(29, 100%, 92%);
+$light-dark: hsl(29, 100%, 91%);
+$light-dark-dark: hsl(26, 69%, 86%);
 
 $mid-tone-light: #cab2a2;
 $mid-tone: #958278;
@@ -44,21 +45,75 @@ $mid-tone-dark: #60544f;
 
 $dark-light: #352f2d;
 $dark: #191817;
+$dark-mid: #131212;
 $dark-dark: #0d0d0c;
 $black: #000000;
 
-$blue-highlight: #93dbff;
-$blue: #81a4cd;
+$blue-white: #93dbff;
+$blue-light-light: #0090eb;
+$blue-light: #0072cc;
+$blue-dark: #003c75;
+$blue-dark-dark: #002a5b;
+$blue-black: #001738;
 
 $brown: #9e643c;
 
-$green-highlight: #87ffb9;
-$green: #005c2d;
-$green-dark: #00502e;
+$green-white: #87ffb9;
+$green-light-light: #00ca59;
+$green-light: #00a34d;
+$green-dark: #005c2e;
+$green-dark-dark: #00502b;
+$green-black: #00311b;
+
+// Light mode
+:root {
+  --background-color: #{$light};
+  --text-color: #{$dark};
+  --text-weight: 400;
+  --strong-text-color: #{$dark-dark};
+  --strong-text-weight: 675;
+  --link-text-weight-bonus: 100;
+
+  --link-text-color: #{$green-dark};
+  --link-highlight-text-color: #{$green-dark-dark};
+  --link-highlight-color: #{$green-white};
+
+  --project-button-text-color: #{$dark};
+  --project-highlight-text-color: #{$black};
+  --project-highlight-color: #{$blue-white};
+  --projects-div-background-color: #{$light-light};
+
+  --navbar-active-text-color: #{$dark-dark};
+  --navbar-inactive-text-color: #{dark};
+}
+
+// Dark mode
+:root {
+  --background-color: #{$dark};
+  --text-color: #{$light-dark-dark};
+  --text-weight: 300;
+  --strong-text-color: #{$light-dark};
+  --strong-text-weight: 625;
+  --link-text-weight-bonus: 50;
+
+  --link-text-color: #{$green-light};
+  --link-highlight-text-color: #{$green-light-light};
+  --link-highlight-color: #{$green-black};
+
+  --project-button-text-color: #{$light-dark-dark};
+  --project-highlight-text-color: #{$light};
+  --project-highlight-color: #{$blue-black};
+  --projects-div-background-color: #{$dark-dark};
+
+  --navbar-active-text-color: #{$light-dark};
+  --navbar-inactive-text-color: #{$light-dark-dark};
+}
 
 // ======================================================================== COLORS
 
-$background-color: $light;
+$background-color: var(--background-color);
+$banner-background-color: $dark-mid;
+$projects-div-background-color: var(--projects-div-background-color);
 
 $temporary: color.change($brown, $alpha: 0.2);
 
@@ -88,10 +143,11 @@ $navbar-inner-horz-space: 0.375rem;
 $navbar-item-font-family: $inconsolata;
 $navbar-item-font-size: 1rem;
 $navbar-item-line-height: 1;
-$navbar-item-active-font-weight: 675;
-$navbar-item-inactive-font-weight: 325;
-$navbar-item-active-color: $dark-dark;
-$navbar-item-inactive-color: $dark;
+$navbar-item-active-font-weight: var(--strong-text-weight);
+$navbar-item-inactive-font-weight: var(--text-weight);
+$navbar-item-active-color: var(--navbar-active-text-color);
+$navbar-item-inactive-color: var(--navbar-inactive-text-color);
+
 $navbar-item-vert-padding: 0.5rem;
 $navbar-item-horz-padding: 0.5rem;
 $navbar-item-padding: $navbar-item-vert-padding $navbar-item-horz-padding;
@@ -159,34 +215,56 @@ $title-subtitle-vert-space: 0.2rem;
 
 $title-font-family: $inconsolata;
 $title-font-size: 1.25rem;
-$title-font-weight: 650;
-$title-font-color: $dark-dark;
+$title-font-weight: var(--strong-text-weight);
+$title-font-color: var(--strong-text-color);
 $title-line-height: 1.1;
 
 $subtitle-font-family: $inconsolata;
 $subtitle-font-size: 1rem;
-$subtitle-font-weight: 400;
-$subtitle-font-color: $dark-dark;
+$subtitle-font-weight: var(--text-weight);
+$subtitle-font-color: var(--strong-text-color);
 $subtitle-line-height: 1.4;
 
 $body-font-family: $inconsolata;
 $body-font-size: 1rem;
-$body-font-weight: 400;
-$body-font-color: $dark;
-$body-bold-font-weight: 675;
-$body-bold-font-color: $dark-dark;
+$body-font-weight: var(--text-weight);
+$body-font-color: var(--text-color);
+$body-bold-font-weight: var(--strong-text-weight);
+$body-bold-font-color: var(--strong-text-color);
 $body-line-height: 1.4;
 
-$link-font-weight: $body-font-weight + 100;
-$link-bold-font-weight: $body-bold-font-weight + 100;
-$link-font-color: $green;
-$link-visited-font-color: $green;
-$link-highlight-font-color: $green-dark;
-$link-highlight-color: $green-highlight;
+$link-font-weight: calc($body-font-weight + var(--link-text-weight-bonus));
+$link-bold-font-weight: calc($body-bold-font-weight + var(--link-text-weight-bonus));
+$link-font-color: var(--link-text-color);
+$link-visited-font-color: var(--link-text-color);
+
+$link-highlight-font-color: var(--link-highlight-text-color);
+$link-highlight-color: var(--link-highlight-color);
 
 $text-vert-spacing: $body-font-size * $body-line-height * 0.65;
 
+$projects-button-font-family: $outfit;
+$projects-button-font-size: linear(32, 48);
+$projects-button-font-weight: 400;
+$projects-button-font-color: var(--project-button-text-color);
+$projects-button-line-height: 1;
+
+$projects-button-highlight-font-color: var(--project-highlight-text-color);
+$projects-button-highlight-color: var(--project-highlight-color);
+
 // ======================================================================== TEXT MIXINS
+
+@mixin highlight-base($color) {
+  background: linear-gradient(to left, transparent 50%, $color 50%);
+  background-size: 200%;
+  background-position: 101% 0;
+  background-repeat: no-repeat;
+}
+$highlight-base-transition: background-position $delay ease;
+
+@mixin highlight-hover {
+  background-position: 0 0;
+}
 
 @mixin user-select($value) {
   -webkit-touch-callout: $value; // iOS Safari
