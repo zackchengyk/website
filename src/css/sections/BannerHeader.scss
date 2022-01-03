@@ -23,6 +23,8 @@ $banner-content-shadow: 0 10px 15px $black;
 }
 
 #banner-left {
+  @include fade-in(2);
+
   place-self: end start;
   padding: $banner-vert-space 0 $banner-vert-space $banner-horz-space;
   grid-row: 1;

@@ -8,13 +8,26 @@ import '../css/App.scss'
 import '../css/font.css'
 import { useEffect, useRef, useState } from 'react'
 
+export const sectionNames = ['home', 'about', 'experience', 'projects']
+
+function fragmentIsSubsection(): boolean {
+  console.log(window.location.hash)
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1)
+    if (id !== 'home' && sectionNames.includes(id)) {
+      return false
+    }
+  }
+  return true
+}
+
 function App() {
   const windowDimensions = useWindowDimensions()
 
+  // Attach passive scroll listener to self
+
   const scrollContainer = useRef<any>()
   const [scrollTop, setScrollTop] = useState<number>(0)
-
-  // Attach passive scroll listener to self
   useEffect(() => {
     // Set first value
     setScrollTop(scrollContainer.current.scrollTop)
@@ -33,6 +46,10 @@ function App() {
     return () => scrollContainer.current.removeEventListener('scroll', scrollHandler)
   }, [])
 
+  // Prevent loading animation when reloading to specific area
+
+  const [allowAnimation, _] = useState<boolean>(fragmentIsSubsection())
+
   const style = {
     '--viewport-height': windowDimensions.y + 'px',
     '--viewport-width': windowDimensions.x + 'px',
@@ -41,7 +58,7 @@ function App() {
   return (
     <div id="scroll-container" ref={scrollContainer} style={style}>
       <BannerHeader />
-      <div>
+      <div className={allowAnimation ? 'allow-animation' : ''}>
         <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
         <AboutSection />
         <ExperienceSection windowDimensions={windowDimensions} scrollTop={scrollTop} />

@@ -64,6 +64,9 @@ body {
   overflow-y: scroll;
   scroll-behavior: smooth;
   > div {
+    &.allow-animation {
+      @include fade-in(4);
+    }
     display: grid;
     grid-template-columns: 1fr;
     place-items: start stretch;

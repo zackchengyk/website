@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import '../../css/sections/Navbar.scss'
+import { sectionNames } from '../App'
 import { XY } from '../common'
 
 // ======================================================================== Helpers
 
-const sectionNames = ['home', 'about', 'experience', 'projects']
-function helper() {
+function getActiveSection() {
   if (window.location.hash) {
     const id = window.location.hash.slice(1)
     if (sectionNames.includes(id)) {
@@ -24,7 +24,7 @@ type NavbarProps = {
 }
 
 function Navbar({ windowDimensions, scrollTop, extraClassName }: NavbarProps) {
-  const [active, setActive] = useState<string>(helper())
+  const [active, setActive] = useState<string>(getActiveSection())
   const [sortedNamesAndTops, setSortedNamesAndTops] = useState<{ name: string; offsetTop: number }[]>([])
 
   // Get list of section names and offsetTops when window dimensions change

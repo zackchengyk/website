@@ -198,7 +198,23 @@ section:last-of-type > .section-body {
 $inner-section-grid-gap: 15px;
 
 $line: 1px solid $mid-tone;
+
+// ======================================================================== INTERACTION
+
 $delay: 0.3s;
+
+@mixin fade-in($delay-multiplier) {
+  animation: fadeIn 0.8s ease forwards ($delay-multiplier * 0.4s);
+  opacity: 0;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 $slide-up-transition: transform 0.8s ease var(--slide-up-delay);
 @mixin slide-up {
