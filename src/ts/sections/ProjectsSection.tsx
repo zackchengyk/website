@@ -39,7 +39,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
 
   return (
     <section id="projects" className={extraClassName} ref={self}>
-      <h2 id="projects-header" className="section-header subtitle-text">
+      <h2 id="projects-header" className="section-header">
         <span>{'PROJECTS'}</span>
       </h2>
       <div id="projects-body" className="section-body">

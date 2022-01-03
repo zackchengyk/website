@@ -27,7 +27,7 @@ function ExperienceSection({ windowDimensions, scrollTop, extraClassName }: Expe
 
   return (
     <section id="experience" className={extraClassName} ref={self}>
-      <h2 id="experience-header" className="section-header subtitle-text">
+      <h2 id="experience-header" className="section-header">
         <span>{'EXPERIENCE'}</span>
       </h2>
       <div id="experience-body" className="section-body">

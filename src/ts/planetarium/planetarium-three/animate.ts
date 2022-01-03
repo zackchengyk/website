@@ -8,7 +8,7 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 // @ts-ignore
 const stats = new Stats()
 stats.showPanel(1) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom)
+// document.body.appendChild(stats.dom)
 stats.dom.style.zIndex = '100000000000000'
 
 // Called once per animation frame

@@ -3,7 +3,12 @@
 @import '../common.scss';
 
 #about-body {
-  @include section-two-grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $about-vert-gap $about-horz-gap;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 
 #about-left {
@@ -13,5 +18,5 @@
 #about-right {
   position: relative;
   min-width: 0;
-  max-width: min(300px, 50vw);
+  max-width: min(250px, 50vw);
 }

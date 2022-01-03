@@ -23,7 +23,7 @@ $projects-button-highlight-delay: $delay;
 
 .projects-li-button {
   width: 100%;
-  padding: $projects-li-vert-space $section-li-horz-space;
+  padding: $projects-li-vert-space $projects-li-horz-space;
   overflow: hidden;
 
   > span {
