@@ -54,16 +54,16 @@ $blue-light-light: #0090eb;
 $blue-light: #0072cc;
 $blue-dark: #003c75;
 $blue-dark-dark: #002a5b;
-$blue-black: #001738;
+$blue-black: #002557;
 
 $brown: #9e643c;
 
-$green-white: #87ffb9;
-$green-light-light: #00ca59;
-$green-light: #00a34d;
+$green-white: #81ffb4;
+$green-light-light: #67cd94;
+$green-light: #5bb585;
 $green-dark: #005c2e;
-$green-dark-dark: #00502b;
-$green-black: #00311b;
+$green-dark-dark: #004826;
+$green-black: #002e19;
 
 // Light mode
 :root {
@@ -78,7 +78,9 @@ $green-black: #00311b;
   --link-highlight-text-color: #{$green-dark-dark};
   --link-highlight-color: #{$green-white};
 
-  --project-button-text-color: #{$dark-light-light};
+  --experience-li-img-background-color: transparent;
+
+  --project-button-text-color: #{$dark-light};
   --project-highlight-text-color: #{$dark};
   --project-highlight-color: #{$blue-white};
   --projects-div-background-color: #{$light-light};
@@ -93,14 +95,16 @@ $green-black: #00311b;
   --text-color: #{$light-dark-dark};
   --text-weight: 300;
   --strong-text-color: #{$light-dark};
-  --strong-text-weight: 625;
-  --link-text-weight-bonus: 50;
+  --strong-text-weight: 600;
+  --link-text-weight-bonus: 25;
 
   --link-text-color: #{$green-light};
   --link-highlight-text-color: #{$green-light-light};
   --link-highlight-color: #{$green-black};
 
-  --project-button-text-color: #{$light-dark-dark};
+  --experience-li-img-background-color: #{$light-dark-dark};
+
+  --project-button-text-color: #{$light-dark};
   --project-highlight-text-color: #{$light};
   --project-highlight-color: #{$blue-black};
   --projects-div-background-color: #{$dark-dark};
@@ -118,6 +122,8 @@ $projects-div-background-color: var(--projects-div-background-color);
 $temporary: color.change($brown, $alpha: 0.2);
 
 // ======================================================================== SPACING
+
+$border-radius: 2px;
 
 $side-padding: 20px;
 $banner-horz-space: 20px;
@@ -143,8 +149,8 @@ $navbar-inner-horz-space: 0.375rem;
 $navbar-item-font-family: $inconsolata;
 $navbar-item-font-size: 1rem;
 $navbar-item-line-height: 1;
-$navbar-item-active-font-weight: calc(var(--strong-text-weight) + var(--link-text-weight-bonus));
-$navbar-item-inactive-font-weight: calc(var(--text-weight) + var(--link-text-weight-bonus));
+$navbar-item-active-font-weight: var(--strong-text-weight);
+$navbar-item-inactive-font-weight: var(--text-weight);
 $navbar-item-active-color: var(--navbar-active-text-color);
 $navbar-item-inactive-color: var(--navbar-inactive-text-color);
 

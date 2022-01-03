@@ -33,6 +33,8 @@
   place-self: stretch;
   grid-column: 1;
   object-fit: contain;
+  background-color: var(--experience-li-img-background-color);
+  border-radius: $border-radius;
 }
 
 .experience-li-inner-div {

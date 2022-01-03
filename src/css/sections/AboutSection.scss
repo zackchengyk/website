@@ -19,4 +19,7 @@
   position: relative;
   min-width: 0;
   max-width: min(250px, 50vw);
+  > img {
+    border-radius: $border-radius;
+  }
 }
