@@ -44,7 +44,7 @@ function App() {
       <div>
         <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
         <AboutSection />
-        <ExperienceSection />
+        <ExperienceSection windowDimensions={windowDimensions} scrollTop={scrollTop} />
         <ProjectsSection windowDimensions={windowDimensions} scrollTop={scrollTop} />
       </div>
     </div>

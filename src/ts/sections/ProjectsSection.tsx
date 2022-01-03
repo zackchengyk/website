@@ -22,7 +22,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
   const [sleeved, setSleeved] = useState<string>('sleeved')
 
   useEffect(() => {
-    if (scrollTop + 0.8 * windowDimensions.y > self.current!.offsetTop) {
+    if (sleeved && scrollTop + 0.75 * windowDimensions.y > self.current!.offsetTop) {
       setSleeved('')
     }
   }, [scrollTop])
@@ -47,7 +47,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
           {projectNames.map((projectName, i) => (
             <ProjectsListItem
               sleeved={sleeved}
-              sleevedStyle={{ '--slide-up-delay': i / 10 + 's' }}
+              sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
               isOpen={currentOpen[projectName]}
               toggleIsOpen={getToggleIsOpenFunction(projectName)}
               {...projectsText[projectName]}

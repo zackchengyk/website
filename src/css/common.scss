@@ -118,7 +118,7 @@ $inner-section-grid-gap: 15px;
 $line: 1px solid $mid-tone;
 $delay: 0.3s;
 
-$slide-up-transition: transform 0.6s ease var(--slide-up-delay);
+$slide-up-transition: transform 0.8s ease var(--slide-up-delay);
 @mixin slide-up {
   transform: translateY(0);
   &.sleeved {

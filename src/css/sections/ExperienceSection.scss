@@ -16,24 +16,26 @@
 .experience-li {
   padding: $experience-li-vert-space $section-li-horz-space;
   border-bottom: $line;
+  overflow: hidden;
+}
 
+.experience-li-div {
   display: grid;
   grid-template: 1fr / minmax(min(15%, 80px), 3fr) minmax(min(85%, 200px), 17fr);
   gap: 15px; //todo
 
-  > *,
-  img {
-    display: block;
-    width: 100%;
-  }
+  @include slide-up;
+  transition: $slide-up-transition;
 }
 
 .experience-li-img {
+  display: block;
   place-self: stretch;
   grid-column: 1;
   object-fit: contain;
 }
-.experience-li-div {
+
+.experience-li-inner-div {
   place-self: center start;
   grid-column: 2;
 }
