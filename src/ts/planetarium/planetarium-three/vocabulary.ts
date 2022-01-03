@@ -40,7 +40,7 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 2,
     radiusRange: [9.5, 11],
     possibleRingCounts: makePopulation([
-      [0, 3],
+      [0, 2],
       [1, 2],
       [2, 1],
     ]),
@@ -67,8 +67,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     possibleRingCounts: makePopulation([
       [0, 1],
       [1, 2],
-      [2, 2],
-      [3, 1],
+      [2, 3],
+      [3, 2],
+      [4, 1],
+      [5, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 3],
@@ -95,8 +97,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     possibleRingCounts: makePopulation([
       [0, 1],
       [1, 2],
-      [2, 2],
-      [3, 1],
+      [2, 3],
+      [3, 2],
+      [4, 1],
+      [5, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 3],
@@ -121,9 +125,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 1,
     radiusRange: [8, 9.5],
     possibleRingCounts: makePopulation([
-      [0, 5],
+      [0, 3],
       [1, 3],
       [2, 1],
+      [3, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 1],
@@ -145,9 +150,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 1,
     radiusRange: [8, 9.5],
     possibleRingCounts: makePopulation([
-      [0, 5],
+      [0, 3],
       [1, 3],
       [2, 1],
+      [3, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['icy', 1],
@@ -169,9 +175,10 @@ export const planetsRecord: Record<PlanetType, PlanetDataType> = {
     probabilityWeight: 1,
     radiusRange: [6.5, 8],
     possibleRingCounts: makePopulation([
-      [0, 2],
+      [0, 1],
       [1, 1],
       [2, 1],
+      [3, 1],
     ]),
     possibleRingTypes: makePopulation([
       ['metallic', 2],
@@ -198,17 +205,17 @@ export const planetsPopulation: Population<PlanetType> = makePopulation(
 export const ringTypes = ['icy', 'metallic', 'dusty'] as const
 export type RingType = typeof ringTypes[number]
 type RingDataType = {
-  materialsPopulation: Population<THREE.Material>
+  colorsPopulation: Population<THREE.Color>
 }
 export const ringsRecord: Record<RingType, RingDataType> = {
   icy: {
-    materialsPopulation: [materialFromColor(0xbee8ed), materialFromColor(0x62b9d9)],
+    colorsPopulation: [new THREE.Color(0xbee8ed), new THREE.Color(0x62b9d9)],
   },
   metallic: {
-    materialsPopulation: [materialFromColor(0x8c7a65), materialFromColor(0x7a4751)],
+    colorsPopulation: [new THREE.Color(0x8c7a65), new THREE.Color(0x7a4751)],
   },
   dusty: {
-    materialsPopulation: [materialFromColor(0xe8963f), materialFromColor(0xa14f1d)],
+    colorsPopulation: [new THREE.Color(0xe8963f), new THREE.Color(0xa14f1d)],
   },
 }
 

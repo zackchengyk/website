@@ -7,7 +7,6 @@ import {
   planetsPopulation,
   planetsRecord,
   PlanetType,
-  planetTypes,
   Population,
   ringsRecord,
   RingType,
@@ -33,10 +32,8 @@ export type InstanceParametersType = {
   }
   rings: {
     type: RingType
-    materialSet: Population<THREE.Material>
+    colorSet: Population<THREE.Color>
     bitCount: number
-    minBitSize: number
-    maxBitSize: number
     innerRad: number
     outerRad: number
   }[]
@@ -75,15 +72,13 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
     .fill(0)
     .map((_, i) => {
       const ringType = randFromArray(planetsRecord[planetType].possibleRingTypes)
-      const ringMaterialsPopulation = ringsRecord[ringType].materialsPopulation
+      const ringColorsPopulation = ringsRecord[ringType].colorsPopulation
       const ringInnerRad = radiusHelper(i) + ringRadOffset + i
       const ringOuterRad = radiusHelper(i + 1) + ringRadOffset + i
       return {
         type: ringType,
-        materialSet: ringMaterialsPopulation,
-        bitCount: Math.floor((ringOuterRad * ringOuterRad - ringInnerRad * ringInnerRad) / 2),
-        minBitSize: 0.35,
-        maxBitSize: 1,
+        colorSet: ringColorsPopulation,
+        bitCount: Math.max(1, Math.floor((ringOuterRad * ringOuterRad - ringInnerRad * ringInnerRad) / 2)),
         innerRad: ringInnerRad,
         outerRad: ringOuterRad,
       }

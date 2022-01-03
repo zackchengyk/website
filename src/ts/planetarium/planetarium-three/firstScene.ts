@@ -1,12 +1,13 @@
 import * as THREE from 'three'
 import { InstanceParametersType } from './instanceParameters'
 import { randFloatTriangular, randFromArray } from './common'
+import crossTextureSrc from '../../../img/crossTexture.png'
 
-type RingBitType = {
-  speed: number
-  ringBitMesh: THREE.Mesh
-}
-type RingsDatumType = RingBitType[]
+const crossTexture = new THREE.TextureLoader().load(crossTextureSrc)
+crossTexture.minFilter = THREE.NearestFilter
+crossTexture.magFilter = THREE.NearestFilter
+
+type RingsDatumType = THREE.Points
 type RingsDataType = RingsDatumType[]
 
 type MoonsDatumType = {
@@ -117,33 +118,21 @@ function spawnRings(
   planetParameters: InstanceParametersType['planet'],
   ringsParameters: InstanceParametersType['rings']
 ): RingsDataType {
-  return ringsParameters.map((x) => spawnRingBits(scene, planetParameters, x))
+  return ringsParameters.map((x) => spawnRing(scene, planetParameters, x))
 }
-function spawnRingBits(
+function spawnRing(
   scene: THREE.Scene,
   { phi, theta, axis }: InstanceParametersType['planet'],
-  {
-    materialSet,
-    bitCount,
-    minBitSize,
-    maxBitSize,
-    innerRad,
-    outerRad,
-  }: InstanceParametersType['rings'][number]
+  { colorSet, bitCount, innerRad, outerRad }: InstanceParametersType['rings'][number]
 ): RingsDatumType {
-  if (!bitCount) {
-    return []
-  }
-  const ringDatum = Array(bitCount).fill(0)
   const phi2 = phi + Math.PI / 2
+  // Geometry
+  const ringGeometry = new THREE.BufferGeometry()
+  const positionArray = Array(bitCount * 3).fill(0)
+  const colorArray = Array(bitCount * 3).fill(0)
+  const sizeArray = Array(3).fill(0)
   for (let i = 0; i < bitCount; i++) {
-    // Geometry
-    const size = randFloatTriangular(minBitSize, maxBitSize)
-    const geometry = new THREE.SphereGeometry(size, 2, 2)
-    // Material
-    const material = randFromArray(materialSet)
-    // Object
-    const ringBitMesh = new THREE.Mesh(geometry, material)
+    const ix3 = 3 * i
     // Position
     const axialOffset =
       THREE.MathUtils.randFloatSpread(1) +
@@ -154,29 +143,44 @@ function spawnRingBits(
       randFloatTriangular(innerRad / 2, outerRad / 2) +
       THREE.MathUtils.randFloatSpread(3 - Math.abs(axialOffset))
     const theta2 = THREE.MathUtils.randFloatSpread(Math.PI * 2)
-    ringBitMesh.position.set(
+    const pos = new THREE.Vector3(
       radius * Math.sin(theta) * Math.sin(phi2),
       radius * Math.cos(phi2),
       radius * Math.cos(theta) * Math.sin(phi2)
     )
-    ringBitMesh.position.applyAxisAngle(axis, theta2)
-    ringBitMesh.position.add(
-      new THREE.Vector3(axis.x * axialOffset, axis.y * axialOffset, axis.z * axialOffset)
-    )
-    const speed = Math.sqrt(radius) * 0.15
-    // Add
-    scene.add(ringBitMesh)
-    // Save data
-    ringDatum[i] = { speed, ringBitMesh }
+    pos.applyAxisAngle(axis, theta2)
+    pos.add(new THREE.Vector3(axis.x * axialOffset, axis.y * axialOffset, axis.z * axialOffset))
+    positionArray[ix3] = pos.x
+    positionArray[ix3 + 1] = pos.y
+    positionArray[ix3 + 2] = pos.z
+    // Color
+    const color = randFromArray(colorSet)
+    colorArray[ix3] = color.r
+    colorArray[ix3 + 1] = color.g
+    colorArray[ix3 + 2] = color.b
+    // Size
+    sizeArray[i] = THREE.MathUtils.randInt(0, 3)
   }
-  return ringDatum
+  ringGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positionArray), 3))
+  ringGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colorArray), 3))
+  ringGeometry.setAttribute('size', new THREE.BufferAttribute(new Float32Array(sizeArray), 1))
+  // Material
+  const ringMaterial = new THREE.ShaderMaterial(getRingShaderParameters())
+  // Object
+  const starsMesh = new THREE.Points(ringGeometry, ringMaterial)
+  // Add
+  scene.add(starsMesh)
+  return starsMesh
 }
 function despawnRings(scene: THREE.Scene, ringsData: RingsDataType) {
   ringsData.forEach((ringDatum) => {
-    ringDatum.forEach((ringBitDatum) => {
-      scene.remove(ringBitDatum.ringBitMesh)
-      ringBitDatum.ringBitMesh.geometry.dispose()
-    })
+    scene.remove(ringDatum)
+    ringDatum.geometry.dispose()
+    if (ringDatum.material instanceof Array) {
+      ringDatum.material.forEach((x) => x.dispose())
+    } else {
+      ringDatum.material.dispose()
+    }
   })
   ringsData = []
 }
@@ -316,11 +320,8 @@ export function updateFirstScene(
 
   // Update rings
   ringsData.forEach((ringDatum) => {
-    ringDatum.forEach((ringBitDatum) => {
-      const ang = deltaTimeInSeconds * ringBitDatum.speed
-      ringBitDatum.ringBitMesh.position.applyAxisAngle(planetRotationAxis, ang) // Rotate the position
-      ringBitDatum.ringBitMesh.rotateOnAxis(planetRotationAxis, ang) // Rotate the object
-    })
+    const ang = deltaTimeInSeconds * 1
+    ringDatum.rotateOnAxis(planetRotationAxis, ang)
   })
 
   /* // Update trail
@@ -366,6 +367,45 @@ export function updateFirstScene(
       }
     `,
 }) */
+
+function getRingShaderParameters(): THREE.ShaderMaterialParameters {
+  return {
+    uniforms: {
+      crossTexture: { value: crossTexture },
+    },
+    vertexShader: `
+      varying vec3 vColor;
+      varying float vSize;
+      attribute vec3 color;
+      attribute float size;
+
+      void main() {
+        vColor = color;
+        vSize = size;
+        gl_PointSize = size;
+        gl_Position = projectionMatrix * modelViewMatrix  * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor;
+      varying float vSize;
+      uniform sampler2D crossTexture;
+
+      void main() {
+        if (vSize == 3.0) {
+          vec2 uv = vec2( gl_PointCoord.x, 1.0 - gl_PointCoord.y );
+          vec4 mapTexel = texture2D( crossTexture, uv );
+          gl_FragColor = vec4(vColor.xyz, mapTexel[3]);
+          if ( gl_FragColor.a < 0.001 ) {
+            discard;
+          }
+        } else {
+          gl_FragColor = vec4(vColor.xyz, 1);
+        }
+      }
+    `,
+  }
+}
 
 /* function getStarShaderParameters(pixelSize: number): THREE.ShaderMaterialParameters {
   return {
