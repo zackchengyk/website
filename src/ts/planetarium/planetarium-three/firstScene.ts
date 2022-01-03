@@ -3,7 +3,10 @@ import { InstanceParametersType } from './instanceParameters'
 import { randFloatTriangular, randFromArray } from './common'
 import { getPlanetShaderParameters, ringShaderMaterial } from './shaders'
 
-type RingsDatumType = THREE.Points
+type RingsDatumType = {
+  speed: number
+  ringPoints: THREE.Points
+}
 type RingsDataType = RingsDatumType[]
 
 type MoonsDatumType = {
@@ -163,15 +166,17 @@ function spawnRing(
   // Material
   const ringMaterial = ringShaderMaterial
   // Object
-  const starsMesh = new THREE.Points(ringGeometry, ringMaterial)
+  const ringPoints = new THREE.Points(ringGeometry, ringMaterial)
   // Add
-  scene.add(starsMesh)
-  return starsMesh
+  scene.add(ringPoints)
+  // Speed
+  const speed = Math.sqrt(innerRad) * 0.15
+  return { ringPoints, speed }
 }
 function despawnRings(scene: THREE.Scene, ringsData: RingsDataType) {
   ringsData.forEach((ringDatum) => {
-    scene.remove(ringDatum)
-    ringDatum.geometry.dispose()
+    scene.remove(ringDatum.ringPoints)
+    ringDatum.ringPoints.geometry.dispose()
     // Do not delete material!
   })
   ringsData = []
@@ -312,8 +317,8 @@ export function updateFirstScene(
 
   // Update rings
   ringsData.forEach((ringDatum) => {
-    const ang = deltaTimeInSeconds * 1
-    ringDatum.rotateOnAxis(planetRotationAxis, ang)
+    const ang = deltaTimeInSeconds * ringDatum.speed
+    ringDatum.ringPoints.rotateOnAxis(planetRotationAxis, ang)
   })
 
   /* // Update trail

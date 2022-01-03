@@ -49,7 +49,7 @@ export type InstanceParametersType = {
 // Called by init to randomly generate parameters for this planet
 export function initInstanceParameters(prevInstanceParameters?: InstanceParametersType) {
   // Camera
-  const cameraDof = 23
+  const cameraDof = 24
   const cameraDistance = 350
   const cameraNear = 200
   const cameraFar = 500
