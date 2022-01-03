@@ -25,7 +25,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
     if (sleeved && scrollTop + 0.75 * windowDimensions.y > self.current!.offsetTop) {
       setSleeved('')
     }
-  }, [scrollTop])
+  }, [scrollTop, windowDimensions])
 
   // Accordion
 
