@@ -1,13 +1,13 @@
 @use 'sass:color';
 @import '../common.scss';
 
-@mixin animated-anchor($delay) {
+@mixin animated-anchor() {
   display: inline;
 
   color: $link-font-color;
-  text-underline-offset: 0.125rem;
-  text-decoration: underline;
   text-decoration-color: $link-font-color;
+  text-decoration: underline;
+  text-underline-offset: 0.125rem;
 
   overflow-x: hidden;
   vertical-align: top;
@@ -33,7 +33,7 @@
 }
 
 p a {
-  @include animated-anchor($delay);
+  @include animated-anchor();
   font-weight: $link-font-weight;
 }
 strong a a strong {

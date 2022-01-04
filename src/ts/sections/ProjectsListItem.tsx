@@ -1,8 +1,12 @@
+import React from 'react'
 import { stringToId } from '../common'
 
 export type ProjectsListItemContentProps = {
   projectName: string
-  children?: React.ReactNode
+  imgChildren?: React.ReactNode
+  projectTitle?: React.ReactNode
+  projectSubtitle?: React.ReactNode
+  projectBody?: React.ReactNode
 }
 type ProjectsListItemProps = {
   sleeved: string
@@ -13,7 +17,10 @@ type ProjectsListItemProps = {
 
 function ProjectsListItem({
   projectName,
-  children,
+  imgChildren,
+  projectTitle,
+  projectSubtitle,
+  projectBody,
   sleeved,
   sleevedStyle,
   isOpen,
@@ -38,8 +45,18 @@ function ProjectsListItem({
           </span>
         </button>
       </h3>
-      <div id={divId} aria-labelledby={buttonId} className={'projects-li-div ' + (isOpen ? '' : 'collapsed')}>
-        <div>{children}</div>
+      <div
+        id={divId}
+        aria-labelledby={buttonId}
+        className={'projects-li-content ' + (isOpen ? '' : 'collapsed')}>
+        <div className="projects-li-content-inner">
+          <div className="projects-img">{imgChildren}</div>
+          <div className="projects-text">
+            <h4 className="title-text">{projectTitle}</h4>
+            <h5 className="subtitle-text">{projectSubtitle}</h5>
+            <div className="body-text">{projectBody}</div>
+          </div>
+        </div>
       </div>
     </li>
   )
