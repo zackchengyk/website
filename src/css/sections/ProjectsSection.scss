@@ -46,10 +46,9 @@
 .projects-li-content {
   height: auto;
   width: 100%;
-  overflow: hidden;
 
   &.collapsed {
-    height: 0;
+    display: none;
   }
 }
 
@@ -78,5 +77,6 @@
 }
 
 .projects-text {
+  min-width: min(100%, 65ch);
   max-width: 65ch;
 }

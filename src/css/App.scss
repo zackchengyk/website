@@ -18,7 +18,8 @@ a {
   text-decoration: none;
 }
 
-img {
+img,
+video {
   display: block;
   min-width: 0;
   max-width: 100%;
@@ -68,7 +69,7 @@ body {
       @include fade-in(4);
     }
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     place-items: start stretch;
 
     > #navbar,
