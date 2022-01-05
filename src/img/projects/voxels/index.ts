@@ -10,8 +10,8 @@ import recordingPig10WebmSrc from './voxels-recording-pig-10-small.webm'
 import recordingPig10Mp4Src from './voxels-recording-pig-10-small.mp4'
 import recordingPig20WebmSrc from './voxels-recording-pig-20-small.webm'
 import recordingPig20Mp4Src from './voxels-recording-pig-20-small.mp4'
-import recordingPig180WebmSrc from './voxels-recording-pig-80-small.webm'
-import recordingPig180Mp4Src from './voxels-recording-pig-80-small.mp4'
+import recordingPig80WebmSrc from './voxels-recording-pig-80-small.webm'
+import recordingPig80Mp4Src from './voxels-recording-pig-80-small.mp4'
 
 export default {
   imageBirdSrc,
@@ -26,6 +26,6 @@ export default {
   recordingPig10Mp4Src,
   recordingPig20WebmSrc,
   recordingPig20Mp4Src,
-  recordingPig180WebmSrc,
-  recordingPig180Mp4Src,
+  recordingPig80WebmSrc,
+  recordingPig80Mp4Src,
 }
