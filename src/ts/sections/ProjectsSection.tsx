@@ -48,6 +48,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
             <ProjectsListItem
               sleeved={sleeved}
               sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
+              evenOdd={i % 2 ? 'even' : 'odd'}
               isOpen={currentOpen[projectName]}
               toggleIsOpen={getToggleIsOpenFunction(projectName)}
               {...projectsText[projectName]}

@@ -11,6 +11,7 @@ export type ProjectsListItemContentProps = {
 type ProjectsListItemProps = {
   sleeved: string
   sleevedStyle: React.CSSProperties
+  evenOdd: string
   isOpen: boolean
   toggleIsOpen: () => void
 } & ProjectsListItemContentProps
@@ -23,6 +24,7 @@ function ProjectsListItem({
   projectBody,
   sleeved,
   sleevedStyle,
+  evenOdd,
   isOpen,
   toggleIsOpen,
 }: ProjectsListItemProps) {
@@ -49,8 +51,8 @@ function ProjectsListItem({
         id={divId}
         aria-labelledby={buttonId}
         className={'projects-li-content ' + (isOpen ? '' : 'collapsed')}>
-        <div className="projects-li-content-inner">
-          <div className="projects-img">{imgChildren}</div>
+        <div className={'projects-li-content-inner ' + evenOdd}>
+          <div className="projects-img-container">{imgChildren}</div>
           <div className="projects-text">
             <h4 className="title-text">{projectTitle}</h4>
             <h5 className="subtitle-text">{projectSubtitle}</h5>

@@ -57,7 +57,13 @@
   align-items: center;
   justify-content: center;
   gap: $about-vert-gap $about-horz-gap;
-  flex-direction: row-reverse;
+
+  &.even {
+    flex-direction: row-reverse;
+  }
+  &.odd {
+    flex-direction: row;
+  }
   flex-wrap: wrap;
 
   width: 100%;
@@ -67,13 +73,10 @@
   background-color: $projects-div-background-color; // obviously temporary
 }
 
-.projects-img {
+.projects-img-container {
   position: relative;
   min-width: 0;
-  max-width: min(700px, 100vw);
-  > img {
-    border-radius: $border-radius;
-  }
+  max-width: min(600px, 100vw);
 }
 
 .projects-text {
