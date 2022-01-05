@@ -31,6 +31,7 @@ function ExperienceSection({ windowDimensions, scrollTop, extraClassName }: Expe
         <ul id="experience-right">
           {experienceNames.map((experienceName, i) => (
             <ExperienceListItem
+              key={i}
               sleeved={sleeved}
               sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
               {...experienceContent[experienceName]}

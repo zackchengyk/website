@@ -55,8 +55,9 @@ function Navbar({ windowDimensions, scrollTop, extraClassName }: NavbarProps) {
   return (
     <nav id="navbar" className={extraClassName}>
       <div id="navbar-right">
-        {sectionNames.map((x) => (
+        {sectionNames.map((x, i) => (
           <a
+            key={i}
             id={`navbar-${x}`}
             className={'navbar-item ' + (active === x ? 'active' : 'inactive')}
             onClick={() => setActive(x)}

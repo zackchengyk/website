@@ -41,6 +41,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
         <ul id="projects-ul">
           {projectNames.map((projectName, i) => (
             <ProjectsListItem
+              key={i}
               sleeved={sleeved}
               sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
               evenOdd={i % 2 ? 'even' : 'odd'}
