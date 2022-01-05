@@ -2,12 +2,12 @@
 @use 'sass:math';
 @import '../common.scss';
 
-#experience-body-grid {
+#experience-body {
   border-top: $line;
   @include section-two-grid(auto-fill);
 }
 
-#experience-ul {
+#experience-right {
   grid-column: -2;
   width: 100%;
   list-style: none;

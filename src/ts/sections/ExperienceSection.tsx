@@ -28,17 +28,15 @@ function ExperienceSection({ windowDimensions, scrollTop, extraClassName }: Expe
         <span>{'EXPERIENCE'}</span>
       </h2>
       <div id="experience-body" className="section-body">
-        <div id="experience-body-grid">
-          <ul id="experience-ul">
-            {experienceNames.map((experienceName, i) => (
-              <ExperienceListItem
-                sleeved={sleeved}
-                sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
-                {...experienceContent[experienceName]}
-              />
-            ))}
-          </ul>
-        </div>
+        <ul id="experience-right">
+          {experienceNames.map((experienceName, i) => (
+            <ExperienceListItem
+              sleeved={sleeved}
+              sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
+              {...experienceContent[experienceName]}
+            />
+          ))}
+        </ul>
       </div>
     </section>
   )

@@ -12,7 +12,6 @@ export function useWindowDimensions(): XY {
   const [windowDimensions, setWindowDimensions] = useState<XY>(getWindowDimensions)
 
   useEffect(() => {
-    // Attach *passive* scroll listener to self
     let handle = 0
     function resizeHandler() {
       // Debounce

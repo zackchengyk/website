@@ -116,7 +116,6 @@ export function initInstanceParameters(prevInstanceParameters?: InstanceParamete
       colors: starColorPopulation,
     }, */
   }
-  // console.log(nextInstanceParameters)
   return nextInstanceParameters
 }
 

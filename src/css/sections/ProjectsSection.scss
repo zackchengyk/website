@@ -58,6 +58,11 @@
   justify-content: center;
   gap: $about-vert-gap $about-horz-gap;
 
+  width: 100%;
+  padding: $about-vert-gap $side-padding calc(2 * $about-vert-gap);
+
+  background-color: $projects-div-background-color;
+
   &.even {
     flex-direction: row-reverse;
   }
@@ -65,12 +70,6 @@
     flex-direction: row;
   }
   flex-wrap: wrap;
-
-  width: 100%;
-  padding: $about-vert-gap $side-padding calc(2 * $about-vert-gap);
-
-  color: var(--text-color); // obviously temporary
-  background-color: $projects-div-background-color; // obviously temporary
 }
 
 .projects-img-container {
@@ -80,9 +79,12 @@
 }
 
 .projects-text {
+  color: var(--text-color);
+
   min-width: min(100%, 65ch);
   max-width: 65ch;
 }
+
 .multi-image {
   display: grid;
   gap: 10px;

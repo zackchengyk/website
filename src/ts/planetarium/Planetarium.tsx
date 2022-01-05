@@ -16,7 +16,7 @@ function Planetarium() {
   const planetarium = useRef<PlanetariumType>()
 
   useEffect(() => {
-    console.warn('Caution! This should run exactly once.')
+    // console.warn('Caution! This should run exactly once.')
 
     // Create the instance
     planetarium.current = main(containerElement.current!, canvasElement.current!)

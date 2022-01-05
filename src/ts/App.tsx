@@ -11,7 +11,6 @@ import { useEffect, useRef, useState } from 'react'
 export const sectionNames = ['home', 'about', 'experience', 'projects']
 
 function fragmentIsSubsection(): boolean {
-  console.log(window.location.hash)
   if (window.location.hash) {
     const id = window.location.hash.slice(1)
     if (id !== 'home' && sectionNames.includes(id)) {
@@ -50,13 +49,8 @@ function App() {
 
   const [allowAnimation, _] = useState<boolean>(fragmentIsSubsection())
 
-  const style = {
-    '--viewport-height': windowDimensions.y + 'px',
-    '--viewport-width': windowDimensions.x + 'px',
-  } as React.CSSProperties
-
   return (
-    <div id="scroll-container" ref={scrollContainer} style={style}>
+    <div id="scroll-container" ref={scrollContainer}>
       <BannerHeader />
       <div className={allowAnimation ? 'allow-animation' : ''}>
         <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
