@@ -223,11 +223,13 @@ $delay: 0.3s;
   }
 }
 
-$slide-up-transition: transform 0.8s ease var(--slide-up-delay);
+$slide-up-transition: transform 0.5s ease var(--slide-up-delay), opacity 0.5s ease var(--slide-up-delay);
 @mixin slide-up {
-  transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0%);
   &.sleeved {
-    transform: translateY(200%);
+    opacity: 0;
+    transform: translateY(100%);
   }
 }
 
