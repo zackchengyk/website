@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
 import { XY } from '../common'
-import '../../css/sections/ProjectsSection.scss'
-import { projectsText } from '../content/text'
+import { useEffect, useRef, useState } from 'react'
+import projectsContent, { ProjectName, projectNames } from '../content/projectsContent'
 import ProjectsListItem from './ProjectsListItem'
-
-const projectNames = ['website', 'cityscape', 'maps', 'voxels', 'override', 'spacewar'] as const
-export type ProjectName = typeof projectNames[number]
-
-// ======================================================================== Component: ProjectsSection
+import '../../css/sections/ProjectsSection.scss'
 
 type ProjectsSectionProps = {
   windowDimensions: XY
@@ -51,7 +46,7 @@ function ProjectsSection({ windowDimensions, scrollTop, extraClassName }: Projec
               evenOdd={i % 2 ? 'even' : 'odd'}
               isOpen={currentOpen[projectName]}
               toggleIsOpen={getToggleIsOpenFunction(projectName)}
-              {...projectsText[projectName]}
+              {...projectsContent[projectName]}
             />
           ))}
         </ul>

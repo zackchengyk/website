@@ -67,7 +67,7 @@
   flex-wrap: wrap;
 
   width: 100%;
-  padding: 25px $side-padding;
+  padding: $about-vert-gap $side-padding calc(2 * $about-vert-gap);
 
   color: var(--text-color); // obviously temporary
   background-color: $projects-div-background-color; // obviously temporary
@@ -82,4 +82,12 @@
 .projects-text {
   min-width: min(100%, 65ch);
   max-width: 65ch;
+}
+.multi-image {
+  display: grid;
+  gap: 10px;
+
+  > * {
+    border: $image-line;
+  }
 }

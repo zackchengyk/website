@@ -1,11 +1,8 @@
 import { XY } from '../common'
-import { experienceText } from '../content/text'
-import '../../css/sections/ExperienceSection.scss'
 import React, { useEffect, useRef, useState } from 'react'
+import experienceContent, { experienceNames } from '../content/experienceContent'
 import ExperienceListItem from './ExperienceListItem'
-
-const experienceNames = ['govtech', 'brgd', 'csci1430', 'engn0031']
-export type ExperienceName = typeof experienceNames[number]
+import '../../css/sections/ExperienceSection.scss'
 
 type ExperienceSectionProps = {
   windowDimensions: XY
@@ -37,7 +34,7 @@ function ExperienceSection({ windowDimensions, scrollTop, extraClassName }: Expe
               <ExperienceListItem
                 sleeved={sleeved}
                 sleevedStyle={{ '--slide-up-delay': i / 8 + 's' } as React.CSSProperties}
-                {...experienceText[experienceName]}
+                {...experienceContent[experienceName]}
               />
             ))}
           </ul>

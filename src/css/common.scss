@@ -133,8 +133,8 @@ $section-horz-space: 20px;
 $section-vert-space: linear(60, 80);
 $section-vert-space-first-last: linear(20, 80);
 
-$about-vert-gap: linear(30, 40);
-$about-horz-gap: 40px;
+$about-vert-gap: linear(20, 30);
+$about-horz-gap: 30px;
 $experience-li-vert-space: linear(10, 20);
 $experience-li-horz-space: 0;
 $projects-li-vert-space: linear(20, 30);
@@ -204,6 +204,7 @@ section:last-of-type > .section-body {
 $inner-section-grid-gap: 15px;
 
 $line: 1px solid $mid-tone;
+$image-line: 1px solid $mid-tone;
 
 // ======================================================================== INTERACTION
 
