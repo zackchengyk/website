@@ -1,14 +1,13 @@
 import src from '../../img/name.svg'
 import Planetarium from '../planetarium/Planetarium'
+import React from 'react'
 import '../../css/sections/BannerHeader.scss'
 
-type BannerHeaderProps = {
-  extraClassName?: string
-}
+type BannerHeaderProps = {}
 
-function BannerHeader({ extraClassName }: BannerHeaderProps) {
+const BannerHeader = React.forwardRef<HTMLElement, BannerHeaderProps>(({}, ref) => {
   return (
-    <header id="home" className={extraClassName}>
+    <header id="home" ref={ref}>
       <div id="banner-left">
         <h2>{'Hello, World!'}</h2>
       </div>
@@ -20,6 +19,6 @@ function BannerHeader({ extraClassName }: BannerHeaderProps) {
       </div>
     </header>
   )
-}
+})
 
 export default BannerHeader

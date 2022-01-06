@@ -1,14 +1,13 @@
 import { personalBlurb, personalIntro } from '../content/aboutContent'
 import src from '../../img/me.jpg'
 import '../../css/sections/AboutSection.scss'
+import React from 'react'
 
-type AboutSectionProps = {
-  extraClassName?: string
-}
+type AboutSectionProps = {}
 
-function AboutSection({ extraClassName }: AboutSectionProps) {
+const AboutSection = React.forwardRef<HTMLElement, AboutSectionProps>(({}, ref) => {
   return (
-    <section id="about" className={extraClassName}>
+    <section id="about" ref={ref}>
       <h2 id="about-header" className="section-header">
         <span>{'ABOUT'}</span>
       </h2>
@@ -23,6 +22,6 @@ function AboutSection({ extraClassName }: AboutSectionProps) {
       </div>
     </section>
   )
-}
+})
 
 export default AboutSection

@@ -1,68 +1,40 @@
 import { useEffect, useState } from 'react'
 import '../../css/sections/Navbar.scss'
-import { sectionNames } from '../App'
+import { SectionName, orderedSectionNames } from '../App'
 import { XY } from '../common'
-
-// ======================================================================== Helpers
-
-function getActiveSection() {
-  if (window.location.hash) {
-    const id = window.location.hash.slice(1)
-    if (sectionNames.includes(id)) {
-      return id
-    }
-  }
-  return sectionNames[0]
-}
 
 // ======================================================================== Component: Navbar
 
 type NavbarProps = {
-  windowDimensions: XY
   scrollTop: number
-  extraClassName?: string
+  sortedSections: { name: SectionName; element: HTMLElement }[]
 }
 
-function Navbar({ windowDimensions, scrollTop, extraClassName }: NavbarProps) {
-  const [active, setActive] = useState<string>(getActiveSection())
-  const [sortedNamesAndTops, setSortedNamesAndTops] = useState<{ name: string; offsetTop: number }[]>([])
-
-  // Get list of section names and offsetTops when window dimensions change
-  useEffect(() => {
-    setSortedNamesAndTops(
-      sectionNames
-        .map((sectionName) => {
-          const navbarTarget = document.getElementById(sectionName)
-          return { name: sectionName, offsetTop: navbarTarget!.offsetTop }
-        })
-        .sort((a, b) => a.offsetTop - b.offsetTop)
-    )
-  }, [windowDimensions])
+function Navbar({ scrollTop, sortedSections }: NavbarProps) {
+  const [active, setActive] = useState<SectionName>(orderedSectionNames[0])
 
   // Change active navbar item based on scrollTop
   useEffect(() => {
     // Find our current position
-    for (let i = 0; i < sortedNamesAndTops.length; i++) {
-      if (scrollTop > sortedNamesAndTops[i].offsetTop) {
-        if (sortedNamesAndTops[i + 1] == null || scrollTop < sortedNamesAndTops[i + 1].offsetTop) {
-          setActive(sortedNamesAndTops[i].name)
+    for (let i = 0; i < sortedSections.length; i++) {
+      if (scrollTop >= sortedSections[i].element.offsetTop) {
+        if (sortedSections[i + 1] == null || scrollTop < sortedSections[i + 1].element.offsetTop) {
+          setActive(sortedSections[i].name)
           return
         }
       }
     }
-  }, [scrollTop])
+  }, [active, sortedSections, scrollTop])
 
   return (
-    <nav id="navbar" className={extraClassName}>
+    <nav id="navbar">
       <div id="navbar-right">
-        {sectionNames.map((x, i) => (
+        {orderedSectionNames.map((sectionName) => (
           <a
-            key={i}
-            id={`navbar-${x}`}
-            className={'navbar-item ' + (active === x ? 'active' : 'inactive')}
-            onClick={() => setActive(x)}
-            href={`#${x}`}>
-            {x}
+            key={sectionName}
+            className={'navbar-item ' + (active === sectionName ? 'active' : 'inactive')}
+            href={`#${sectionName}`}>
+            {sectionName}
           </a>
         ))}
       </div>

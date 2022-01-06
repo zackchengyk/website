@@ -4,18 +4,17 @@ import ExperienceSection from './sections/ExperienceSection'
 import Navbar from './sections/Navbar'
 import ProjectsSection from './sections/ProjectsSection'
 import { useWindowDimensions } from './useWindowDimensions'
+import React, { useEffect, useRef, useState } from 'react'
 import '../css/App.scss'
 import '../css/font.css'
-import { useEffect, useRef, useState } from 'react'
 
-export const sectionNames = ['home', 'about', 'experience', 'projects']
+export const orderedSectionNames = ['home', 'about', 'experience', 'projects'] as const
+export type SectionName = typeof orderedSectionNames[number]
 
-function fragmentIsSubsection(): boolean {
+function allowAnimationBasedOnURLHash(): boolean {
   if (window.location.hash) {
     const id = window.location.hash.slice(1)
-    if (id !== 'home' && sectionNames.includes(id)) {
-      return false
-    }
+    return id === 'home' || !orderedSectionNames.includes(id as any)
   }
   return true
 }
@@ -23,40 +22,61 @@ function fragmentIsSubsection(): boolean {
 function App() {
   const windowDimensions = useWindowDimensions()
 
-  // Attach passive scroll listener to self
+  // ================== Prevent loading animation when reloading to specific area
+  const [allowAnimation, _] = useState<boolean>(allowAnimationBasedOnURLHash())
 
-  const scrollContainer = useRef<any>()
+  // ================== Keep track of scrollTop
   const [scrollTop, setScrollTop] = useState<number>(0)
-  useEffect(() => {
-    // Set first value
+  const scrollContainer = useRef<any>()
+  // Set first value
+  useEffect(() => setScrollTop(scrollContainer.current.scrollTop), [])
+  // Define scroll handler
+  const throttleDelay = 50
+  let waiting = false
+  function scrollHandler() {
+    // Throttle
+    if (waiting) return
+    waiting = true
+    setTimeout(() => (waiting = false), throttleDelay)
+    // Set scrollTop
     setScrollTop(scrollContainer.current.scrollTop)
-    // Create listener handler
-    const throttleDelay = 50
-    let waiting = false
-    function scrollHandler() {
-      // Throttle
-      if (waiting) return
-      waiting = true
-      setTimeout(() => (waiting = false), throttleDelay)
-      // Set scrollTop
-      setScrollTop(scrollContainer.current.scrollTop)
-    }
-    scrollContainer.current.addEventListener('scroll', scrollHandler, { passive: true })
-    return () => scrollContainer.current.removeEventListener('scroll', scrollHandler)
-  }, [])
+  }
 
-  // Prevent loading animation when reloading to specific area
-
-  const [allowAnimation, _] = useState<boolean>(fragmentIsSubsection())
+  // ================== Keep track of section elements
+  const [sortedSections, setSortedSections] = useState<{ name: SectionName; element: HTMLElement }[]>([])
+  const sectionRefs = useRef<Record<SectionName, React.RefObject<HTMLElement>>>(
+    orderedSectionNames.reduce(
+      (acc, ele) => ((acc[ele] = React.createRef()), acc),
+      {} as Record<SectionName, React.RefObject<HTMLElement>>
+    )
+  )
+  // Get sorted list of sections
+  useEffect(() => {
+    setSortedSections(
+      orderedSectionNames.map((sectionName) => {
+        // Could (but almost certainly will not) be null, so use a random div as a fallback
+        const sectionElement = sectionRefs.current[sectionName].current || document.createElement('div')
+        return { name: sectionName, element: sectionElement }
+      })
+    )
+  }, [sectionRefs])
 
   return (
-    <div id="scroll-container" ref={scrollContainer}>
-      <BannerHeader />
+    <div id="scroll-container" ref={scrollContainer} onScroll={scrollHandler}>
+      <BannerHeader ref={sectionRefs.current.home} />
       <div className={allowAnimation ? 'allow-animation' : ''}>
-        <Navbar windowDimensions={windowDimensions} scrollTop={scrollTop} />
-        <AboutSection />
-        <ExperienceSection windowDimensions={windowDimensions} scrollTop={scrollTop} />
-        <ProjectsSection windowDimensions={windowDimensions} scrollTop={scrollTop} />
+        <Navbar scrollTop={scrollTop} sortedSections={sortedSections} />
+        <AboutSection ref={sectionRefs.current.about} />
+        <ExperienceSection
+          ref={sectionRefs.current.experience}
+          windowDimensions={windowDimensions}
+          scrollTop={scrollTop}
+        />
+        <ProjectsSection
+          ref={sectionRefs.current.projects}
+          windowDimensions={windowDimensions}
+          scrollTop={scrollTop}
+        />
       </div>
     </div>
   )
