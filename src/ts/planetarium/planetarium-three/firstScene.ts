@@ -170,7 +170,7 @@ function spawnRing(
   // Add
   scene.add(ringPoints)
   // Speed
-  const speed = Math.sqrt(innerRad) * 0.15
+  const speed = Math.sqrt(1 / innerRad) * 3
   return { ringPoints, speed }
 }
 function despawnRings(scene: THREE.Scene, ringsData: RingsDataType) {
@@ -215,7 +215,7 @@ function spawnMoon(
     radius * Math.cos(theta2) * Math.sin(phi2)
   )
   // Speed
-  const speed = Math.sqrt(radius) * 0.05
+  const speed = Math.sqrt(1 / radius) * 3
   // Add
   scene.add(moonMesh)
 
