@@ -15,6 +15,7 @@ const ExperienceSection = React.forwardRef<HTMLElement, ExperienceSectionProps>(
     // ================== Animate
     const [sleeved, setSleeved] = useState<string>('sleeved')
     useEffect(() => {
+      // @ts-ignore
       if (sleeved && scrollTop + 0.75 * windowDimensions.y > ref?.current.offsetTop) {
         setSleeved('')
       }

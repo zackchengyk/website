@@ -15,6 +15,7 @@ const ProjectsSection = React.forwardRef<HTMLElement, ProjectsSectionProps>(
     // ================== Animate
     const [sleeved, setSleeved] = useState<string>('sleeved')
     useEffect(() => {
+      // @ts-ignore
       if (sleeved && scrollTop + 0.75 * windowDimensions.y > ref?.current!.offsetTop) {
         setSleeved('')
       }
