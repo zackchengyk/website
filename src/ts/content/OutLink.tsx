@@ -1,4 +1,3 @@
-import React from 'react'
 import '../../css/content/OutLink.scss'
 
 type OutLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>

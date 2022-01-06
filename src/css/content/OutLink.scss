@@ -5,6 +5,9 @@
   display: inline;
 
   color: $link-font-color;
+  > strong {
+    color: $link-font-color;
+  }
   text-decoration-color: $link-font-color;
   text-decoration: underline;
   text-underline-offset: 0.125rem;
@@ -14,6 +17,9 @@
 
   &:visited {
     color: $link-visited-font-color;
+    > strong {
+      color: $link-visited-font-color;
+    }
     text-decoration-color: $link-visited-font-color;
   }
 
@@ -35,7 +41,4 @@
 p a {
   @include animated-anchor();
   font-weight: $link-font-weight;
-}
-strong a a strong {
-  font-weight: $link-bold-font-weight;
 }

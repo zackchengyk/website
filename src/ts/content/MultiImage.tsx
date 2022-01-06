@@ -1,3 +1,5 @@
+import '../../css/content/MultiImage.scss'
+
 type MultiImageProps = {
   children?: React.ReactNode
   style?: React.CSSProperties
