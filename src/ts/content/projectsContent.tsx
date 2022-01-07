@@ -26,8 +26,8 @@ const planetarium: ProjectsListItemContentProps = {
     </MultiImage>
   ),
   projectTitle: 'Planetarium',
-  projectSubtitle: 'Typescript, THREE.js',
-  projectBody: <p>{'My God this was tiring.'}</p>,
+  projectSubtitle: 'THREE.js, Typescript',
+  projectBody: <p>{'My God this was tiring. Todo.'}</p>,
 }
 
 // ======================================================================== Cityscape
@@ -47,7 +47,52 @@ const cityscape: ProjectsListItemContentProps = {
       <img src={cityscapeSrc.image1Src} alt="todo" />
     </MultiImage>
   ),
-  projectBody: <p>{'Cityscape!'}</p>,
+  projectTitle: 'Cityscape',
+  projectSubtitle: 'THREE.js, Javascript',
+  projectBody: (
+    <>
+      <p>
+        {'We created a '}
+        <strong>{'procedurally-generated'}</strong>
+        {' cityscape which you can freely traverse, complete with a day-night cycle and weather!'}
+      </p>
+      <p>
+        {'In a way, this project was one big excuse for me to experiment with '}
+        <strong>{'WebGL'}</strong>
+        {': I figured out how to make '}
+        <strong>{'rounded outlines'}</strong>
+        {' via vertex shader-extruded geometry, sneaky '}
+        <strong>{'backface culling'}</strong>
+        {', and '}
+        <strong>{'stencil buffers'}</strong>
+        {'; implemented '}
+        <strong>{'bloom'}</strong>
+        {' and '}
+        <strong>{'overlay'}</strong>
+        {' via custom shader passes; and created the movement system, building textures, and lighting.'}
+      </p>
+      <p>
+        <strong>{'Fun facts: '}</strong>
+        <br />
+        {"- The camera doesn't actually move! Everything else is really moving in the opposite direction."}
+        <br />
+        {
+          "- The buildings don't change in height (that wouldn't be performant) or scale (it would mess up textures) "
+        }
+        {'\u2014 instead, they descend underground... making outline generation a real pain.'}
+      </p>
+      <p>
+        <OutLink href="https://zackchengyk.github.io/cityscape/">
+          <strong>{'> Try it out here!'}</strong>
+        </OutLink>
+      </p>
+      <p>
+        <OutLink href="https://github.com/zackchengyk/cityscape">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
+      </p>
+    </>
+  ),
 }
 
 // ======================================================================== Maps
@@ -62,30 +107,56 @@ const maps: ProjectsListItemContentProps = {
       <PseudoGif webmSrc={mapsSrc.recording3WebmSrc} mp4Src={mapsSrc.recording3Mp4Src} />
     </MultiImage>
   ),
+  projectTitle: 'Maps',
+  projectSubtitle: 'HTML5 Canvas, React, Java',
   projectBody: (
     <>
       <p>
         {'I made a '}
         <strong>{'browser-based'}</strong>
-        {', IntelliJ-themed map applet in React, with a Java backend.'}
+        {', IntelliJ-themed map applet in React, with a Java backend server. '}
+        <em>{"I can't believe it's not Bootstrap!"}</em>
       </p>
       <p>
-        {'The app features pathfinding via '}
+        {'The app features pathfinding using '}
         <strong>
           <OutLink href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">
             {"Dijkstra's algorithm"}
           </OutLink>
         </strong>
-        {', nearest-node searching using '}
+        {', nearest-neighbor searching with '}
         <strong>
-          <abbr title="k-dimensional">{'k-d'}</abbr> {'trees'}
+          <OutLink href="https://en.wikipedia.org/wiki/K-d_tree">
+            <abbr title="k-dimensional">{'k-d'}</abbr> {'trees'}
+          </OutLink>
         </strong>
         {', and '}
         <strong>{'server- and client-side caching'}</strong>
-        {'. Its UI is also fully '}
-        <strong>{'keyboard-navigable'}</strong>
+        {" to boot. Rendering is done on a plain'ol <canvas>."}
+      </p>
+      <p>
+        {'Its '}
+        <strong>{'UI'}</strong>
+        {' is also fully '}
+        <OutLink href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets">
+          <strong>{'keyboard-navigable'}</strong>
+        </OutLink>
         {' and '}
-        <strong>{'responsive'}</strong>.
+        <strong>{'responsive'}</strong>
+        {', and I threw in '}
+        <strong>{'tooltips'}</strong>
+        {', '}
+        <strong>{'loading indicators'}</strong>
+        {', and '}
+        <strong>{'toast notifications'}</strong>
+        {" for the heck of it (it wasn't feeling "}
+        <em>{'IntelliJ'}</em>
+        {' enough yet).'}
+      </p>
+      <p>
+        <OutLink href="https://github.com/zackchengyk/maps">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
       </p>
     </>
   ),
@@ -94,7 +165,7 @@ const maps: ProjectsListItemContentProps = {
 // ======================================================================== Voxels
 
 const voxels: ProjectsListItemContentProps = {
-  projectName: 'Voxel Reconstruction',
+  projectName: 'Voxel Coloring',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a b c d" "e f g h"'>
       <img src={voxelsSrc.imageBirdSrc} alt="todo" />
@@ -107,6 +178,8 @@ const voxels: ProjectsListItemContentProps = {
       <PseudoGif webmSrc={voxelsSrc.recordingPig80WebmSrc} mp4Src={voxelsSrc.recordingPig80Mp4Src} />
     </MultiImage>
   ),
+  projectTitle: "Wait, It's All Voxels?",
+  projectSubtitle: 'Python, MATLAB',
   projectBody: (
     <>
       <p>
@@ -124,6 +197,11 @@ const voxels: ProjectsListItemContentProps = {
         <strong>{'Python'}</strong>
         {' and '}
         <strong>{'MATLAB'}</strong>.
+      </p>
+      <p>
+        <OutLink href="https://github.com/zackchengyk/voxel-coloring">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
       </p>
     </>
   ),
@@ -145,6 +223,8 @@ const override: ProjectsListItemContentProps = {
       <PseudoGif webmSrc={overrideSrc.recording4WebmSrc} mp4Src={overrideSrc.recording4Mp4Src} />
     </MultiImage>
   ),
+  projectTitle: 'Override!',
+  projectSubtitle: 'Unity, C#',
   projectBody: (
     <>
       <p>
@@ -158,13 +238,22 @@ const override: ProjectsListItemContentProps = {
         <OutLink href="https://rainydey.itch.io/override">{'Override! (available on Itch.io)'}</OutLink>
       </p>
       <p>
-        {
-          'I worked on game design, movement, particle effects, and code organization; mostly, this was a chance to brush up on my '
-        }
+        {"I worked on the game's overall design, its movement system, some particle effects, "}
+        {'and general code organization. It was a great chance to brush up on my '}
         <strong>{'Unity'}</strong>
         {' and '}
         <strong>{'C#'}</strong>
         {', plus some UI design and real-time graphics fundamentals.'}
+      </p>
+      <p>
+        <OutLink href="https://rainydey.itch.io/override">
+          <strong>{'> Play or download it here!'}</strong>
+        </OutLink>
+      </p>
+      <p>
+        <OutLink href="https://github.com/whatnameshouldiuse/BRGD-Jumping-Asteroids">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
       </p>
     </>
   ),
@@ -198,7 +287,7 @@ const spacewar: ProjectsListItemContentProps = {
         {' of the original 1962 game :)'}
       </p>
       <p>
-        {'I kept the project files simple so that non-'}
+        {"Even though there's an entire game engine in there, I kept the project files simple so that non-"}
         <abbr title="computer science">{'CS'}</abbr>
         {' art students could not only '}
         <strong>
@@ -209,16 +298,20 @@ const spacewar: ProjectsListItemContentProps = {
         <strong>
           <em>{'play with its source code'}</em>
         </strong>
-        {
-          '. Through their involvement as viewers in the creation of the experience of interacting with the work, I hoped to help them learn about '
-        }
-        <OutLink href="https://en.wikipedia.org/wiki/Early_history_of_video_games">
-          {'early video games'}
-        </OutLink>
-        {' as an offshoot of interactive media/art.'}
+        {', thereby co-creating their own experience of the work. '}
+        {'I like to think it makes a convincing case for '}
+        <OutLink href="https://en.wikipedia.org/wiki/Video_games_as_an_art_form">{'video games'}</OutLink>
+        {' as interactive art!'}
       </p>
       <p>
-        <OutLink href="https://zackchengyk.github.io/spacewar/">{'> Play it here!'}</OutLink>
+        <OutLink href="https://zackchengyk.github.io/spacewar/">
+          <strong>{'> Play it here!'}</strong>
+        </OutLink>
+      </p>
+      <p>
+        <OutLink href="https://github.com/zackchengyk/spacewar">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
       </p>
     </>
   ),
