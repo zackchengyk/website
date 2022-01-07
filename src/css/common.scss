@@ -34,12 +34,12 @@ $larger-breakpoint: $larger-b * 1px;
 // ======================================================================== PRIMARY PALETTE
 
 $white: #ffffff;
-$light-light: #fff2eb;
-$light: #feeadb;
-$light-dark: #fbe4cd;
-$light-dark-dark: #f4dbc4;
+$light-light: rgb(255, 241, 231);
+$light: #fee5d4;
+$light-dark: #f5dac4;
+$light-dark-dark: #e8ceb8;
 
-$mid-tone-light: #b5a291;
+$mid-tone-light: #b5a191;
 $mid-tone: #84756c;
 $mid-tone-dark: #534b47;
 
@@ -50,8 +50,8 @@ $dark-dark: #141212;
 $black: #000000;
 
 $blue-white: #93dbff;
-$blue-light-light: #0090eb;
-$blue-light: #0072cc;
+$blue-light-light: #0095f3;
+$blue-light: #0082e7;
 $blue-dark: #003c75;
 $blue-dark-dark: #002a5b;
 $blue-black: #002557;
@@ -69,10 +69,11 @@ $green-black: #002e19;
 :root {
   --background-color: #{$light};
   --text-color: #{$dark-light-light};
-  --text-weight: 400;
+  --text-weight: 450;
   --strong-text-color: #{$dark-light};
   --strong-text-weight: 675;
-  --link-text-weight-bonus: 100;
+  --link-text-weight-bonus: 50;
+  --blockquote-line-color: #{color.change($dark-light-light, $alpha: 0.25)};
 
   --link-text-color: #{$green-dark};
   --link-highlight-text-color: #{$green-dark-dark};
@@ -93,10 +94,11 @@ $green-black: #002e19;
 :root {
   --background-color: #{$dark};
   --text-color: #{$light-dark-dark};
-  --text-weight: 300;
+  --text-weight: 350;
   --strong-text-color: #{$light-dark};
-  --strong-text-weight: 600;
+  --strong-text-weight: 575;
   --link-text-weight-bonus: 25;
+  --blockquote-line-color: #{color.change($light-dark-dark, $alpha: 0.25)};
 
   --link-text-color: #{$green-light};
   --link-highlight-text-color: #{$green-light-light};
@@ -257,6 +259,7 @@ $body-font-color: var(--text-color);
 $body-bold-font-weight: var(--strong-text-weight);
 $body-bold-font-color: var(--strong-text-color);
 $body-line-height: 1.4;
+$blockquote-line-color: var(--blockquote-line-color);
 
 $link-font-weight: calc($body-font-weight + var(--link-text-weight-bonus));
 $link-bold-font-weight: calc($body-bold-font-weight + var(--link-text-weight-bonus));
@@ -301,6 +304,8 @@ $highlight-base-transition: background-position $delay ease;
 }
 
 @mixin content-text {
+  text-underline-offset: 0.125rem;
+
   abbr {
     text-decoration: none;
   }
@@ -314,6 +319,14 @@ $highlight-base-transition: background-position $delay ease;
   cite,
   em,
   i {
+    font-style: italic;
+  }
+
+  q {
+    &::before,
+    &::after {
+      content: '"';
+    }
     font-style: italic;
   }
 }
@@ -347,8 +360,15 @@ $highlight-base-transition: background-position $delay ease;
   color: $body-font-color;
   line-height: $body-line-height;
 
+  > blockquote:not(:last-child),
   > p:not(:last-child) {
     margin-bottom: $text-vert-spacing;
+  }
+
+  > blockquote {
+    padding-left: 1.5ch;
+    border-left: 0.5ch solid $blockquote-line-color;
+    // font-style: italic;
   }
 }
 

@@ -3,17 +3,17 @@
 
 @mixin animated-anchor() {
   display: inline;
+  font-weight: $link-font-weight;
+  text-decoration: underline;
+  text-underline-offset: 0.125rem;
+  overflow-x: hidden;
+  vertical-align: top;
 
   color: $link-font-color;
   > strong {
     color: $link-font-color;
   }
   text-decoration-color: $link-font-color;
-  text-decoration: underline;
-  text-underline-offset: 0.125rem;
-
-  overflow-x: hidden;
-  vertical-align: top;
 
   &:visited {
     color: $link-visited-font-color;
@@ -38,7 +38,7 @@
   }
 }
 
-p a {
+p a,
+blockquote a {
   @include animated-anchor();
-  font-weight: $link-font-weight;
 }
