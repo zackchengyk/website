@@ -1,5 +1,5 @@
 import { XY } from '../common'
-import { MutableRefObject, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import projectsContent, { ProjectName, projectNames } from '../content/projectsContent'
 import ProjectsListItem from './ProjectsListItem'
 import '../../css/sections/ProjectsSection.scss'

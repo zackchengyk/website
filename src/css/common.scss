@@ -285,7 +285,7 @@ $projects-button-highlight-color: var(--project-highlight-color);
 @mixin highlight-base($color) {
   background: linear-gradient(to left, transparent 50%, $color 50%);
   background-size: 200%;
-  background-position: 101% 0;
+  background-position: 105% 0; // avoids tiny sliver of visibility on right side, in some browsers
   background-repeat: no-repeat;
 }
 $highlight-base-transition: background-position $delay ease;
