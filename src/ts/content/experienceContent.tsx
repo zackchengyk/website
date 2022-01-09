@@ -25,7 +25,7 @@ const govtech: ExperienceListItemContentProps = {
         <strong>{'React'}</strong>
         {' components for user '}
         <strong>{'input/interaction'}</strong>
-        {' and initiated '}
+        {' and kickstarted '}
         <strong>
           <abbr title="accessibility">{'a11y'}</abbr>
         </strong>
@@ -36,7 +36,7 @@ const govtech: ExperienceListItemContentProps = {
       <p>
         {'I also designed and developed a '}
         <strong>{'data pipeline + CMS'}</strong>
-        {' to manage dynamic content provided by external partners (in multiple languages!).'}
+        {' to manage dynamic, multilingual content provided by external partners.'}
       </p>
     </>
   ),
@@ -51,10 +51,12 @@ const brgd: ExperienceListItemContentProps = {
   experienceSubtitle: 'Brown-RISD Game Developers',
   experienceBody: (
     <p>
-      {'Right now, I just help to run the club and oversee game design and development. '}
-      {"In the near future, I'll also be working on improving our "}
+      {'Right now, I just help to run the club and oversee game design and development, '}
+      {'and, of course, '}
+      <a href="#projects-override">{'make games'}</a>
+      {". In the near future, I'll be working on improving our "}
       <strong>{'Unity and C# instruction'}</strong>
-      {' ;)'}
+      {' for new programmers.'}
     </p>
   ),
 }
@@ -76,7 +78,9 @@ const csci1430: ExperienceListItemContentProps = {
       </OutLink>
       {". We're still in the midst of preparations, including reviewing "}
       <strong>{'course content'}</strong>
-      {' and designing + producing '}
+      {', updating '}
+      <strong>{'assignments'}</strong>
+      {', and designing '}
       <strong>{'interactive demos'}</strong>
       {'. Check back later!'}
     </p>
@@ -97,8 +101,10 @@ const engn0031: ExperienceListItemContentProps = {
         <strong>{'MATLAB'}</strong>
         {' and '}
         <strong>{'Mathematica'}</strong>
-        {', almost always extending my hours >2x to help those who stuck around. '}
-        {' I loved every minute of my time as a UTA, and hope it helped!'}
+        {', almost always extending my hours to help those who stuck around. '}
+        {' I loved being a UTA, especially figuring out '}
+        <strong>{'effective ways to explain things'}</strong>
+        {' :)'}
       </p>
     </>
   ),
