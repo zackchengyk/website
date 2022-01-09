@@ -44,6 +44,7 @@ const ProjectsSection = React.forwardRef<HTMLElement, ProjectsSectionProps>(
                 evenOdd={i % 2 ? 'even' : 'odd'}
                 isOpen={currentOpen[projectName]}
                 toggleIsOpen={getToggleCurrentOpenFunction(projectName)}
+                windowDimensions={windowDimensions}
                 {...projectsContent[projectName]}
               />
             ))}

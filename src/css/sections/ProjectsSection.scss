@@ -44,11 +44,14 @@
 }
 
 .projects-li-content {
-  height: auto;
+  position: relative;
+  height: var(--current-height);
   width: 100%;
+  overflow: hidden;
+  transition: height $delay ease;
 
   &.collapsed {
-    display: none;
+    height: 0;
   }
 }
 

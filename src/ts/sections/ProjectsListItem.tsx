@@ -1,5 +1,5 @@
-import React from 'react'
-import { stringToId } from '../common'
+import React, { useEffect, useRef, useState } from 'react'
+import { stringToId, XY } from '../common'
 
 export type ProjectsListItemContentProps = {
   projectName: string
@@ -14,6 +14,7 @@ type ProjectsListItemProps = {
   evenOdd: string
   isOpen: boolean
   toggleIsOpen: () => void
+  windowDimensions: XY
 } & ProjectsListItemContentProps
 
 function ProjectsListItem({
@@ -27,20 +28,29 @@ function ProjectsListItem({
   evenOdd,
   isOpen,
   toggleIsOpen,
+  windowDimensions,
 }: ProjectsListItemProps) {
-  const id = 'projects-' + stringToId(projectName)
-  const liId = id
-  const buttonId = id + '-button'
-  const divId = id + '-content'
+  const contentRef = useRef<any>()
+  const [style, setStyle] = useState<React.CSSProperties>({
+    '--current-height': contentRef.current?.scrollHeight + 'px',
+  } as React.CSSProperties)
+
+  const id = stringToId(projectName)
+  const buttonId = `projects-${id}-button`
+  const contentId = `projects-${id}-content`
+
+  useEffect(() => {
+    setStyle({ '--current-height': contentRef.current?.scrollHeight + 'px' } as React.CSSProperties)
+  }, [windowDimensions.x, contentRef, isOpen])
 
   return (
-    <li id={liId} className={'projects-li'}>
+    <li id={`projects-${id}`} className={'projects-li'}>
       <h3>
         <button
           id={buttonId}
           className="projects-li-button"
           onClick={toggleIsOpen}
-          aria-controls={divId}
+          aria-controls={contentId}
           aria-expanded={isOpen}>
           <span className={sleeved} style={sleevedStyle}>
             {projectName}
@@ -48,10 +58,11 @@ function ProjectsListItem({
         </button>
       </h3>
       <div
-        id={divId}
+        id={contentId}
         aria-labelledby={buttonId}
-        className={'projects-li-content ' + (isOpen ? '' : 'collapsed')}>
-        <div className={'projects-li-content-inner ' + evenOdd}>
+        className={'projects-li-content ' + (isOpen ? '' : 'collapsed')}
+        style={style}>
+        <div ref={contentRef} className={'projects-li-content-inner ' + evenOdd}>
           <div className="projects-img-container">{imgChildren}</div>
           <div className="projects-text">
             <h4 className="title-text">{projectTitle}</h4>
