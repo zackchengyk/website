@@ -213,8 +213,8 @@ $image-line: 1px solid $mid-tone;
 
 // ======================================================================== INTERACTION
 
-$highlight-transition-duration: 0.4s;
-$projects-li-height-transition-duration: 0.8s;
+$highlight-transition-duration: 0.275s;
+$projects-li-height-transition-duration: 0.5s;
 
 @mixin fade-in($delay-multiplier, $duration-multiplier: 1) {
   animation: fadeIn (0.25s * $duration-multiplier) ease-out forwards ($delay-multiplier * 0.19s);

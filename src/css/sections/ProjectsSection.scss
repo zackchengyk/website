@@ -49,7 +49,7 @@
   height: var(--current-height);
   width: 100%;
   overflow: hidden;
-  transition: height $projects-li-height-transition-duration ease;
+  transition: height $projects-li-height-transition-duration cubic-bezier(0.6, 0.05, 0.4, 0.95);
 
   &.collapsed {
     height: 0;
