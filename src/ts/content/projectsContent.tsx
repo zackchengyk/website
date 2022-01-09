@@ -27,7 +27,55 @@ const planetarium: ProjectsListItemContentProps = {
   ),
   projectTitle: 'Planetarium',
   projectSubtitle: 'THREE.js, Typescript',
-  projectBody: <p>{'My God this was tiring. Todo.'}</p>,
+  projectBody: (
+    <>
+      <p>
+        {'These '}
+        <strong>{'procedural pixel planets'}</strong>
+        {' are the result of my recent obsession with getting good at '}
+        <OutLink href="https://threejs.org">{'THREE.js'}</OutLink>
+        {', combined with my love for '}
+        <strong>{'generative art'}</strong>
+        {', '}
+        <strong>{'crunchy pixels'}</strong>
+        {', and '}
+        <strong>{'outer space'}</strong>
+        {'.'}
+      </p>
+      <p>
+        {'To achieve the look I wanted, I had the generator randomly select from a predefined dictionary of '}
+        <strong>{' parameter ranges and distributions'}</strong>
+        {'. '}
+        <strong>{'Multi-octave Perlin noise'}</strong>
+        {' (by way of a '}
+        <em>{'massive'}</em>
+        {' fragment shader), some simplified orbital mechanics, and a '}
+        <strong>{' two-pass pixelization effect'}</strong>
+        {' tied up the rest.'}
+      </p>
+      <p>
+        {"Since it's entirely browser-based, optimizing it for "}
+        <strong>{'performance'}</strong>
+        {' was the biggest challenge by far. '}
+        {'A more detailed write-up is in the works, so stay tuned for that!'}
+      </p>
+      <p>
+        {"Heavily inspired by Daniel Linssen's "}
+        <OutLink href="https://managore.itch.io/planetarium">{'Planetarium'}</OutLink>
+        {'.'}
+      </p>
+      <p>
+        <a href="#home">
+          <strong>{'> Live demo (just scroll up!)'}</strong>
+        </a>
+      </p>
+      <p>
+        <OutLink href="https://github.com/zackchengyk/website/tree/master/src/ts/planetarium">
+          <strong>{'> GitHub'}</strong>
+        </OutLink>
+      </p>
+    </>
+  ),
 }
 
 // ======================================================================== Cityscape
@@ -52,16 +100,18 @@ const cityscape: ProjectsListItemContentProps = {
   projectBody: (
     <>
       <p>
-        {'We created a '}
+        {'For our graphics final project, we created an infinite, '}
         <strong>{'procedurally-generated'}</strong>
-        {' cityscape which you can freely traverse, complete with a day-night cycle and weather!'}
+        {' cityscape, which you can '}
+        <OutLink href="https://zackchengyk.github.io/cityscape/">{'explore right in your browser'}</OutLink>
+        {'!'}
       </p>
       <p>
         {'In a way, this project was one big excuse for me to experiment with '}
         <strong>{'WebGL'}</strong>
-        {': I figured out how to make '}
+        {'. I figured out how to create '}
         <strong>{'rounded outlines'}</strong>
-        {' via vertex shader-extruded geometry, sneaky '}
+        {' using vertex shader-extruded geometry, sneaky '}
         <strong>{'backface culling'}</strong>
         {', and '}
         <strong>{'stencil buffers'}</strong>
@@ -69,21 +119,21 @@ const cityscape: ProjectsListItemContentProps = {
         <strong>{'bloom'}</strong>
         {' and '}
         <strong>{'overlay'}</strong>
-        {' via custom shader passes; and created the movement system, building textures, and lighting.'}
+        {' via custom shader passes; and also made a movement system and day-night cycle.'}
       </p>
       <p>
         <strong>{'Fun facts: '}</strong>
         <br />
-        {"- The camera doesn't actually move! Everything else is really moving in the opposite direction."}
+        {"- The camera doesn't actually move! Instead, everything else moves in the opposite direction."}
         <br />
         {
           "- The buildings don't change in height (that wouldn't be performant) or scale (it would mess up textures) "
         }
-        {'\u2014 instead, they descend underground... making outline generation a real pain.'}
+        {'\u2014 instead, they descend underground... that made outline generation a real pain.'}
       </p>
       <p>
         <OutLink href="https://zackchengyk.github.io/cityscape/">
-          <strong>{'> Try it out here!'}</strong>
+          <strong>{'> Visit our city!'}</strong>
         </OutLink>
       </p>
       <p>
@@ -115,10 +165,10 @@ const maps: ProjectsListItemContentProps = {
         {'I made a '}
         <strong>{'browser-based'}</strong>
         {', IntelliJ-themed map applet in React, with a Java backend server. '}
-        <em>{"I can't believe it's not Bootstrap!"}</em>
+        {'This was for class, but I put way too much effort into it not to show it off haha.'}
       </p>
       <p>
-        {'The app features pathfinding using '}
+        {'The app features pathfinding via '}
         <strong>
           <OutLink href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">
             {"Dijkstra's algorithm"}
@@ -132,7 +182,7 @@ const maps: ProjectsListItemContentProps = {
         </strong>
         {', and '}
         <strong>{'server- and client-side caching'}</strong>
-        {" to boot. Rendering is done on a plain'ol <canvas>."}
+        {'.'}
       </p>
       <p>
         {'Its '}
@@ -151,7 +201,7 @@ const maps: ProjectsListItemContentProps = {
         <strong>{'toast notifications'}</strong>
         {" for the heck of it (it wasn't feeling "}
         <em>{'IntelliJ'}</em>
-        {' enough yet).'}
+        {" enough yet). Rendering is done on a plain'ol canvas element."}
       </p>
       <p>
         <OutLink href="https://github.com/zackchengyk/maps">
@@ -183,7 +233,7 @@ const voxels: ProjectsListItemContentProps = {
   projectBody: (
     <>
       <p>
-        {'We implemented '}
+        {'For our computer vision final project, we implemented '}
         <strong>{'photorealistic scene reconstruction'}</strong>
         {' via '}
         <strong>{'voxel coloring'}</strong>
@@ -232,9 +282,9 @@ const override: ProjectsListItemContentProps = {
         <OutLink href="https://twitter.com/brownrisdgames">
           {'Brown-'}
           <abbr title="Rhode Island School of Design">{'RISD'}</abbr>
-          {' Game Developers club'}
+          {' Game Developers'}
         </OutLink>
-        {', we made an arcade-style shoot-em-up where you take control of your enemies: '}
+        {' club, we made an arcade-style shoot-em-up where you take control of your enemies: '}
         <OutLink href="https://rainydey.itch.io/override">{'Override! (available on Itch.io)'}</OutLink>
       </p>
       <p>
@@ -243,7 +293,7 @@ const override: ProjectsListItemContentProps = {
         <strong>{'Unity'}</strong>
         {' and '}
         <strong>{'C#'}</strong>
-        {', plus some UI design and real-time graphics fundamentals.'}
+        {', plus brush up on some UI design and real-time graphics fundamentals.'}
       </p>
       <p>
         <OutLink href="https://rainydey.itch.io/override">
