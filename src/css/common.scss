@@ -213,10 +213,11 @@ $image-line: 1px solid $mid-tone;
 
 // ======================================================================== INTERACTION
 
-$delay: 0.3s;
+$highlight-transition-duration: 0.4s;
+$projects-li-height-transition-duration: 0.8s;
 
-@mixin fade-in($delay-multiplier) {
-  animation: fadeIn 0.8s ease forwards ($delay-multiplier * 0.4s);
+@mixin fade-in($delay-multiplier, $duration-multiplier: 1) {
+  animation: fadeIn (0.25s * $duration-multiplier) ease-out forwards ($delay-multiplier * 0.19s);
   opacity: 0;
 }
 @keyframes fadeIn {
@@ -291,7 +292,7 @@ $projects-button-highlight-color: var(--project-highlight-color);
   background-position: 105% 0; // avoids tiny sliver of visibility on right side, in some browsers
   background-repeat: no-repeat;
 }
-$highlight-base-transition: background-position $delay ease;
+$highlight-base-transition: background-position $highlight-transition-duration ease;
 
 @mixin highlight-hover {
   background-position: 0 0;

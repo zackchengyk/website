@@ -49,7 +49,7 @@
   height: var(--current-height);
   width: 100%;
   overflow: hidden;
-  transition: height $delay ease;
+  transition: height $projects-li-height-transition-duration ease;
 
   &.collapsed {
     height: 0;

@@ -3,7 +3,7 @@
 @import '../common.scss';
 
 $banner-left-font-family: $munro-small;
-$banner-left-font-size: 45px;
+$banner-left-font-size: linear(40, 60);
 $banner-left-font-weight: normal;
 $banner-left-font-color: $light;
 $banner-left-line-height: 1;
@@ -23,7 +23,7 @@ $banner-content-shadow: 0 10px 15px $black;
 }
 
 #banner-left {
-  @include fade-in(1);
+  @include fade-in(7, 2);
 
   place-self: end start;
   padding: $banner-vert-space 0 $banner-vert-space $banner-horz-space;
@@ -52,7 +52,7 @@ $banner-content-shadow: 0 10px 15px $black;
 }
 
 #banner-right {
-  @include fade-in(0);
+  @include fade-in(0, 3.5);
 
   place-self: stretch;
   padding: $banner-vert-space $banner-horz-space $banner-vert-space 0;
