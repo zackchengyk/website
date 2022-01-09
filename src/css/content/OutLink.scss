@@ -11,14 +11,14 @@
 
   color: $link-font-color;
   > strong {
-    color: $link-font-color;
+    color: $link-font-color !important;
   }
   text-decoration-color: $link-font-color;
 
   &:visited {
     color: $link-visited-font-color;
     > strong {
-      color: $link-visited-font-color;
+      color: $link-visited-font-color !important;
     }
     text-decoration-color: $link-visited-font-color;
   }
