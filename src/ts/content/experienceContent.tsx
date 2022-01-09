@@ -48,15 +48,21 @@ const brgd: ExperienceListItemContentProps = {
   experienceName: 'BRGD',
   imgSrc: brgdSrc,
   experienceTitle: 'Executive Board Member',
-  experienceSubtitle: 'Brown-RISD Game Developers',
+  experienceSubtitle: (
+    <>
+      {'Brown-'}
+      <abbr title="Rhode Island School of Design">{'RISD'}</abbr>
+      {' Game Developers'}
+    </>
+  ),
   experienceBody: (
     <p>
       {'Right now, I just help to run the club and oversee game design and development, '}
       {'and, of course, '}
       <a href="#projects-override">{'make games'}</a>
-      {". In the near future, I'll be working on improving our "}
+      {". In the near future, I'll also be working on improving our "}
       <strong>{'Unity and C# instruction'}</strong>
-      {' for new programmers.'}
+      {', to get our new programmers up to speed.'}
     </p>
   ),
 }
@@ -102,7 +108,9 @@ const engn0031: ExperienceListItemContentProps = {
         {' and '}
         <strong>{'Mathematica'}</strong>
         {', almost always extending my hours to help those who stuck around. '}
-        {' I loved being a UTA, especially figuring out '}
+        {" I had heckin' good time as a UTA, "}
+        <em>{'especially'}</em>
+        {' figuring out '}
         <strong>{'effective ways to explain things'}</strong>
         {' :)'}
       </p>
