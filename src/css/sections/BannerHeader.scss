@@ -68,6 +68,7 @@ $banner-content-shadow: 0 10px 15px $black;
 
   > img {
     height: 100%;
+    width: unset;
     filter: drop-shadow($banner-content-shadow);
   }
 }

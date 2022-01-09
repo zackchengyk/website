@@ -19,7 +19,7 @@ const ExperienceSection = React.forwardRef<HTMLElement, ExperienceSectionProps>(
       if (sleeved && scrollTop + 0.75 * windowDimensions.y > ref?.current.offsetTop) {
         setSleeved('')
       }
-    }, [scrollTop, windowDimensions])
+    }, [scrollTop, windowDimensions.x, windowDimensions.y])
 
     return (
       <section id="experience" className={extraClassName} ref={ref}>

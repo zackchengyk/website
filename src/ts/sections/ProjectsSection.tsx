@@ -19,7 +19,7 @@ const ProjectsSection = React.forwardRef<HTMLElement, ProjectsSectionProps>(
       if (sleeved && scrollTop + 0.75 * windowDimensions.y > ref?.current!.offsetTop) {
         setSleeved('')
       }
-    }, [scrollTop, windowDimensions])
+    }, [scrollTop, windowDimensions.x, windowDimensions.y])
 
     // ================== Accordion
     const [currentOpen, setCurrentOpen] = useState<Record<ProjectName, boolean>>(

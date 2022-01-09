@@ -21,7 +21,7 @@
 
 .experience-li-div {
   display: grid;
-  grid-template: 1fr / minmax(min(15%, 80px), 3fr) minmax(min(85%, 200px), 17fr);
+  grid-template: 1fr / minmax(min(15vw, 50px), 1fr) minmax(0, 9fr);
   gap: 15px; //todo
 
   @include slide-up;
