@@ -7,6 +7,7 @@ import { useWindowDimensions } from './useWindowDimensions'
 import React, { useEffect, useRef, useState } from 'react'
 import '../css/App.scss'
 import '../css/font.css'
+import { projectNames } from './content/projectsContent'
 
 export const orderedSectionNames = ['home', 'about', 'experience', 'projects'] as const
 export type SectionName = typeof orderedSectionNames[number]
@@ -14,7 +15,9 @@ export type SectionName = typeof orderedSectionNames[number]
 function allowAnimationBasedOnURLHash(): boolean {
   if (window.location.hash) {
     const id = window.location.hash.slice(1)
-    return id === 'home' || !orderedSectionNames.includes(id as any)
+    return (
+      id === 'home' || !(orderedSectionNames.includes(id as any) || projectNames.includes(id.slice(9) as any))
+    )
   }
   return true
 }

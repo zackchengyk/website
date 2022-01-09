@@ -160,6 +160,9 @@ $navbar-item-vert-padding: 0.5rem;
 $navbar-item-horz-padding: 0.5rem;
 $navbar-item-padding: $navbar-item-vert-padding $navbar-item-horz-padding;
 
+$effective-navbar-height: ($navbar-vert-space + $navbar-item-vert-padding) * 2 + $navbar-item-line-height *
+  $navbar-item-font-size + 0.0625rem * 2; // Last term accounts for border
+
 // ======================================================================== SECTIONS
 
 nav {
