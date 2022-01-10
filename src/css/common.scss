@@ -68,7 +68,7 @@ $green-black: #002e19;
 // Light mode
 :root {
   --background-color: #{$light};
-  --background-color-overlay: #{color.change($light, $alpha: 0.5)};
+  --background-color-overlay: #{color.change($light, $alpha: 0.7)};
   --text-color: #{$dark-light-light};
   --text-weight: 450;
   --strong-text-color: #{$dark-light};
@@ -94,7 +94,7 @@ $green-black: #002e19;
 // Dark mode
 :root {
   --background-color: #{$dark};
-  --background-color-overlay: #{color.change($dark, $alpha: 0.5)};
+  --background-color-overlay: #{color.change($dark, $alpha: 0.7)};
   --text-color: #{$light-dark-dark};
   --text-weight: 350;
   --strong-text-color: #{$light-dark};
@@ -144,6 +144,10 @@ $experience-li-vert-space: linear(10, 20);
 $experience-li-horz-space: 0;
 $projects-li-vert-space: linear(20, 30);
 $projects-li-horz-space: linear(0, 30);
+$art-vert-space: linear(20, 25);
+$art-horz-space: 20px;
+$art-padding-top: linear(20, 50);
+$art-max-width: $larger-breakpoint + 150px;
 
 // ======================================================================== NAVBAR
 
@@ -288,6 +292,12 @@ $projects-button-line-height: 1;
 
 $projects-button-highlight-font-color: var(--project-highlight-text-color);
 $projects-button-highlight-color: var(--project-highlight-color);
+
+$art-name-font-family: $munro-small;
+$art-name-font-size: 30px;
+$art-name-font-weight: normal;
+$art-name-font-color: var(--strong-text-color);
+$art-name-line-height: 1;
 
 // ======================================================================== TEXT MIXINS
 

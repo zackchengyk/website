@@ -1,0 +1,108 @@
+@use 'sass:color';
+@use 'sass:math';
+@import '../common.scss';
+
+#art-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#art-ul {
+  list-style: none;
+  padding-top: $art-padding-top;
+  width: 100%;
+  max-width: $art-max-width + 2 * $section-horz-space;
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      clamp(
+        33.33333333333% - 2 * $art-horz-space,
+        math.div($larger-breakpoint - 2 * $art-horz-space + 2 * $section-horz-space, 3),
+        100%
+      ),
+      1fr
+    )
+  );
+  place-items: center;
+  gap: $art-vert-space $art-horz-space;
+}
+
+.art-li {
+  position: relative;
+
+  scroll-margin-top: $effective-navbar-height;
+  width: 100%;
+  padding-top: math.div(5, 7) * 100%;
+}
+
+.art-li-div {
+  position: absolute;
+  inset: 0px;
+
+  cursor: pointer;
+
+  // Slide up
+  @include slide-up();
+  transition: $slide-up-transition, $highlight-base-transition;
+
+  > .art-li-overlay {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  &:hover {
+    > .art-li-overlay {
+      opacity: 1;
+    }
+  }
+
+  border-radius: $border-radius;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.15), 0 6px 16px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.art-li-img-container {
+  position: absolute;
+  inset: 0px;
+}
+
+.art-li-img {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: cover;
+  border-radius: $border-radius;
+}
+
+.art-li-overlay {
+  pointer-events: none;
+
+  position: absolute;
+  inset: -1px;
+  z-index: 4;
+
+  border-radius: $border-radius;
+
+  display: grid;
+  place-items: center;
+
+  background-color: $background-color-overlay;
+
+  > .title-text {
+    pointer-events: auto;
+
+    margin: 0;
+    text-shadow: 0 0 10px $background-color;
+
+    font-family: $art-name-font-family;
+    font-size: $art-name-font-size;
+    font-weight: $art-name-font-weight;
+    color: $art-name-font-color;
+    line-height: $art-name-line-height;
+  }
+}

@@ -8,8 +8,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../css/App.scss'
 import '../css/font.css'
 import { projectNames } from './content/projectsContent'
+import ArtSection from './sections/ArtSection'
 
-export const orderedSectionNames = ['home', 'about', 'experience', 'projects'] as const
+export const orderedSectionNames = ['home', 'about', 'experience', 'projects', 'art'] as const
 export type SectionName = typeof orderedSectionNames[number]
 
 function allowAnimationBasedOnURLHash(): boolean {
@@ -80,6 +81,7 @@ function App() {
           windowDimensions={windowDimensions}
           scrollTop={scrollTop}
         />
+        <ArtSection ref={sectionRefs.current.art} windowDimensions={windowDimensions} scrollTop={scrollTop} />
       </div>
     </div>
   )
