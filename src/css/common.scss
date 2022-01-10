@@ -34,9 +34,9 @@ $larger-breakpoint: $larger-b * 1px;
 // ======================================================================== PRIMARY PALETTE
 
 $white: #ffffff;
-$light-light: rgb(255, 241, 231);
-$light: #fee5d4;
-$light-dark: #f5dac4;
+$light-light: #fff7f3;
+$light: #fceee4;
+$light-dark: #f5d9c2;
 $light-dark-dark: #e8ceb8;
 
 $mid-tone-light: #b5a191;
@@ -68,6 +68,7 @@ $green-black: #002e19;
 // Light mode
 :root {
   --background-color: #{$light};
+  --background-color-overlay: #{color.change($light, $alpha: 0.5)};
   --text-color: #{$dark-light-light};
   --text-weight: 450;
   --strong-text-color: #{$dark-light};
@@ -93,6 +94,7 @@ $green-black: #002e19;
 // Dark mode
 :root {
   --background-color: #{$dark};
+  --background-color-overlay: #{color.change($dark, $alpha: 0.5)};
   --text-color: #{$light-dark-dark};
   --text-weight: 350;
   --strong-text-color: #{$light-dark};
@@ -118,6 +120,7 @@ $green-black: #002e19;
 // ======================================================================== COLORS
 
 $background-color: var(--background-color);
+$background-color-overlay: var(--background-color-overlay);
 $banner-background-color: $dark-dark;
 $projects-div-background-color: var(--projects-div-background-color);
 
@@ -125,15 +128,15 @@ $temporary: color.change($brown, $alpha: 0.2);
 
 // ======================================================================== SPACING
 
-$border-radius: 2px;
+$border-radius: 4px;
 
 $side-padding: 20px;
 $banner-horz-space: 20px;
 $banner-vert-space: 25px;
 
 $section-horz-space: 20px;
-$section-vert-space: linear(60, 80);
-$section-vert-space-first-last: linear(20, 80);
+$section-vert-space: linear(60, 95);
+$section-vert-space-first-last: linear(20, 95);
 
 $about-vert-gap: linear(20, 30);
 $about-horz-gap: 30px;
@@ -164,6 +167,11 @@ $effective-navbar-height: ($navbar-vert-space + $navbar-item-vert-padding) * 2 +
   $navbar-item-font-size + 0.0625rem * 2; // Last term accounts for border
 
 // ======================================================================== SECTIONS
+
+$inner-section-grid-gap: 15px;
+
+$line: 1px solid $mid-tone;
+$image-line: 1px solid $mid-tone;
 
 nav {
   text-transform: uppercase;
@@ -198,6 +206,8 @@ nav {
 .section-body {
   width: 100%;
   padding: 0 $section-horz-space $section-vert-space;
+
+  border-top: $line;
 }
 section:first-of-type > .section-body {
   padding-top: $section-vert-space-first-last;
@@ -205,11 +215,6 @@ section:first-of-type > .section-body {
 section:last-of-type > .section-body {
   padding-bottom: $section-vert-space-first-last;
 }
-
-$inner-section-grid-gap: 15px;
-
-$line: 1px solid $mid-tone;
-$image-line: 1px solid $mid-tone;
 
 // ======================================================================== INTERACTION
 

@@ -24,15 +24,12 @@ function ExperienceListItem({
   sleevedStyle,
 }: ExperienceListItemProps) {
   const id = 'experience-' + stringToId(experienceName)
-  const liId = id
-  const imgId = id + '-img'
-  const divId = id + '-content'
 
   return (
-    <li id={liId} className={'experience-li ' + extraClassName}>
+    <li id={id} className={'experience-li ' + extraClassName}>
       <div className={'experience-li-div ' + sleeved} style={sleevedStyle}>
-        <img id={imgId} className={'experience-li-img'} src={imgSrc} />
-        <div id={divId} className={'experience-li-inner-div'}>
+        <img id={`${id}-img`} className={'experience-li-img'} src={imgSrc} />
+        <div id={`${id}-content`} className={'experience-li-inner-div'}>
           <h3 className={'title-text'}>{experienceTitle}</h3>
           <h4 className={'subtitle-text'}>{experienceSubtitle}</h4>
           <div className={'body-text'}>{experienceBody}</div>

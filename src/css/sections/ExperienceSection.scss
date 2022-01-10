@@ -3,7 +3,6 @@
 @import '../common.scss';
 
 #experience-body {
-  border-top: $line;
   @include section-two-grid(auto-fill);
 }
 
