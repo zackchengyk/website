@@ -41,7 +41,15 @@ function ProjectsListItem({
 
   useEffect(() => {
     setStyle({ '--current-height': contentRef.current?.scrollHeight + 'px' } as React.CSSProperties)
-  }, [windowDimensions.x, contentRef, isOpen])
+  }, [windowDimensions.x, contentRef])
+
+  useEffect(() => {
+    setStyle({ '--current-height': contentRef.current?.scrollHeight + 'px' } as React.CSSProperties)
+    setTimeout(
+      () => setStyle({ '--current-height': contentRef.current?.scrollHeight + 'px' } as React.CSSProperties),
+      500
+    )
+  }, [isOpen])
 
   return (
     <li id={`projects-${id}`} className={'projects-li'}>
