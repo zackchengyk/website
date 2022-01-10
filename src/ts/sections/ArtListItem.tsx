@@ -16,7 +16,12 @@ function ArtListItem({ artName, imgSrc, sleeved, sleevedStyle }: ArtListItemProp
     <li id={id} className={'art-li'}>
       <div className={'art-li-div ' + sleeved} style={sleevedStyle}>
         <div className={'art-li-img-container'}>
-          <img className={'art-li-img'} src={imgSrc} loading="lazy" />
+          <img
+            className={'art-li-img'}
+            srcSet={imgSrc}
+            loading="lazy"
+            sizes="(max-width: 607px) 100vw, (max-width: 900px) 50vw, 350px"
+          />
         </div>
         <div className={'art-li-overlay'}>
           <h3 className={'title-text'}>{artName}</h3>

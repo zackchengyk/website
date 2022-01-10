@@ -20,7 +20,7 @@
     minmax(
       clamp(
         33.33333333333% - 2 * $art-horz-space,
-        math.div($larger-breakpoint - 2 * $art-horz-space + 2 * $section-horz-space, 3),
+        math.div($larger-breakpoint - 2 * $art-horz-space - 2 * $section-horz-space, 3),
         100%
       ),
       1fr
@@ -41,8 +41,6 @@
 .art-li-div {
   position: absolute;
   inset: 0px;
-
-  cursor: pointer;
 
   // Slide up
   @include slide-up();
