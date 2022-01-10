@@ -67,7 +67,7 @@ body {
   scroll-behavior: smooth;
   > div {
     &.allow-animation {
-      @include fade-in(15, 3.5);
+      @include fade-in(10.5, 3.5);
     }
     display: grid;
     grid-template-columns: minmax(0, 1fr);
