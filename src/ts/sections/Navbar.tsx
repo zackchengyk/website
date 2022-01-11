@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import '../../css/sections/Navbar.scss'
 import { SectionName, orderedSectionNames } from '../App'
-import { XY } from '../common'
+import '../../css/sections/Navbar.scss'
 
 // ======================================================================== Component: Navbar
 

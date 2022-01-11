@@ -42,7 +42,6 @@ button {
 
 // ================== MAIN STUFF
 
-html,
 body {
   background-color: $background-color;
 }
@@ -74,7 +73,7 @@ body {
     place-items: start stretch;
 
     > #navbar,
-    #about {
+    > #about {
       grid-row: 1;
       grid-column: 1;
     }
