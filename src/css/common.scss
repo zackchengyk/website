@@ -65,33 +65,7 @@ $green-dark: #005c2e;
 $green-dark-dark: #004826;
 $green-black: #002e19;
 
-// Light mode
-:root {
-  --background-color: #{$light};
-  --background-color-overlay: #{color.change($light, $alpha: 0.7)};
-  --text-color: #{$dark-light-light};
-  --text-weight: 450;
-  --strong-text-color: #{$dark-light};
-  --strong-text-weight: 675;
-  --link-text-weight-bonus: 50;
-  --blockquote-line-color: #{color.change($dark-light-light, $alpha: 0.25)};
-
-  --link-text-color: #{$green-dark};
-  --link-highlight-text-color: #{$green-dark-dark};
-  --link-highlight-color: #{$green-white};
-
-  --experience-li-img-background-color: transparent;
-
-  --project-button-text-color: #{$dark-light};
-  --project-highlight-text-color: #{$dark};
-  --project-highlight-color: #{$blue-white};
-  --projects-div-background-color: #{$light-light};
-
-  --navbar-active-text-color: #{$dark-light};
-  --navbar-inactive-text-color: #{dark-light-light};
-}
-
-// Dark mode
+// Dark mode by default
 :root {
   --background-color: #{$dark};
   --background-color-overlay: #{color.change($dark, $alpha: 0.7)};
@@ -115,6 +89,34 @@ $green-black: #002e19;
 
   --navbar-active-text-color: #{$light-dark};
   --navbar-inactive-text-color: #{$light-dark-dark};
+}
+
+// Light mode
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #{$light};
+    --background-color-overlay: #{color.change($light, $alpha: 0.7)};
+    --text-color: #{$dark-light-light};
+    --text-weight: 450;
+    --strong-text-color: #{$dark-light};
+    --strong-text-weight: 675;
+    --link-text-weight-bonus: 50;
+    --blockquote-line-color: #{color.change($dark-light-light, $alpha: 0.25)};
+
+    --link-text-color: #{$green-dark};
+    --link-highlight-text-color: #{$green-dark-dark};
+    --link-highlight-color: #{$green-white};
+
+    --experience-li-img-background-color: transparent;
+
+    --project-button-text-color: #{$dark-light};
+    --project-highlight-text-color: #{$dark};
+    --project-highlight-color: #{$blue-white};
+    --projects-div-background-color: #{$light-light};
+
+    --navbar-active-text-color: #{$dark-light};
+    --navbar-inactive-text-color: #{dark-light-light};
+  }
 }
 
 // ======================================================================== COLORS
