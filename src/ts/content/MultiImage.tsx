@@ -1,9 +1,7 @@
-import '../../css/content/MultiImage.scss'
-
 type MultiImageProps = {
   children?: React.ReactNode
   style?: React.CSSProperties
-  gridTemplateAreas?: string
+  gridTemplateAreas: string
 }
 
 function MultiImage({ children, style, gridTemplateAreas }: MultiImageProps) {

@@ -8,12 +8,12 @@ import image4SmallSrc from './planetarium-image-4-small.png'
 import image4MediumSrc from './planetarium-image-4-medium.png'
 
 export default {
-  image1SmallSrc,
-  image1MediumSrc,
-  image2SmallSrc,
-  image2MediumSrc,
-  image3SmallSrc,
-  image3MediumSrc,
-  image4SmallSrc,
-  image4MediumSrc,
+  image1Small: { aspect: { x: 700, y: 473 }, src: image1SmallSrc },
+  image1Medium: { aspect: { x: 1400, y: 946 }, src: image1MediumSrc },
+  image2Small: { aspect: { x: 700, y: 473 }, src: image2SmallSrc },
+  image2Medium: { aspect: { x: 1400, y: 946 }, src: image2MediumSrc },
+  image3Small: { aspect: { x: 700, y: 473 }, src: image3SmallSrc },
+  image3Medium: { aspect: { x: 1400, y: 946 }, src: image3MediumSrc },
+  image4Small: { aspect: { x: 700, y: 473 }, src: image4SmallSrc },
+  image4Medium: { aspect: { x: 1400, y: 946 }, src: image4MediumSrc },
 }

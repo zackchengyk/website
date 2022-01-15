@@ -415,3 +415,25 @@ $highlight-base-transition: background-position $highlight-transition-duration e
     max-width: 100%;
   }
 }
+
+// ======================================================================== MEDIA
+
+.multi-image {
+  display: grid;
+  gap: 10px;
+
+  > * {
+    border: $image-line;
+    overflow: hidden;
+  }
+}
+
+.aspect-ratio-outer {
+  position: relative;
+  margin: -0.5px;
+}
+
+.aspect-ratio-inner {
+  position: absolute;
+  inset: 0;
+}

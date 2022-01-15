@@ -9,6 +9,7 @@ import OutLink from './OutLink'
 import MultiImage from './MultiImage'
 import EmbeddedVideo from './EmbeddedVideo'
 import PseudoGif from './PseudoGif'
+import EmbeddedImage from './EmbeddedImage'
 
 export const projectNames = ['planetarium', 'cityscape', 'maps', 'voxels', 'override', 'spacewar'] as const
 export type ProjectName = typeof projectNames[number]
@@ -19,10 +20,10 @@ const planetarium: ProjectsListItemContentProps = {
   projectName: 'Planetarium',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
-      <img src={planetariumSrc.image1MediumSrc} alt="todo" style={{ gridArea: 'a' }} />
-      <img src={planetariumSrc.image2SmallSrc} alt="todo" />
-      <img src={planetariumSrc.image3SmallSrc} alt="todo" />
-      <img src={planetariumSrc.image4SmallSrc} alt="todo" />
+      <EmbeddedImage {...planetariumSrc.image1Medium} alt="todo" style={{ gridArea: 'a' }} />
+      <EmbeddedImage {...planetariumSrc.image2Small} alt="todo" />
+      <EmbeddedImage {...planetariumSrc.image3Small} alt="todo" />
+      <EmbeddedImage {...planetariumSrc.image4Small} alt="todo" />
     </MultiImage>
   ),
   projectTitle: 'Planetarium',
@@ -84,15 +85,10 @@ const cityscape: ProjectsListItemContentProps = {
   projectName: 'Cityscape',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
-      <EmbeddedVideo
-        webmSrc={cityscapeSrc.recordingWebmSrc}
-        mp4Src={cityscapeSrc.recordingMp4Src}
-        posterSrc={cityscapeSrc.recordingPosterSrc}
-        style={{ gridArea: 'a' }}
-      />
-      <img src={cityscapeSrc.image3Src} alt="todo" />
-      <img src={cityscapeSrc.image2Src} alt="todo" />
-      <img src={cityscapeSrc.image1Src} alt="todo" />
+      <EmbeddedVideo {...cityscapeSrc.recording} style={{ gridArea: 'a' }} />
+      <EmbeddedImage {...cityscapeSrc.image3} alt="todo" />
+      <EmbeddedImage {...cityscapeSrc.image2} alt="todo" />
+      <EmbeddedImage {...cityscapeSrc.image1} alt="todo" />
     </MultiImage>
   ),
   projectTitle: 'Cityscape',
@@ -151,10 +147,10 @@ const maps: ProjectsListItemContentProps = {
   projectName: 'Maps',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
-      <img src={mapsSrc.imageSrc} alt="todo" style={{ gridArea: 'a' }} />
-      <PseudoGif webmSrc={mapsSrc.recording1WebmSrc} mp4Src={mapsSrc.recording1Mp4Src} />
-      <PseudoGif webmSrc={mapsSrc.recording2WebmSrc} mp4Src={mapsSrc.recording2Mp4Src} />
-      <PseudoGif webmSrc={mapsSrc.recording3WebmSrc} mp4Src={mapsSrc.recording3Mp4Src} />
+      <EmbeddedImage {...mapsSrc.image} alt="todo" style={{ gridArea: 'a' }} />
+      <PseudoGif {...mapsSrc.recording1} />
+      <PseudoGif {...mapsSrc.recording2} />
+      <PseudoGif {...mapsSrc.recording3} />
     </MultiImage>
   ),
   projectTitle: 'Maps',
@@ -217,15 +213,15 @@ const maps: ProjectsListItemContentProps = {
 const voxels: ProjectsListItemContentProps = {
   projectName: 'Voxel Coloring',
   imgChildren: (
-    <MultiImage gridTemplateAreas='"a b c d" "e f g h"'>
-      <img src={voxelsSrc.imageBirdSrc} alt="todo" />
-      <PseudoGif webmSrc={voxelsSrc.recordingBird10WebmSrc} mp4Src={voxelsSrc.recordingBird10Mp4Src} />
-      <PseudoGif webmSrc={voxelsSrc.recordingBird20WebmSrc} mp4Src={voxelsSrc.recordingBird20Mp4Src} />
-      <PseudoGif webmSrc={voxelsSrc.recordingBird100WebmSrc} mp4Src={voxelsSrc.recordingBird100Mp4Src} />
-      <img src={voxelsSrc.imagePigSrc} alt="todo" />
-      <PseudoGif webmSrc={voxelsSrc.recordingPig10WebmSrc} mp4Src={voxelsSrc.recordingPig10Mp4Src} />
-      <PseudoGif webmSrc={voxelsSrc.recordingPig20WebmSrc} mp4Src={voxelsSrc.recordingPig20Mp4Src} />
-      <PseudoGif webmSrc={voxelsSrc.recordingPig80WebmSrc} mp4Src={voxelsSrc.recordingPig80Mp4Src} />
+    <MultiImage gridTemplateAreas='"a b c d" "e f g h"' style={{ gridTemplate: '1fr 1fr / repeat(4, 1fr)' }}>
+      <EmbeddedImage {...voxelsSrc.imageBird} alt="todo" />
+      <PseudoGif {...voxelsSrc.recordingBird10} />
+      <PseudoGif {...voxelsSrc.recordingBird20} />
+      <PseudoGif {...voxelsSrc.recordingBird100} />
+      <EmbeddedImage {...voxelsSrc.imagePig} alt="todo" />
+      <PseudoGif {...voxelsSrc.recordingPig10} />
+      <PseudoGif {...voxelsSrc.recordingPig20} />
+      <PseudoGif {...voxelsSrc.recordingPig80} />
     </MultiImage>
   ),
   projectTitle: "Wait, It's All Voxels?",
@@ -263,14 +259,10 @@ const override: ProjectsListItemContentProps = {
   projectName: 'Override',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
-      <PseudoGif
-        webmSrc={overrideSrc.recording1WebmSrc}
-        mp4Src={overrideSrc.recording1Mp4Src}
-        style={{ gridArea: 'a' }}
-      />
-      <PseudoGif webmSrc={overrideSrc.recording2WebmSrc} mp4Src={overrideSrc.recording2Mp4Src} />
-      <PseudoGif webmSrc={overrideSrc.recording3WebmSrc} mp4Src={overrideSrc.recording3Mp4Src} />
-      <PseudoGif webmSrc={overrideSrc.recording4WebmSrc} mp4Src={overrideSrc.recording4Mp4Src} />
+      <PseudoGif {...overrideSrc.recording1} style={{ gridArea: 'a' }} />
+      <PseudoGif {...overrideSrc.recording2} />
+      <PseudoGif {...overrideSrc.recording3} />
+      <PseudoGif {...overrideSrc.recording4} />
     </MultiImage>
   ),
   projectTitle: 'Override!',
@@ -315,7 +307,7 @@ const spacewar: ProjectsListItemContentProps = {
   projectName: 'Spacewar!',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a"'>
-      <img src={spacewarSrc.imageSrc} alt="todo" />
+      <EmbeddedImage {...spacewarSrc.image} alt="todo" />
     </MultiImage>
   ),
   projectTitle: 'Spacewar!',

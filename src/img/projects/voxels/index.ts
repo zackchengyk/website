@@ -14,18 +14,36 @@ import recordingPig80WebmSrc from './voxels-recording-pig-80-small.webm'
 import recordingPig80Mp4Src from './voxels-recording-pig-80-small.mp4'
 
 export default {
-  imageBirdSrc,
-  recordingBird10WebmSrc,
-  recordingBird10Mp4Src,
-  recordingBird20WebmSrc,
-  recordingBird20Mp4Src,
-  recordingBird100WebmSrc,
-  recordingBird100Mp4Src,
-  imagePigSrc,
-  recordingPig10WebmSrc,
-  recordingPig10Mp4Src,
-  recordingPig20WebmSrc,
-  recordingPig20Mp4Src,
-  recordingPig80WebmSrc,
-  recordingPig80Mp4Src,
+  imageBird: { aspect: { x: 400, y: 400 }, src: imageBirdSrc },
+  recordingBird10: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingBird10WebmSrc,
+    mp4Src: recordingBird10Mp4Src,
+  },
+  recordingBird20: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingBird20WebmSrc,
+    mp4Src: recordingBird20Mp4Src,
+  },
+  recordingBird100: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingBird100WebmSrc,
+    mp4Src: recordingBird100Mp4Src,
+  },
+  imagePig: { aspect: { x: 400, y: 400 }, src: imagePigSrc },
+  recordingPig10: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingPig10WebmSrc,
+    mp4Src: recordingPig10Mp4Src,
+  },
+  recordingPig20: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingPig20WebmSrc,
+    mp4Src: recordingPig20Mp4Src,
+  },
+  recordingPig80: {
+    aspect: { x: 400, y: 400 },
+    webmSrc: recordingPig80WebmSrc,
+    mp4Src: recordingPig80Mp4Src,
+  },
 }

@@ -6,10 +6,13 @@ import recordingMp4Src from './cityscape-recording-small.mp4'
 import recordingPosterSrc from './cityscape-recording-small-poster.png'
 
 export default {
-  image1Src,
-  image2Src,
-  image3Src,
-  recordingWebmSrc,
-  recordingMp4Src,
-  recordingPosterSrc,
+  recording: {
+    aspect: { x: 1027, y: 698 },
+    webmSrc: recordingWebmSrc,
+    mp4Src: recordingMp4Src,
+    posterSrc: recordingPosterSrc,
+  },
+  image1: { aspect: { x: 500, y: 339 }, src: image1Src },
+  image2: { aspect: { x: 500, y: 339 }, src: image2Src },
+  image3: { aspect: { x: 500, y: 339 }, src: image3Src },
 }
