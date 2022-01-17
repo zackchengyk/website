@@ -4,6 +4,8 @@ import mapsSrc from '../../img/projects/maps'
 import voxelsSrc from '../../img/projects/voxels'
 import overrideSrc from '../../img/projects/override'
 import spacewarSrc from '../../img/projects/spacewar'
+import coordinatorSrc from '../../img/projects/coordinator'
+import otherSrc from '../../img/projects/other'
 import { ProjectsListItemContentProps } from '../sections/ProjectsListItem'
 import OutLink from './OutLink'
 import MultiImage from './MultiImage'
@@ -11,7 +13,16 @@ import EmbeddedVideo from './EmbeddedVideo'
 import PseudoGif from './PseudoGif'
 import EmbeddedImage from './EmbeddedImage'
 
-export const projectNames = ['planetarium', 'cityscape', 'maps', 'voxels', 'override', 'spacewar'] as const
+export const projectNames = [
+  'planetarium',
+  'cityscape',
+  'maps',
+  'voxels',
+  'override',
+  'spacewar',
+  'coordinator',
+  'other',
+] as const
 export type ProjectName = typeof projectNames[number]
 
 // ======================================================================== Planetarium
@@ -184,8 +195,8 @@ const maps: ProjectsListItemContentProps = {
         {'Its '}
         <strong>{'UI'}</strong>
         {' is also fully '}
-        <OutLink href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets">
-          <strong>{'keyboard-navigable'}</strong>
+        <OutLink href="https://webaim.org/techniques/keyboard/">
+          <strong>{'keyboard-accessible'}</strong>
         </OutLink>
         {' and '}
         <strong>{'responsive'}</strong>
@@ -289,7 +300,7 @@ const override: ProjectsListItemContentProps = {
       </p>
       <p>
         <OutLink href="https://rainydey.itch.io/override">
-          <strong>{'> Play or download it here!'}</strong>
+          <strong>{'> Play or download on Itch.io!'}</strong>
         </OutLink>
       </p>
       <p>
@@ -359,6 +370,141 @@ const spacewar: ProjectsListItemContentProps = {
   ),
 }
 
+// ======================================================================== Coordinator
+
+const coordinator: ProjectsListItemContentProps = {
+  projectButtonTitle: 'Coordinator',
+  imgChildren: (
+    <MultiImage gridTemplateAreas='"a a a" "b c d"'>
+      <EmbeddedImage {...coordinatorSrc.image1} alt="todo" style={{ gridArea: 'a' }} />
+      <EmbeddedImage {...coordinatorSrc.image2} alt="todo" />
+      <EmbeddedImage {...coordinatorSrc.image3} alt="todo" />
+      <PseudoGif {...coordinatorSrc.recording} />
+    </MultiImage>
+  ),
+  projectTitle: 'Coordinator',
+  projectSubtitle: 'React, Java, SQLite',
+  projectBody: (
+    <>
+      <p>
+        {'For our software engineering final project, we developed a '}
+        <strong>{'when2meet'}</strong>
+        {'-inspired applet for coordinating teams, designed for '}
+        <strong>{'generating optimal subgroups'}</strong>
+        {' and '}
+        <strong>{'meeting times'}</strong>
+        {'.'}
+      </p>
+      <p>
+        {'For group subdivision, we used a custom '}
+        <strong>{'fixed-size iterative k-means clustering'}</strong>
+        {' algorithm, adapted from the method outlined in '}
+        <OutLink href="https://www.researchgate.net/publication/275245766_K-means_based_Clustering_Method_with_a_Fixed_Number_of_Cluster_Members">
+          {'this paper'}
+        </OutLink>
+        {'. Then, meeting time generation was a simple matter of '}
+        <strong>{'weighing'}</strong>
+        {" team members' schedules and preferred times."}
+      </p>
+      <p>
+        {"As with all my other projects, the applet's GUI is entirely "}
+        <strong>{'keyboard-accessible'}</strong>
+        {' (take '}
+        <em>{'that'}</em>
+        {', when2meet). '}
+        {'I also implemented '}
+        <strong>{'date and time localization'}</strong>
+        {", so that events would be displayed based on the user's timezone."}
+      </p>
+      <p>
+        <OutLink href="http://coordinator.tanjoshua.com">
+          <strong>{'> Demo'}</strong>
+          {" (hosted on my teammate Joshua's website)"}
+        </OutLink>
+      </p>
+    </>
+  ),
+}
+
+// ======================================================================== Other
+
+const other: ProjectsListItemContentProps = {
+  projectButtonTitle: 'Other',
+  imgChildren: (
+    <MultiImage gridTemplateAreas='"a a b" "a a c"'>
+      <EmbeddedImage {...otherSrc.raytracerImage} alt="todo" style={{ gridArea: 'a' }} />
+      <PseudoGif {...otherSrc.gmcRecording} />
+      <EmbeddedImage {...otherSrc.gmcImage} alt="todo" />
+    </MultiImage>
+  ),
+  projectTitle: "Some Other Stuff I've Worked On",
+  projectSubtitle: 'Mixed Media',
+  projectBody: (
+    <ul>
+      <li>
+        {'A '}
+        <strong>{'C++'}</strong>
+        {' raytracer which supports '}
+        <strong>{'shadows'}</strong>
+        {', '}
+        <strong>{'recursive reflections'}</strong>
+        {', and '}
+        <strong>{'texture mapping'}</strong>
+        {'. Other features include:'}
+        <ul>
+          <li>
+            {'A '}
+            <strong>{'scenegraph parser'}</strong>
+            {' which loads primitives into the scene;'}
+          </li>
+          <li>
+            {'An '}
+            <strong>{'OpenGL'}</strong>
+            {' scene viewer, which generates tessellated primitives with dynamically-alterable '}
+            <strong>{'level of detail'}</strong>
+            {'; and'}
+          </li>
+          <li>
+            <strong>{'Multi-threading'}</strong>
+            {', for performance.'}
+          </li>
+        </ul>
+      </li>
+      <li>
+        {'A basic '}
+        <strong>{'C++'}</strong>
+        {' implementation of '}
+        <strong>{'Photoshop-like brushes'}</strong>
+        {' and '}
+        <strong>{'filters'}</strong>
+        {' (convolution by kernels, e.g. Sobel).'}
+      </li>
+      <li>
+        {'A '}
+        <strong>{'2D truss analyzer'}</strong>
+        {' in '}
+        <strong>{'MATLAB'}</strong>
+        {'. It supports an '}
+        <strong>{'arbitrary number'}</strong>
+        {' of nodes and connections, and solves for '}
+        <strong>{'member forces'}</strong>
+        {'.'}
+      </li>
+      <li>
+        {'Detailed CAD plans for a 1:413 '}
+        <strong>{'architectural model'}</strong>
+        {" of Singapore's "}
+        <OutLink href="https://en.wikipedia.org/wiki/Golden_Mile_Complex">{'Golden Mile Complex'}</OutLink>
+        {', including '}
+        <strong>{'Adobe Illustrator'}</strong>
+        {' files for laser-cutting '}
+        <strong>{'over 950'}</strong>
+        {' parts.'}
+      </li>
+    </ul>
+  ),
+}
+
 // ======================================================================== Export
 
 const projectsContent: Record<ProjectName, ProjectsListItemContentProps> = {
@@ -368,6 +514,8 @@ const projectsContent: Record<ProjectName, ProjectsListItemContentProps> = {
   voxels,
   override,
   spacewar,
+  coordinator,
+  other,
 }
 
 export default projectsContent
