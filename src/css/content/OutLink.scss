@@ -39,6 +39,7 @@
 }
 
 p a,
-blockquote a {
+blockquote a,
+li a {
   @include animated-anchor();
 }

@@ -382,8 +382,17 @@ $highlight-base-transition: background-position $highlight-transition-duration e
   line-height: $body-line-height;
 
   > blockquote:not(:last-child),
-  > p:not(:last-child) {
+  > p:not(:last-child),
+  > ul > li {
     margin-bottom: $text-vert-spacing;
+  }
+
+  ul {
+    list-style: '> ' outside;
+    padding-left: 2ch;
+  }
+  ul ul {
+    list-style: '- ' outside;
   }
 
   > blockquote {
