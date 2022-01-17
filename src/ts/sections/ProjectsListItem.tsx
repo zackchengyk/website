@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { stringToId, XY } from '../common'
 
 export type ProjectsListItemContentProps = {
-  projectName: string
+  projectButtonTitle: string
   imgChildren?: React.ReactNode
   projectTitle?: React.ReactNode
   projectSubtitle?: React.ReactNode
@@ -18,7 +18,7 @@ type ProjectsListItemProps = {
 } & ProjectsListItemContentProps
 
 function ProjectsListItem({
-  projectName,
+  projectButtonTitle,
   imgChildren,
   projectTitle,
   projectSubtitle,
@@ -35,7 +35,7 @@ function ProjectsListItem({
     '--current-height': contentRef.current?.scrollHeight + 'px',
   } as React.CSSProperties)
 
-  const id = stringToId(projectName)
+  const id = stringToId(projectButtonTitle)
   const buttonId = `projects-${id}-button`
   const contentId = `projects-${id}-content`
 
@@ -61,7 +61,7 @@ function ProjectsListItem({
           aria-controls={contentId}
           aria-expanded={isOpen}>
           <span className={sleeved} style={sleevedStyle}>
-            {projectName}
+            {projectButtonTitle}
           </span>
         </button>
       </h3>

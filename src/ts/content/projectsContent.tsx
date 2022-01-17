@@ -17,7 +17,7 @@ export type ProjectName = typeof projectNames[number]
 // ======================================================================== Planetarium
 
 const planetarium: ProjectsListItemContentProps = {
-  projectName: 'Planetarium',
+  projectButtonTitle: 'Planetarium',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
       <EmbeddedImage {...planetariumSrc.image1Medium} alt="todo" style={{ gridArea: 'a' }} />
@@ -82,7 +82,7 @@ const planetarium: ProjectsListItemContentProps = {
 // ======================================================================== Cityscape
 
 const cityscape: ProjectsListItemContentProps = {
-  projectName: 'Cityscape',
+  projectButtonTitle: 'Cityscape',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
       <EmbeddedVideo {...cityscapeSrc.recording} style={{ gridArea: 'a' }} />
@@ -144,7 +144,7 @@ const cityscape: ProjectsListItemContentProps = {
 // ======================================================================== Maps
 
 const maps: ProjectsListItemContentProps = {
-  projectName: 'Maps',
+  projectButtonTitle: 'Maps',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
       <EmbeddedImage {...mapsSrc.image} alt="todo" style={{ gridArea: 'a' }} />
@@ -211,7 +211,7 @@ const maps: ProjectsListItemContentProps = {
 // ======================================================================== Voxels
 
 const voxels: ProjectsListItemContentProps = {
-  projectName: 'Voxel Coloring',
+  projectButtonTitle: 'Voxel Coloring',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a b c d" "e f g h"' style={{ gridTemplate: '1fr 1fr / repeat(4, 1fr)' }}>
       <EmbeddedImage {...voxelsSrc.imageBird} alt="todo" />
@@ -256,7 +256,7 @@ const voxels: ProjectsListItemContentProps = {
 // ======================================================================== Override
 
 const override: ProjectsListItemContentProps = {
-  projectName: 'Override',
+  projectButtonTitle: 'Override',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a a a" "b c d"'>
       <PseudoGif {...overrideSrc.recording1} style={{ gridArea: 'a' }} />
@@ -304,7 +304,7 @@ const override: ProjectsListItemContentProps = {
 // ======================================================================== Spacewar
 
 const spacewar: ProjectsListItemContentProps = {
-  projectName: 'Spacewar!',
+  projectButtonTitle: 'Spacewar!',
   imgChildren: (
     <MultiImage gridTemplateAreas='"a"'>
       <EmbeddedImage {...spacewarSrc.image} alt="todo" />
