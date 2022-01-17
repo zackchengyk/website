@@ -439,10 +439,14 @@ $highlight-base-transition: background-position $highlight-transition-duration e
 
 .aspect-ratio-outer {
   position: relative;
-  margin: -0.5px;
 }
 
 .aspect-ratio-inner {
   position: absolute;
   inset: 0;
+
+  // Temporary
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
 }
