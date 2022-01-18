@@ -4,6 +4,8 @@ import { main, PlanetariumType, resetAll } from './planetarium-three/main'
 import PlanetariumBackground from './PlanetariumBackground'
 import '../../css/planetarium/Planetarium.scss'
 
+const resetKeys = ['Enter', ' ', 'r']
+
 function Planetarium() {
   const fullWindowElement = useRef<any>()
   const containerElement = useRef<any>()
@@ -12,6 +14,8 @@ function Planetarium() {
   const [clickHandler, setClickHandler] = useState<any>()
   const [mouseMoveHandler, setMouseMoveHandler] = useState<any>()
   const [mouseLeaveHandler, setMouseLeaveHandler] = useState<any>()
+
+  const [pseudoActive, setPseudoActive] = useState<boolean>(false)
 
   const planetarium = useRef<PlanetariumType>()
 
@@ -60,8 +64,20 @@ function Planetarium() {
       id="planetarium-full-window"
       ref={fullWindowElement}
       onClick={clickHandler}
+      onKeyDown={(e) => {
+        if (resetKeys.includes(e.key)) {
+          setPseudoActive(true)
+        }
+      }}
+      onKeyUp={(e) => {
+        if (pseudoActive && resetKeys.includes(e.key)) {
+          setPseudoActive(false)
+          clickHandler()
+        }
+      }}
       onMouseMove={mouseMoveHandler}
       onMouseLeave={mouseLeaveHandler}
+      className={pseudoActive ? 'pseudoActive' : ''}
       tabIndex={0}>
       <div id="planetarium-container" ref={containerElement}>
         <canvas id="planetarium" ref={canvasElement} />
