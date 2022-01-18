@@ -1,5 +1,5 @@
-import imageSrc from './spacewar-image.png'
+import imageSrc from './spacewar-image-small.png'
 
 export default {
-  image: { aspect: { x: 2124, y: 1644 }, src: imageSrc },
+  image: { aspect: { x: 1196, y: 926 }, src: imageSrc },
 }

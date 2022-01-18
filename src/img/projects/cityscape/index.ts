@@ -12,7 +12,7 @@ export default {
     mp4Src: recordingMp4Src,
     posterSrc: recordingPosterSrc,
   },
-  image1: { aspect: { x: 500, y: 339 }, src: image1Src },
-  image2: { aspect: { x: 500, y: 339 }, src: image2Src },
-  image3: { aspect: { x: 500, y: 339 }, src: image3Src },
+  image1: { aspect: { x: 382, y: 259 }, src: image1Src },
+  image2: { aspect: { x: 382, y: 259 }, src: image2Src },
+  image3: { aspect: { x: 382, y: 259 }, src: image3Src },
 }
