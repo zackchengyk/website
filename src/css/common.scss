@@ -34,9 +34,9 @@ $larger-breakpoint: $larger-b * 1px;
 // ======================================================================== PRIMARY PALETTE
 
 $white: #ffffff;
-$light-light: #fff7f3;
-$light: #fceee4;
-$light-dark: #f5d9c2;
+$light-light: #fff5f0;
+$light: #ffeee1;
+$light-dark: #f5ddca;
 $light-dark-dark: #e8ceb8;
 
 $mid-tone-light: #b5a191;
@@ -89,6 +89,8 @@ $green-black: #002e19;
 
   --navbar-active-text-color: #{$light-dark};
   --navbar-inactive-text-color: #{$light-dark-dark};
+
+  --art-shadow: 0, 0, 0;
 }
 
 // Light mode
@@ -116,6 +118,8 @@ $green-black: #002e19;
 
     --navbar-active-text-color: #{$dark-light};
     --navbar-inactive-text-color: #{dark-light-light};
+
+    --art-shadow: 100, 50, 15;
   }
 }
 
@@ -142,7 +146,7 @@ $section-vert-space-first-last: linear(20, 95);
 
 $about-vert-gap: linear(20, 30);
 $about-horz-gap: 30px;
-$about-vert-gap-expanding: linear(20, 40);
+$about-vert-gap-expanding: 40px;
 $about-horz-gap-expanding: linear(30, 60);
 $experience-li-vert-space: linear(10, 20);
 $experience-li-horz-space: 0;
@@ -417,7 +421,7 @@ $highlight-base-transition: background-position $highlight-transition-duration e
     )
   );
   place-items: center;
-  gap: $inner-section-grid-gap;
+  gap: 0 $inner-section-grid-gap;
 
   > * {
     max-width: 100%;

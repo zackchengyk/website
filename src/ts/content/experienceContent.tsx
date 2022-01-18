@@ -108,9 +108,11 @@ const engn0031: ExperienceListItemContentProps = {
         {' and '}
         <strong>{'Mathematica'}</strong>
         {', almost always extending my hours to help those who stuck around. '}
-        {" I had heckin' good time as a UTA, especially figuring out "}
+        {' My favorite part of being a '}
+        <abbr title="teaching assistant">{'TA'}</abbr>
+        {'? Figuring out '}
         <strong>{'effective ways to explain things'}</strong>
-        {' :)'}
+        {' >:D'}
       </p>
     </>
   ),

@@ -25,16 +25,16 @@ const AboutSection = React.forwardRef<HTMLElement, AboutSectionProps>(({}, ref) 
         </div>
         <nav id="about-lower">
           <OutLink href="mailto:zack_cheng@brown.edu">
-            <strong>{'> Email'}</strong>
+            <strong>{'Email'}</strong>
           </OutLink>
           <OutLink href="https://www.linkedin.com/in/zackcheng/">
-            <strong>{'> LinkedIn'}</strong>
+            <strong>{'LinkedIn'}</strong>
           </OutLink>
           <OutLink href={resumeSrc}>
-            <strong>{'> Resume'}</strong>
+            <strong>{'Resume'}</strong>
           </OutLink>
           <OutLink href="https://github.com/zackchengyk">
-            <strong>{'> GitHub'}</strong>
+            <strong>{'GitHub'}</strong>
           </OutLink>
         </nav>
       </div>
