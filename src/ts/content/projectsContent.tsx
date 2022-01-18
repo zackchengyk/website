@@ -78,7 +78,8 @@ const planetarium: ProjectsListItemContentProps = {
       </p>
       <p>
         <a href="#home">
-          <strong>{'> Live demo (just scroll up!)'}</strong>
+          <strong>{'> Live demo'}</strong>
+          {' (just scroll up and click on it!)'}
         </a>
       </p>
       <p>

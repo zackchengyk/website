@@ -13,6 +13,8 @@
 
   padding: $navbar-vert-space $navbar-horz-space;
 
+  text-transform: uppercase;
+
   @include section-two-grid(auto-fill);
 }
 

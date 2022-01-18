@@ -142,6 +142,8 @@ $section-vert-space-first-last: linear(20, 95);
 
 $about-vert-gap: linear(20, 30);
 $about-horz-gap: 30px;
+$about-vert-gap-expanding: linear(20, 40);
+$about-horz-gap-expanding: linear(30, 60);
 $experience-li-vert-space: linear(10, 20);
 $experience-li-horz-space: 0;
 $projects-li-vert-space: linear(20, 30);
@@ -179,9 +181,6 @@ $inner-section-grid-gap: 15px;
 $line: 1px solid $mid-tone;
 $image-line: 1px solid $mid-tone;
 
-nav {
-  text-transform: uppercase;
-}
 .section-header {
   width: 100%;
   margin: 0;

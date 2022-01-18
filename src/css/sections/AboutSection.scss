@@ -6,21 +6,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: $about-vert-gap-expanding;
+  flex-direction: column;
+}
+
+#about-upper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: $about-vert-gap $about-horz-gap;
   flex-direction: row-reverse;
   flex-wrap: wrap;
 }
 
-#about-left {
+#about-text {
   min-width: min(100%, 65ch);
   max-width: 65ch;
 }
 
-#about-right {
+#about-photo {
   position: relative;
   min-width: 0;
   max-width: min(250px, 50vw);
   > img {
     border-radius: $border-radius;
   }
+}
+
+#about-lower {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $text-vert-spacing $about-horz-gap-expanding;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  font-weight: $body-bold-font-weight;
+  line-height: $body-line-height;
 }
