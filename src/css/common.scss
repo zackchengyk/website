@@ -35,18 +35,18 @@ $larger-breakpoint: $larger-b * 1px;
 
 $white: #ffffff;
 $light-light: #fff5f0;
-$light: #ffeee1;
-$light-dark: #f5ddca;
-$light-dark-dark: #e8ceb8;
+$light: #fae9dd;
+$light-dark: #eed9c8;
+$light-dark-dark: #d9c3b0;
 
 $mid-tone-light: #b5a191;
 $mid-tone: #84756c;
 $mid-tone-dark: #534b47;
 
-$dark-light-light: #231f1f;
-$dark-light: #1d1a1a;
-$dark: #1a1717;
-$dark-dark: #141212;
+$dark-light-light: #393433;
+$dark-light: #282424;
+$dark: #1c1919;
+$dark-dark: #151313;
 $black: #000000;
 
 $blue-white: #93dbff;
@@ -70,12 +70,11 @@ $green-black: #002e19;
   --background-color: #{$dark};
   --background-color-overlay: #{color.change($dark, $alpha: 0.7)};
   --text-color: #{$light-dark-dark};
-  --text-weight: 350;
+  --text-weight: 325;
   --strong-text-color: #{$light-dark};
-  --strong-text-weight: 575;
+  --strong-text-weight: 550;
   --link-text-weight-bonus: 25;
   --blockquote-line-color: #{color.change($light-dark-dark, $alpha: 0.25)};
-
   --link-text-color: #{$green-light};
   --link-highlight-text-color: #{$green-light-light};
   --link-highlight-color: #{$green-black};
@@ -98,9 +97,9 @@ $green-black: #002e19;
   :root {
     --background-color: #{$light};
     --background-color-overlay: #{color.change($light, $alpha: 0.7)};
-    --text-color: #{$dark-light-light};
+    --text-color: #{$dark-light};
     --text-weight: 450;
-    --strong-text-color: #{$dark-light};
+    --strong-text-color: #{$dark};
     --strong-text-weight: 675;
     --link-text-weight-bonus: 50;
     --blockquote-line-color: #{color.change($dark-light-light, $alpha: 0.25)};
@@ -129,8 +128,6 @@ $background-color: var(--background-color);
 $background-color-overlay: var(--background-color-overlay);
 $banner-background-color: $dark-dark;
 $projects-div-background-color: var(--projects-div-background-color);
-
-$temporary: color.change($brown, $alpha: 0.2);
 
 // ======================================================================== SPACING
 
